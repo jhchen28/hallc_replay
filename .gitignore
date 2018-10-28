@@ -12,6 +12,7 @@
 *.root
 
 # Directories
+OUTPUT
 REPORT_OUTPUT
 HISTOGRAMS
 MON_OUTPUT

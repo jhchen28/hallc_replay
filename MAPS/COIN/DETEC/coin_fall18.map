@@ -3930,6 +3930,7 @@ REFINDEX=0
   74,   2,  79,   1  ! hEL_LO_ROC2
   75,   2,  80,   1  ! hEL_HI_ROC2
   76,   2,  81,   1  ! hEL_REAL_ROC2
+  79,   2, 113,   1  ! pRF_ROC2
   77,   2,  82,   1  ! hEL_CLEAN_ROC2
   80,   2, 103,   1  ! pPRE40_ROC2
   81,   2, 104,   1  ! pPRE100_ROC2

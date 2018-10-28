@@ -21,7 +21,10 @@ if [ -z "$runNum" ]; then
 fi
 
 # How many events to analyze.
-numEvents=-1
+numEvents=$2
+if [ -z "$numEvents" ]; then
+  numEvents=-1
+fi
 
 # Which scripts to run.
 script="./UTIL_SIDIS/scripts/replay/replay_production_coin_sidis.C"

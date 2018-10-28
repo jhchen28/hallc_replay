@@ -81,6 +81,22 @@ SHMS BCM4A Beam Cut Charge: {P.BCM4A.scalerChargeCut/1000.:%.3f} mC
 SHMS BCM4B Beam Cut Charge: {P.BCM4B.scalerChargeCut/1000.:%.3f} mC		 
 SHMS BCM4C Beam Cut Charge: {P.BCM4C.scalerChargeCut/1000.:%.3f} mC		 
 SHMS Unser Beam Cut Charge: {P.Unser.scalerChargeCut/1000.:%.3f} mC
+
+
+****** Trig rates with current cut *********
+TRIG1 Rate Cut Current : {P.pTRIG1.scalerCut/P.1MHz.scalerTimeCut} 
+TRIG2 Rate Cut Current : {P.pTRIG2.scalerCut/P.1MHz.scalerTimeCut} 
+TRIG3 Rate Cut Current : {P.pTRIG3.scalerCut/P.1MHz.scalerTimeCut} 
+TRIG4 Rate Cut Current : {P.pTRIG4.scalerCut/P.1MHz.scalerTimeCut} 
+TRIG5 Rate Cut Current : {P.pTRIG5.scalerCut/P.1MHz.scalerTimeCut} 
+
+**** Trig counts/uC *****
+TRIG1 Counts/uC Cut Current : {P.pTRIG1.scalerCut/P.BCM4B.scalerChargeCut} 
+TRIG2 Counts/uC Cut Current : {P.pTRIG2.scalerCut/P.BCM4B.scalerChargeCut} 
+TRIG3 Counts/uC Cut Current : {P.pTRIG3.scalerCut/P.BCM4B.scalerChargeCut} 
+TRIG4 Counts/uC Cut Current : {P.pTRIG4.scalerCut/P.BCM4B.scalerChargeCut} 
+TRIG5 Counts/uC Cut Current : {P.pTRIG5.scalerCut/P.BCM4B.scalerChargeCut} 
+
  
 
 ********************
