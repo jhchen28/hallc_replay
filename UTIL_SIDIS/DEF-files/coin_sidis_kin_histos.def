@@ -1,0 +1,37 @@
+############################
+#   KINEMATICS
+############################
+
+
+formula mmiss2 P.kin.secondary.emiss_nuc*P.kin.secondary.emiss_nuc-P.kin.secondary.pmiss*P.kin.secondary.pmiss
+TH1F pkin_mmiss2              'SHMS M^{2}_{miss} (ccleantrack); M^{2}_{miss} (GeV); Count / 0.01 GeV'  mmiss2 400 -2 2 ccleantrack 
+TH1F pkin_mmiss2_coincut      'SHMS M^{2}_{miss} (coincut); M^{2}_{miss} (GeV); Count / 0.01 GeV'      mmiss2 400 -2 2 coincut
+TH1F pkin_mmiss2_coincut_ep   'SHMS M^{2}_{miss} (coincut_ep); M^{2}_{miss} (GeV); Count / 0.01 GeV'   mmiss2 400 -2 2 hcoincut_epi
+TH1F pkin_mmiss2_tightcut     'SHMS M^{2}_{miss} (tight_coin); M^{2}_{miss} (GeV); Count / 0.01 GeV'   mmiss2 400 -2 2 tight_coin&&hselect_e_cut&&hbetacut_pi
+TH1F pkin_mmiss2_ran_coincut  'SHMS M^{2}_{miss} (ran_coincut); M^{2}_{miss} (GeV); Count / 0.01 GeV'  mmiss2 400 -2 2 ran_coincut&&hselect_e_cut&&hbetacut_pi
+
+TH1F hkin_Q2                 'HMS Q^{2}; Q^{2} (GeV); Count / 0.01 GeV;'   H.kin.primary.Q2                 1500 0 15 ccleantrack
+TH1F hkin_Q2_coincut         'HMS Q^{2}; (coincut); Q^{2} (GeV); Count / 0.01 GeV;'   H.kin.primary.Q2      1500 0 15 coincut
+TH1F hkin_Q2_coincut_epi     'HMS Q^{2}; (hcoincut_epi); Q^{2} (GeV); Count / 0.01 GeV;'  H.kin.primary.Q2  1500 0 15 hcoincut_epi
+
+TH1F hkin_W2                 'HMS W^{2}; W^{2} (GeV); Count / 0.01 GeV;'   H.kin.primary.W2                 1500 0 15 ccleantrack
+TH1F hkin_W2_coincut         'HMS W^{2}; (coincut); W^{2} (GeV); Count / 0.01 GeV;'   H.kin.primary.W2      1500 0 15 coincut
+TH1F hkin_W2_coincut_epi     'HMS W^{2}; (hcoincut_epi); W^{2} (GeV); Count / 0.01 GeV;'   H.kin.primary.W2 1500 0 15 hcoincut_epi
+
+TH1F hkin_xbj                'HMS x_{bj} (ccleantrack); x_{bj}; Count / 0.01;'    H.kin.primary.x_bj 120 0 1.2 ccleantrack
+TH1F hkin_xbj_coincut        'HMS x_{bj} (coincut); x_{bj}; Count / 0.01;'        H.kin.primary.x_bj 120 0 1.2 coincut
+TH1F hkin_xbj_coincut_epi    'HMS x_{bj} (hcoincut_epi); x_{bj}; Count / 0.01;'   H.kin.primary.x_bj 120 0 1.2 hcoincut_epi
+
+formula z_had sqrt(0.1395701835*0.1395701835 + P.gtr.p*P.gtr.p)/H.kin.primary.omega
+TH1F pkin_z_had              'SHMS z_{had} (ccleantrack); z_{had}; count/ 0.01'     z_had 120 0 1.2 ccleantrack
+TH1F pkin_z_had_coincut      'SHMS z_{had} (coincut); z_{had}; count/ 0.01'         z_had 120 0 1.2 coincut
+TH1F pkin_z_had_coincut_epi  'SHMS z_{had} (hcoincut_epi); z_{had}; count/ 0.01'    z_had 120 0 1.2 hcoincut_epi
+
+formula p_t  P.gtr.p*(1-(cos(H.kin.primary.th_q))
+TH1F pkin_pt                'SHMS p_t (ccleantrack); p_t (GeV); Count / 0.01 (GeV2)'     p_t   400 -0.5 3.5 ccleantrack
+TH1F pkin_pt_coincut        'SHMS p_t (coincut); p_t (GeV); Count / 0.01 (GeV2)'         p_t   400 -0.5 3.5 coincut
+TH1F pkin_pt_coincut_epi    'SHMS p_t (hcoincut_epi); p_t (GeV); Count / 0.01 (GeV2)'    p_t   400 -0.5 3.5 hcoincut_epi
+
+TH1F phi_had                 'SHMS phi_{had} (ccleantrack); phi_{had}; count/ 0.1 (Rad);'      P.kin.secondary.ph_xq 70 -3.5 3.5 ccleantrack
+TH1F phi_had_coincut         'SHMS phi_{had} (coincut); phi_{had}; count/ 0.1 (Rad);'          P.kin.secondary.ph_xq 70 -3.5 3.5 coincut
+TH1F phi_had_coincut_epi     'SHMS phi_{had} (hcoincut_epi); phi_{had}; count/ 0.1 (Rad);'     P.kin.secondary.ph_xq 70 -3.5 3.5 hcoincut_epi
