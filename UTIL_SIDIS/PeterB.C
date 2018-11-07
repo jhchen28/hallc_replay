@@ -276,7 +276,7 @@ void PeterB(Int_t runNumber, Int_t targ=1){
          (TcoinpTRIG4_ROC2_tdcTimeRaw*0.1 - 
          HMScoinCorr) - pOffset; 
        ctimepi = SHMScorrCoinTimeROC2 ;
-       printf(" %8.1f %8.1f %8.1f %8.1f %8.1f %8.1f %8.1f\n", ctimepi,TcoinpTRIG1_ROC2_tdcTimeRaw, SHMScoinCorr, TcoinpTRIG4_ROC2_tdcTimeRaw, HMScoinCorr, (PhodoStartTimeMean - PhodfpHitsTime), (HhodoStartTimeMean - HhodfpHitsTime)) ; 
+       //       printf(" %8.1f %8.1f %8.1f %8.1f %8.1f %8.1f %8.1f\n", ctimepi,TcoinpTRIG1_ROC2_tdcTimeRaw, SHMScoinCorr, TcoinpTRIG4_ROC2_tdcTimeRaw, HMScoinCorr, (PhodoStartTimeMean - PhodfpHitsTime), (HhodoStartTimeMean - HhodfpHitsTime)) ; 
 
        SHMScoinCorr = (PhodoStartTimeMean - PhodfpHitsTime); 
        HMScoinCorr = (HhodoStartTimeMean - HhodfpHitsTime);      
