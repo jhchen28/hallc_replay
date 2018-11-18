@@ -1,7 +1,10 @@
+block T.helicity.*
+
 block CTime.*_ROC2
 
 block T.coin.pTRIG*
 block T.coin.pRF*
+block T.coin.hRF*
 block T.coin.pHEL_*
 
 block H.cer.npe*
