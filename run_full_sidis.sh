@@ -38,9 +38,11 @@ runReportMon="./UTIL_SIDIS/scripts/get_sidis_report.py ${runNum} ${numEvents}"
 
 
 #Define smalle e12-10-003 report file directory
+mkdir -p /tmp/temp_full_reports
 reportDir="UTIL_SIDIS/REPORT/sidis_report_${runNum}.report"
 #Define command to open report file
-openReport="emacs ${reportDir} &"
+temp_report=$(mktemp -p /tmp/temp_full_reports)
+openReport="head -n 3 ${reportDir} > ${temp_report} ; tail -n 29 ${reportDir} | column -t -s: >> ${temp_report} ;  emacs ${temp_report} &"
 
 #runOnlineGUI="./online -f ${config} -r ${runNum}"
 #saveOnlineGUI="./online -f ${config} -r ${runNum} -P"

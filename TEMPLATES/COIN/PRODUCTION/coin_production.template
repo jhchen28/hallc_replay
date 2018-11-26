@@ -256,6 +256,9 @@ ROC2 Pre-Scaled Ps4 ROC2 Computer Dead Time : {100.0 - (pTRIG4_ROC2.npassed / (P
 ROC2 Pre-Scaled Ps6 ROC2 Computer Live Time : {(pTRIG6_ROC2.npassed / (P.pTRIG6.scaler/gHC_ti_ps_factors[5]))*100.0:%3.4f} %
 ROC2 Pre-Scaled Ps6 ROC2 Computer Dead Time : {100.0 - (pTRIG6_ROC2.npassed / (P.pTRIG6.scaler/gHC_ti_ps_factors[5]))*100.0:%3.4f} %
 
+ROC2 Pre-Scaled PS6-COIN ROC2 Computer Live Time : {(ALL_COIN_events.npassed / (P.pTRIG6.scaler/gHC_ti_ps_factors[5]))*100.0:%3.4f} %
+ROC2 Pre-Scaled Ps6-COIN ROC2 Computer Dead Time : {100.0 - (ALL_COIN_events.npassed / (P.pTRIG6.scaler/gHC_ti_ps_factors[5]))*100.0:%3.4f} %
+
 ROC2 Pre-Scaled Ps1 Total Live Time (EDTM) : {(SHMS_edtm_accepted.npassed / (P.EDTM.scaler/gHC_ti_ps_factors[0]))*100.0:%3.4f} %
 ROC2 Pre-Scaled Ps1 Total Dead Time (EDTM) : {100.0 - (SHMS_edtm_accepted.npassed / (P.EDTM.scaler/gHC_ti_ps_factors[0]))*100.0:%3.4f} %
 
@@ -499,9 +502,9 @@ pdidh                          : {shmsScinDidh.npassed}
 pscinshould                    : {shmsScinShould.npassed}
 pscinshoulde                   : {shmsScinShoulde.npassed}
 pscinshouh                     : {shmsScinShouldh.npassed}
-SING FID TRACK EFFIC           : {shmsScinDid.npassed / (shmsScinShould.npassed+0.0001):%8.4f} +- {(sqrt(shmsScinShould.npassed-shmsScinDid.npassed) / (shmsScinShould.npassed+.0001)):%8.4f}
-E SING FID TRACK EFFIC         : {shmsScinDide.npassed / (shmsScinShoulde.npassed+0.0001):%8.4f} +- {(sqrt(shmsScinShoulde.npassed-shmsScinDide.npassed) / (shmsScinShoulde.npassed+.0001)):%8.4f}
-HADRON SING FID TRACK EFFIC    : {shmsScinDidh.npassed / (shmsScinShouldh.npassed+0.0001):%8.4f} +- {(sqrt(shmsScinShouldh.npassed-shmsScinDidh.npassed) / (shmsScinShouldh.npassed+.0001)):%8.4f}
+SHMS SING FID TRACK EFFIC           : {shmsScinDid.npassed / (shmsScinShould.npassed+0.0001):%8.4f} +- {(sqrt(shmsScinShould.npassed-shmsScinDid.npassed) / (shmsScinShould.npassed+.0001)):%8.4f}
+SHMS E SING FID TRACK EFFIC         : {shmsScinDide.npassed / (shmsScinShoulde.npassed+0.0001):%8.4f} +- {(sqrt(shmsScinShoulde.npassed-shmsScinDide.npassed) / (shmsScinShoulde.npassed+.0001)):%8.4f}
+SHMS HADRON SING FID TRACK EFFIC    : {shmsScinDidh.npassed / (shmsScinShouldh.npassed+0.0001):%8.4f} +- {(sqrt(shmsScinShouldh.npassed-shmsScinDidh.npassed) / (shmsScinShouldh.npassed+.0001)):%8.4f}
 
 =:=:=:=:=:=:=:=:=
 = HMS Chambers  =
@@ -640,9 +643,9 @@ hdidh                          :   {HMSScinDidh.npassed}
 hscinshould                    :   {HMSScinShould.npassed}
 hscinshoulde                   :   {HMSScinShoulde.npassed}
 hscinshouldh                   :   {HMSScinShouldh.npassed}
-SING FID TRACK EFFIC           :   {HMSScinDid.npassed/(HMSScinShould.npassed+0.0001):%8.4f} +- {(sqrt(HMSScinShould.npassed-HMSScinDid.npassed)/(HMSScinShould.npassed+.0001)):%8.4f}
-E SING FID TRACK EFFIC         :   {HMSScinDide.npassed/(HMSScinShoulde.npassed+0.0001):%8.4f} +- {(sqrt(HMSScinShoulde.npassed-HMSScinDide.npassed)/(HMSScinShoulde.npassed+.0001)):%8.4f}
-HADRON SING FID TRACK EFFIC    :   {HMSScinDidh.npassed/(HMSScinShouldh.npassed+0.0001):%8.4f} +- {(sqrt(HMSScinShouldh.npassed-HMSScinDidh.npassed)/(HMSScinShouldh.npassed+.0001)):%8.4f}
+HMS SING FID TRACK EFFIC           :   {HMSScinDid.npassed/(HMSScinShould.npassed+0.0001):%8.4f} +- {(sqrt(HMSScinShould.npassed-HMSScinDid.npassed)/(HMSScinShould.npassed+.0001)):%8.4f}
+HMS E SING FID TRACK EFFIC         :   {HMSScinDide.npassed/(HMSScinShoulde.npassed+0.0001):%8.4f} +- {(sqrt(HMSScinShoulde.npassed-HMSScinDide.npassed)/(HMSScinShoulde.npassed+.0001)):%8.4f}
+HMS HADRON SING FID TRACK EFFIC    :   {HMSScinDidh.npassed/(HMSScinShouldh.npassed+0.0001):%8.4f} +- {(sqrt(HMSScinShouldh.npassed-HMSScinDidh.npassed)/(HMSScinShouldh.npassed+.0001)):%8.4f}
 
 
 

@@ -63,15 +63,17 @@ void PeterB(Int_t runNumber, Int_t targ=1){
   Double_t pkinW, pEm, pPm, modPm, pbeta, hbeta, hcalepr, hcaletot, hcernpe, pcaletot, pcalepr, pcernpe, pcernpeng;
   Double_t TcoinpTRIG1_ROC1_tdcTimeRaw, TcoinpTRIG4_ROC1_tdcTimeRaw, TcoinpTRIG1_ROC2_tdcTimeRaw;
   Double_t TcoinhTRIG1_ROC1_tdcTimeRaw, TcoinhTRIG1_ROC2_tdcTimeRaw, TcoinhTRIG4_ROC1_tdcTimeRaw;
-  Double_t t11,t31,t41,t51,t61,t12,t32,t42,t52,t62,diff1,diff3,diff4,diff5,diff6 ;
+  Double_t t11,t31,t41,t51,t61,t12,t32,t42,t52,t62,diff1,diff3,diff4,diff5,diff6,tdiff1,tdiff2,td3,td4 ;
   Double_t TcoinhTRIG4_ROC2_tdcTimeRaw, TcoinpTRIG4_ROC2_tdcTimeRaw;
   Double_t TcoinpTRIG3_ROC1_tdcTimeRaw, TcoinpTRIG3_ROC2_tdcTimeRaw;
   Double_t TcoinpTRIG5_ROC1_tdcTimeRaw, TcoinpTRIG5_ROC2_tdcTimeRaw;
   Double_t TcoinpTRIG6_ROC1_tdcTimeRaw, TcoinpTRIG6_ROC2_tdcTimeRaw,sum1,sum2,counters[10];
-  Double_t  helmpsa,helnega,helposa,hgtry,pgtry,pcaltot,pgdsc,trkeff,trkeffer ;
-  Int_t  helmpsi,helnegi,helposi,icc,chist[100],chistp[100],chistpt[100] ;
+  Double_t  helmpsa,helnega,helposa,hgtry,pgtry,pcaltot,pgdsc,trkeff,trkeffer,prf, hrf, prfraw, hrfraw, hztar, pztar,trkeffg,trkeffger,trkefft,trkeffter,htof1,htof2 ;
+  //  Int_t hel1,helpred,helrep,helmps,helnqrt ;                     
+  Double_t hel1,helpred,helrep,helmps,helnqrt ;                     
+  Int_t  helmpsi,helnegi,helposi,icc,chist[100],chistp[100],chistpt[100],chistpg[100],chistt[100],chistg[100] ;
   Int_t  chistb[20][10],ibeta,ctpih[100],ctbig[100] ;
-  Int_t cntsepi=0;
+  Int_t cntsepi=0, it3;
   Int_t cntsep=0;
   Int_t cntsek=0;
   Int_t cntpos=0;
@@ -80,6 +82,9 @@ void PeterB(Int_t runNumber, Int_t targ=1){
     chist[icc]=0 ;
     chistp[icc]=0 ;
     chistpt[icc]=0 ;
+    chistpg[icc]=0 ;
+    chistt[icc]=0 ;
+    chistg[icc]=0 ;
     ctpih[icc]=0 ;
     ctbig[icc]=0 ;
   }
@@ -115,6 +120,8 @@ void PeterB(Int_t runNumber, Int_t targ=1){
   tt->SetBranchAddress("P.gtr.th", &PgtrTh);  
   tt->SetBranchAddress("H.gtr.ph", &HgtrPh);   
   tt->SetBranchAddress("P.gtr.ph", &PgtrPh);  
+  tt->SetBranchAddress("H.react.z", &hztar);  
+  tt->SetBranchAddress("P.react.z", &pztar);  
   tt->SetBranchAddress("P.cal.eprtracknorm", &pcalepr);
   tt->SetBranchAddress("P.cal.etottracknorm", &pcaletot); 
   tt->SetBranchAddress("P.cal.etotnorm", &pcaltot); 
@@ -131,7 +138,12 @@ void PeterB(Int_t runNumber, Int_t targ=1){
   tt->SetBranchAddress(
    "T.coin.pHEL_POS_adcMultiplicity", &helposa);
   tt->SetBranchAddress("P.hod.goodscinhit", &pgdsc);
-                                                                                                            
+  tt->SetBranchAddress("T.helicity.hel",&hel1) ;
+  tt->SetBranchAddress("T.helicity.helpred",&helpred) ;
+  tt->SetBranchAddress("T.helicity.helrep",&helrep) ; 
+  tt->SetBranchAddress("T.helicity.mps",&helmps) ;
+  tt->SetBranchAddress("T.helicity.nqrt",&helnqrt) ;
+                    
   tt->SetBranchAddress("P.hod.starttime", &PhodStartTime);                                               
   tt->SetBranchAddress("P.hod.fpHitsTime", &PhodfpHitsTime);                                             
   tt->SetBranchAddress("H.hod.starttime", &HhodStartTime);                                               
@@ -146,7 +158,12 @@ void PeterB(Int_t runNumber, Int_t targ=1){
   tt->SetBranchAddress("T.coin.pTRIG4_ROC2_tdcTimeRaw", &TcoinpTRIG4_ROC2_tdcTimeRaw);                   
   tt->SetBranchAddress("T.coin.pTRIG5_ROC2_tdcTimeRaw", &TcoinpTRIG5_ROC2_tdcTimeRaw);                   
   tt->SetBranchAddress("T.coin.pTRIG6_ROC2_tdcTimeRaw", &TcoinpTRIG6_ROC2_tdcTimeRaw);                   
-                   
+  tt->SetBranchAddress("T.coin.pRF_tdcTime",&prf) ;   
+  tt->SetBranchAddress("T.coin.hRF_tdcTime",&hrf) ;   
+  tt->SetBranchAddress("T.coin.pRF_tdcTimeRaw",&prfraw) ;   
+  tt->SetBranchAddress("T.coin.hRF_tdcTimeRaw",&hrfraw) ;   
+  tt->SetBranchAddress("T.coin.hSTOF_ROC2",&htof1) ;   
+  tt->SetBranchAddress("T.coin.hSTOF_ROC1",&htof2) ;   
                                               
   TCut hpdelta;
   TCut epiCut;                                                                   
@@ -194,8 +211,8 @@ void PeterB(Int_t runNumber, Int_t targ=1){
   Double_t SHMScorrCoinTimeROC2;                                                 
   Double_t HMScorrCoinTimeROC1;                                                  
   Double_t HMScorrCoinTimeROC2;   
-  Double_t  ncoin=0;
-  Double_t  ncoinwtrk=0;
+  Double_t  ncoin=0,ncoinf=0;
+  Double_t  ncoinwtrk=0,ncoinwtrk1=0,ncoinwtrk2=0;
      
   Bool_t epievent_cut, epevent_cut, ekevent_cut, positron_cut, event_cut, hpdelta_cut;
   //
@@ -227,6 +244,8 @@ void PeterB(Int_t runNumber, Int_t targ=1){
     if(hdelta > -15 && hdelta < 15) {
       counters[1] = counters[1]+1 ;
     }
+    if (kk % 5000 == 0 && pdelta<1000 && hdelta<1000) printf("%8.2f %8.2f %8.2f %8.2f %8.2f %8.2f %8.2f \n",prf,hrf, hdelta, pdelta, pcaltot, pztar,hztar) ;  
+
     if(hdelta > -15 && hdelta < 15 && 
 
        pdelta > -25 && pdelta < 40) {
@@ -285,7 +304,9 @@ void PeterB(Int_t runNumber, Int_t targ=1){
          SHMScoinCorr) - 
          (TcoinpTRIG4_ROC2_tdcTimeRaw*0.0997 - 
          HMScoinCorr) - pOffset; 
-
+       //       printf("%.1f %.1f %.1f %.1f %.1f \n",ctimeraw,TcoinpTRIG4_ROC2_tdcTimeRaw*0.0997,HMScoinCorr,htof1,htof2) ;
+       tdiff1 = PhodfpHitsTime - HhodfpHitsTime ;
+       tdiff2 = (t41 - t42)*0.0997 ;
        SHMSpartMass = 0.93827231; // proton mass in GeV/c^2
        DeltaHMSpathLength = 12.462*HgtrTh + 
          0.1138*HgtrTh*HgtrX - 
@@ -397,29 +418,45 @@ void PeterB(Int_t runNumber, Int_t targ=1){
        if(ctimepi > -2000. && ctimepi < 2600) { 
          counters[3] = counters[3]+1 ;
        }
-       if(ctimepi > -20. && ctimepi < 26) { 
+       if(ctimepi > -26. && ctimepi < 26) { 
          counters[4] = counters[4]+1 ;
-	 helmpsi = 0 ;
-	 if(helmpsa > 0) helmpsi = 1 ;
-	 helnegi = 0 ;
-	 if(helnega > 0) helnegi = 1 ;
-	 helmpsi = 0 ;
-	 if(helposa > 0) helposi = 1 ;
+	 if(runNumber <  5300) {
+   	  helmpsi = 0 ;
+	  if(helmpsa > 0) helmpsi = 1 ;
+	  helnegi = 0 ;
+	  if(helnega > 0) helnegi = 1 ;
+	  helposi = 0 ;
+	  if(helposa > 0) helposi = 1 ;
+	 }
+	 if(runNumber >  5300) {
+   	  helmpsi = 0 ;
+	  if(helmps > 0) helmpsi = 1 ;
+	  helnegi = 0 ;
+	  if(hel1 < 0) helnegi = 1 ;
+	  helposi = 0 ;
+	  if(hel1 > 0) helposi = 1 ;
+	 }
          fprintf(f2,
-"%6.2f %5.2f %5.2f %1d %1d %1d %6.2f %7.4f %7.4f %6.2f %7.4f %7.4f %4.1f %4.2f %4.2f %4.1f %4.1f %4.1f %4.2f %4.2f %5.1f %5.1f %6.3f %6.2f %6.3f %6.2f %6.3f %6.2f %6.3f %6.2f %6.3f\n",
+"%6.2f %5.2f %5.2f %1d %1d %1d %6.2f %7.4f %7.4f %6.2f %7.4f %7.4f %4.1f %4.2f %4.2f %4.1f %4.1f %4.1f %4.2f %4.2f %5.1f %5.1f %6.3f %6.2f %6.3f %6.2f %6.3f %6.2f %6.3f %6.2f %6.3f %8.2f %8.2f %8.2f %8.2f %8.2f %8.2f\n",
 	   ctimepi,ctimeK-ctimepi,ctimep-ctimepi,
-		 (int)helmpsa,(int)helnega,(int)helposa,hdelta,HgtrTh,
+//	    (int)helmpsa,(int)helnega,(int)helposa,hdelta,HgtrTh,
+	   (int)hel1+1,(int)helrep+1,(int)helmps+1,hdelta,HgtrTh,
            HgtrPh,pdelta,PgtrTh,PgtrPh,hcernpe,
 	   hcalepr,hcaletot,pcernpeng,
-		 paeronpe,pcernpe,pcalepr,pcaletot,hgtry,pgtry,pbeta,
-                 hdcx,hdcxp,hdcy,hdcyp,pdcx,pdcxp,pdcy,pdcyp) ;
-	 if (kk % 100 == 0) cout << kk*100/nentriesD << "   % of data done " << ctimepi << "  " << ctimepi-ctimeraw << "  " << pbeta << " " << hbeta << endl;
+	   paeronpe,pcernpe,pcalepr,pcaletot,hgtry,pgtry,pbeta,
+	   hdcx,hdcxp,hdcy,hdcyp,pdcx,pdcxp,pdcy,pdcyp,prf,hrf,
+		 PhodfpHitsTime,HhodfpHitsTime,pztar,hztar) ;
+	 //	 if (kk % 100 == 0) cout << kk*100/nentriesD << "   % of data done " << pdelta << "  " << paeronpe << "  " << pbeta << " " << pcaltot << endl;
 	 if(hcernpe>1 && hcaletot>0.7) {
 	   counters[5] = counters[5]+1 ;
-	   if(paeronpe > 2. && pcaletot > 0.5) {
+	   if(paeronpe > 2. && pcaletot > 0.05) {
 	     counters[6] = counters[6]+1 ;
+	     td3  = PhodfpHitsTime - prf + 1000. ;
+	     it3 = (int) (td3/4.) ;
+             td4 = td3 - 4.*it3 ;
 	   }
 	 }
+	 //	 printf("%.2f %.2f %.2f %.2f %.2f \n",hel1,helpred,helrep,helmps,helnqrt) ; 
        } // cointime check
     } // delta, PID cut
     // get SHMS tracking efficiency cut on coin with good e
@@ -432,15 +469,32 @@ void PeterB(Int_t runNumber, Int_t targ=1){
        //  (HhodoStartTimeMean - HhodfpHitsTime);      
       //printf("%7.1f %7.1f %7.1f %7.1f %7.1f %7.1f %7.1f %7.1f %7.1f %7.1f   \n",ctimeraw,hdelta,pgdsc,paeronpe,pcaltot,hcaletot,hcernpe) ;
     if(hdelta > -10 && hdelta < 10 && 
-       pgdsc>0. && paeronpe>.4 && pcaltot>0.10 &&
+       paeronpe>.4 && pcaltot > 0.10 &&
        hcaletot>0.6 && hcernpe>2) {
       ncoin = ncoin + 1. ;
-      if(pdelta>-100. && pdelta<100.) ncoinwtrk = ncoinwtrk + 1 ;
+      if(pgdsc>0.) { 
+       ncoinf = ncoinf + 1. ;
+       if(pdelta>-10000. && pdelta<10000.) {
+         ncoinwtrk = ncoinwtrk + 1 ;
+ 	if(pdelta>-25 && pdelta<40) {
+          ncoinwtrk1 = ncoinwtrk1 + 1 ;
+ 	 if(pgtry>-5 && pgtry< 5.) {
+ 	   ncoinwtrk2 = ncoinwtrk2 + 1 ;
+ 	 }
+ 	}
+       }
+      }
       //      printf("%10.1f %8.1f %8.2f %5.1f %5.2f \n",
       //        pdelta,ctimeraw,pgdsc,paeronpe,pcaltot);        
       icc = (int) ctimeraw -10 ;
-      if(icc > -1 && icc < 100) chist[icc]++ ; 
-      if(icc > -1 && icc < 100 && pdelta>-100. && pdelta<100.) chistp[icc]++ ;
+      if(icc > -1 && icc < 100) {
+       chist[icc]++ ; 
+       if(pdelta>-100. && pdelta<100.) chistp[icc]++ ;
+       if(pgdsc>0.) {
+        chistg[icc]++ ;
+   	if(pdelta>-100. && pdelta<100.) chistpg[icc]++ ;
+       }
+      }
       diff1 = t11 - t12 ;
       diff3 = t31 - t32 ;
       diff4 = t41 - t42 ;
@@ -462,22 +516,38 @@ void PeterB(Int_t runNumber, Int_t targ=1){
       } 
       tmp = (ctimepi + 5.) * 10. ;
       icc = (int) tmp ;
+      if(icc > -1 && icc < 100) chistt[icc]++ ;
       if(icc > -1 && icc < 100 && pdelta>-100. && pdelta<100.) chistpt[icc]++ ;
     }
   } // loop over events
 
   fprintf(f2,"  0.00  0.00 0.00\n") ;
-  fprintf(f2,"%8.0f %8.0f\n",ncoin,ncoinwtrk) ;
-  for(icc=0 ; icc<100 ;  icc++) {
+  fprintf(f2,"%8.0f %8.0f %8.0f %8.0f %8.0f\n",
+	  ncoin,ncoinf,ncoinwtrk,ncoinwtrk1,ncoinwtrk2) ;
+  printf("%8.0f %8.3f %8.3f %8.3f %8.3f\n",
+	 ncoin,ncoinf/ncoin,ncoinwtrk/ncoinf,ncoinwtrk1/ncoinf,ncoinwtrk2/ncoinf) ;
+  for(icc=45 ; icc<55 ;  icc++) {
     printf("%5d %5d %6d %6d %6d %6d \n",icc,chist[icc],chistp[icc],
 	   chistpt[icc],ctpih[icc],ctbig[icc]) ;
     trkeff = 0. ;
     trkeffer = 0. ; 
-    if(chist[icc]>2 && chist[icc]>2) {
+    if(chistp[icc]>2 && chist[icc]>2) {
       trkeff = (float)chistp[icc] / (float)chist[icc] ;
      trkeffer = sqrt(1./chistp[icc] - 1./chist[icc]) ;
     }
-    fprintf(f2," %5d %5d %6d %7.3f %7.3f\n",icc,chist[icc],chistp[icc],trkeff,trkeffer) ;
+    trkeffg = 0. ;
+    trkeffger = 0. ; 
+    if(chistpg[icc]>2 && chistg[icc]>2) {
+      trkeffg = (float)chistpg[icc] / (float)chistg[icc] ;
+     trkeffger = sqrt(1./chistpg[icc] - 1./chistg[icc]) ;
+    }
+    trkefft = 0. ;
+    trkeffter = 0. ; 
+    if(chistpt[icc]>2 && chistt[icc]>2) {
+      trkefft = (float)chistpt[icc] / (float)chistt[icc] ;
+     trkeffter = sqrt(1./chistpt[icc] - 1./chistt[icc]) ;
+    }
+    fprintf(f2," %5d %5d %6d %7.3f %7.3f %7.3f %7.3f %7.3f %7.3f\n",icc,chist[icc],chistp[icc],trkeff,trkeffer,trkeffg,trkeffger,trkefft,trkeffter) ;
   }
   for(ibeta=0 ; ibeta<10 ;  ibeta++) {
     sum1 = 0. ;
