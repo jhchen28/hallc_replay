@@ -12,10 +12,12 @@
 *.root
 
 # Directories
+OUTPUT
 REPORT_OUTPUT
 HISTOGRAMS
 MON_OUTPUT
 ROOTfiles
+logs
 .root_history
 raw
 raw.copiedtotape
