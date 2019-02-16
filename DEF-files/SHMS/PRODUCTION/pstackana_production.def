@@ -1,3 +1,5 @@
+block P.cal.*
+
 #include "DEF-files/SHMS/PRODUCTION/TRIG/ptrig_histos.def"
 #include "DEF-files/SHMS/PRODUCTION/AERO/paero_histos.def"
 #include "DEF-files/SHMS/PRODUCTION/CAL/pcal_histos.def"
