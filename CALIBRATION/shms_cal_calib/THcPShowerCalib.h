@@ -869,9 +869,15 @@ void THcPShowerCalib::SolveAlphas() {
   // Assign the gain arrays.
 
   for (UInt_t i=0; i<THcPShTrack::fNpmts; i++) {
-    falphaU[i] = au[i];
-    falphaC[i] = ac[i];
+    if (fHitCount[i] >= fMinHitCount) {
+      falphaU[i] = au[i];
+      falphaC[i] = ac[i];
+    }
+    else {
+falphaC[i] = Previous Calibration!!!
+    }
   }
+
 
 }
 
