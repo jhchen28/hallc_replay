@@ -27,17 +27,14 @@ g_ctp_trigdet_filename = "PARAM/TRIG/tcoin_fall18.param"
 g_ctp_parm_filename       = "DBASE/COIN/general_7000.param"
 g_ctp_kinematics_filename = "DBASE/COIN/auto_standard_coin.kinematics"
 g_ctp_map_filename = "MAPS/COIN/DETEC/coin_fall18.map"
-g_ctp_trigdet_filename = "PARAM/TRIG/tcoin_fall18.param"
 
 7274-7307
 g_ctp_parm_filename       = "DBASE/COIN/general_7274.param"
 g_ctp_kinematics_filename = "DBASE/COIN/auto_standard_coin.kinematics"
 g_ctp_map_filename = "MAPS/COIN/DETEC/coin_fall18.map"
-g_ctp_trigdet_filename = "PARAM/TRIG/tcoin_fall18.param"
 
 7308-99999
 g_ctp_parm_filename       = "DBASE/COIN/general_7308.param"
 g_ctp_kinematics_filename = "DBASE/COIN/auto_standard_coin.kinematics"
 g_ctp_map_filename = "MAPS/COIN/DETEC/coin_fall18.map"
-g_ctp_trigdet_filename = "PARAM/TRIG/tcoin_fall18.param"
 
