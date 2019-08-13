@@ -31,8 +31,8 @@ hphi_offset = 0.
                           ; Data taken with fields set by field00.f or later should set to 2000.
 ; These offsets are determined from elastic ep data.
 ; central field  correction
-  hpcentral_offset = -0.37 ;    
-  hthetacentral_offset = .0015 ; (rad) 
+  hpcentral_offset = -0.506 ;    
+  hthetacentral_offset = .00207 ; (rad) 
   h_oopcentral_offset = 0.00  ; (rad)
 ; sets hpcentral = hpcentral * ( 1. + hpcentral_offset / 100. )
 ;      htheta_lab=htheta_lab + hthetacentral_offset/degree 
