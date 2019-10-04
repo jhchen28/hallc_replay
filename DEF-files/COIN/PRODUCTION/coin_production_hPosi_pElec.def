@@ -48,11 +48,11 @@ variable H.cer.xAtCer
 variable H.cer.yAtCer
 
 # block H.dc.*
-H.dc.ntrack
-H.dc.x_fp
-H.dc.xp_fp
-H.dc.y_fp
-H.dc.yp_fp
+variable H.dc.ntrack
+variable HH.dc.x_fp
+variable HH.dc.xp_fp
+variable H.dc.y_fp
+variable H.dc.yp_fp
 
 ## block H.tr.*
 variable H.tr.n
