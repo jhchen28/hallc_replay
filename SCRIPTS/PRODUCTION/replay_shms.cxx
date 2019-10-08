@@ -1,17 +1,16 @@
-#include <fmt/core.h>
-#include <fmt/ostream.h>
-R__LOAD_LIBRARY(libfmt.so)
-
 #include <chrono>
 #include <iostream>
-
+#include <locale>
+#include <string>
 using namespace std;
 
+// Logging
 #include "spdlog/spdlog.h"
 
-R__LOAD_LIBRARY(libHallC.so)
-#include "hcana/HallC_Data.h"
+// Better formatting
+#include <fmt/format.h>
 
+// analyzer includes
 #include "THaCut.h"
 #include "THaGoldenTrack.h"
 #include "THaReactionPoint.h"
@@ -36,7 +35,18 @@ R__LOAD_LIBRARY(libHallC.so)
 #include "THcShower.h"
 #include "THcTrigApp.h"
 #include "THcTrigDet.h"
-void replay_production_shms(Int_t RunNumber = 7160, Int_t MaxEvent = 50000) {
+
+std::string coda_file_pattern(bool do_coin) {
+  return fmt::format("{}_all_{{:05d}}.dat", do_coin? "coin", "shms");
+}
+std::string output_file_pattern(string_view path, string_view content, string_view extension,
+                                bool do_coin, bool do_all) {
+  return fmt::format("{}/shms{}_{}{}_{{:05d}}_{{}}.{}", path, do_coin ? "coin_" : "", content,
+                     do_all ? "all_" : "", extension);
+}
+
+void replay_shms(Int_t RunNumber = 7160, Int_t MaxEvent = 0, string_view mode = "shms",
+                 const bool do_all = false) {
   // ===========================================================================
   // Setup logging
   spdlog::set_level(spdlog::level::warn);
@@ -47,7 +57,7 @@ void replay_production_shms(Int_t RunNumber = 7160, Int_t MaxEvent = 50000) {
   if (RunNumber == 0) {
     cout << "Enter a Run Number (-1 to exit): ";
     if (RunNumber <= 0)
-      return;
+      return -1;
   }
   // note: MaxEvent equal to -1 means all events
   if (MaxEvent == 0) {
@@ -55,15 +65,21 @@ void replay_production_shms(Int_t RunNumber = 7160, Int_t MaxEvent = 50000) {
     cin >> MaxEvent;
     if (MaxEvent == 0) {
       cerr << "...Invalid entry\n";
-      exit;
+      return -1;
     }
   }
+  if (mode != "shms" && mode != "SHMS" && mode != "coin" && mode != "COIN") {
+    cerr << "Invalid mode `" << mode << "`, has to be either `coin` or `shms`\n";
+    return -1;
+  }
+  const bool do_coin = (mode == "coin" || mode == "COIN");
 
   // ===========================================================================
   // Create file name patterns.
   //
   // 1. Input files
-  const char*     RunFileNamePattern = "shms_all_%05d.dat";
+  const auto RunFileNamePattern = coda_file_pattern(do_coin);
+
   vector<TString> pathList;
   pathList.push_back(".");
   pathList.push_back("./DATA/raw");
@@ -73,7 +89,8 @@ void replay_production_shms(Int_t RunNumber = 7160, Int_t MaxEvent = 50000) {
   pathList.push_back("./raw/../raw.copiedtotape");
   pathList.push_back("./cache");
   // 2. Output files
-  const char* ROOTFileNamePattern = "ROOTfiles/shms_replay_production_%d_%d.root";
+  const auto ROOTFileNamePattern =
+      output_file_pattern("ROOTfiles", "replay_production", "root", do_coin, do_all);
 
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);
@@ -135,6 +152,10 @@ void replay_production_shms(Int_t RunNumber = 7160, Int_t MaxEvent = 50000) {
   // Add trigger detector to trigger apparatus
   THaApparatus* TRG = new THcTrigApp("T", "TRG");
   gHaApps->Add(TRG);
+  // Add trigger detector to trigger apparatus
+  THcTrigDet* shms = new THcTrigDet("shms", "SHMS Trigger Information");
+  shms->SetSpectName("P");
+  TRG->AddDetector(shms);
   // TODO Add helicity detector to trigger apparatus
   // THcHelicity* helicity = new THcHelicity("helicity","Helicity Detector");
   // TRG->AddDetector(helicity);
@@ -178,7 +199,8 @@ void replay_production_shms(Int_t RunNumber = 7160, Int_t MaxEvent = 50000) {
   THcConfigEvtHandler* ev125 = new THcConfigEvtHandler("HC", "Config Event type 125");
   gHaEvtHandlers->Add(ev125);
   // Add event handler for EPICS events
-  THaEpicsEvtHandler* hcepics = new THaEpicsEvtHandler("epics", "HC EPICS event type 180");
+  THaEpicsEvtHandler* hcepics = new THaEpicsEvtHandler(
+      "epics", do_coin ? "HC EPICS event type 182" : "HC EPICS event type 181");
   gHaEvtHandlers->Add(hcepics);
 
   // -----------------------------------------------------------
@@ -196,46 +218,51 @@ void replay_production_shms(Int_t RunNumber = 7160, Int_t MaxEvent = 50000) {
 
   // Define the run(s) that we want to analyze.
   // We just set up one, but this could be many.
-  THcRun* run = new THcRun(pathList, Form(RunFileNamePattern, RunNumber));
+  THcRun* run = new THcRun(pathList, fmt::format(RunFileNamePattern, RunNumber).c_str());
 
   // Set to read in Hall C run database parameters
   run->SetRunParamClass("THcRunParameters");
 
   // Eventually need to learn to skip over, or properly analyze the pedestal events
-  run->SetEventRange(1,
+  run->SetEventRange(FirstEvent,
                      MaxEvent);  // Physics Event number, does not include scaler or control events.
   run->SetNscan(1);
   run->SetDataRequired(0x7);
-  // run->Print();
+  run->Print();
 
   // Define the analysis parameters
-  TString ROOTFileName = Form(ROOTFileNamePattern, RunNumber, MaxEvent);
+  const auto ROOTFileName = fmt::format(ROOTFileNamePattern, RunNumber, MaxEvent);
   analyzer->SetCountMode(2);  // 0 = counter is # of physics triggers
                               // 1 = counter is # of all decode reads
                               // 2 = counter is event number
 
   analyzer->SetEvent(event);
   // Set EPICS event type
-  analyzer->SetEpicsEvtType(180);
+  analyzer->SetEpicsEvtType(do_coin ? 182 : 181);
   // Define crate map
   analyzer->SetCrateMapFileName("MAPS/db_cratemap.dat");
   // Define output ROOT file
-  analyzer->SetOutFile(ROOTFileName.Data());
+  analyzer->SetOutFile(ROOTFileName.c_str());
   // Define DEF-file+
   // analyzer->SetOdefFile("DEF-files/SHMS/PRODUCTION/pstackana_production_all.def");
-  analyzer->SetOdefFile("DEF-files/SHMS/PRODUCTION/pstackana_production.def");
+  analyzer->SetOdefFile(do_all ? "DEF-files/SHMS/PRODUCTION/pstackana_production_all.def"
+                               : "DEF-files/SHMS/PRODUCTION/pstackana_production.def");
   // Define cuts file
   analyzer->SetCutFile("DEF-files/SHMS/PRODUCTION/CUTS/pstackana_production_cuts.def");  // optional
   // File to record accounting information for cuts
-  analyzer->SetSummaryFile(Form("REPORT_OUTPUT/SHMS/PRODUCTION/summary_all_production_%d_%d.report",
-                                RunNumber, MaxEvent));  // optional
+  analyzer->SetSummaryFile(fmt::format(output_file_pattern("REPORT_OUTPUT/PRODUCTION", "summary",
+                                                           "report", do_coin, do_all),
+                                       Run Number, MaxEvent)
+                               .c_str());
   // Start the actual analysis.
   analyzer->Process(run);
   // Create report file from template
   analyzer->PrintReport(
       "TEMPLATES/SHMS/PRODUCTION/pstackana_production.template",
-      Form("REPORT_OUTPUT/SHMS/PRODUCTION/replay_shms_all_production_%d_%d.report", RunNumber,
-           MaxEvent));  // optional
+      fmt::format(output_file_pattern("REPORT_OUTPUT/PRODUCTION", "replay_production", "report",
+                                      do_coin, do_all),
+                  Run Number, MaxEvent)
+          .c_str());
 
   delete analyzer;
 }
