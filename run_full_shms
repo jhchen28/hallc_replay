@@ -5,7 +5,7 @@ function print_the_help {
   echo "USAGE: $0 -r <run_number> -n <num> "
   echo "  OPTIONS: "
   echo "            -r,--run           Required run number"
-  echo "            -n,--n-events        Required number of eventsrun number"
+  echo "            -n,--n-events      Optional number of events (default: all)"
   #echo "            -o,--online-only   Log online only"
   #echo "            -a,--all           Log all plots (online, detectors, physics)"
   #echo "            -n,--no-log        Do not submit any log entries"
@@ -89,8 +89,8 @@ fi
 #  exit 
 #fi
 
-source /group/c-pol-he3/software/setup.sh
+#source /group/c-pol-he3/software/setup.sh
 
-hcana -b -q "SCRIPTS/SHMS/replay_production_shms.cxx(${run_number},${n_events})"
+hcana -b -q "SCRIPTS/SHMS/replay_production_shms.cxx+(${run_number},${n_events})"
 
 
