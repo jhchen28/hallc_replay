@@ -12,17 +12,4 @@ function print_the_help {
   exit 
 }
 
-POSITIONAL=()
-while [[ $# -gt 0 ]]
-do
-  key="$1"
-
-  case $key in
-    -h|--help)
-      shift # past argument
-      print_the_help
-      ;;
-  esac
-done
-
-bash SCRIPTS/replay.sh -m SHMS $@ || print_the_help
+./SCRIPTS/replay.sh -m SHMS $@ || print_the_help
