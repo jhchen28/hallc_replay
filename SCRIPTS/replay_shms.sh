@@ -73,7 +73,7 @@ do
       shift # past argument
       ;;
     -c|--coin)
-      
+      DO_COIN="true"     
       shift # past argument
       ;;
     *)    # unknown option

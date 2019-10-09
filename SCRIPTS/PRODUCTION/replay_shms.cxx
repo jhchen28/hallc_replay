@@ -110,11 +110,13 @@ int replay_shms(Int_t RunNumber = 7160, Int_t MaxEvent = -1, Int_t FirstEvent = 
   //
   // Set up the equipment to be analyzed.
   THcHallCSpectrometer* SHMS = new THcHallCSpectrometer("P", "SHMS");
-  SHMS->SetEvtType(1);
-  SHMS->AddEvtType(4);
-  SHMS->AddEvtType(5);
-  SHMS->AddEvtType(6);
-  SHMS->AddEvtType(7);
+  if (do_coin) {
+    SHMS->SetEvtType(1);
+    SHMS->AddEvtType(4);
+    SHMS->AddEvtType(5);
+    SHMS->AddEvtType(6);
+    SHMS->AddEvtType(7);
+  }
   gHaApps->Add(SHMS);
   // 1. Add Noble Gas Cherenkov to SHMS apparatus
   THcCherenkov* pngcer = new THcCherenkov("ngcer", "Noble Gas Cherenkov");
@@ -181,18 +183,20 @@ int replay_shms(Int_t RunNumber = 7160, Int_t MaxEvent = -1, Int_t FirstEvent = 
   // Add event handler for scaler events
   THcScalerEvtHandler* pscaler = new THcScalerEvtHandler("P", "Hall C scaler event type 1");
   pscaler->AddEvtType(1);
-  pscaler->AddEvtType(4);
-  pscaler->AddEvtType(5);
-  pscaler->AddEvtType(6);
-  pscaler->AddEvtType(7);
+  if (do_coin) {
+    pscaler->AddEvtType(4);
+    pscaler->AddEvtType(5);
+    pscaler->AddEvtType(6);
+    pscaler->AddEvtType(7);
+  }
   pscaler->AddEvtType(129);
   pscaler->SetDelayedType(129);
   pscaler->SetUseFirstEvent(kTRUE);
   gHaEvtHandlers->Add(pscaler);
 
   // Add event handler for prestart event 125.
-  THcConfigEvtHandler* ev125 = new THcConfigEvtHandler("HC", "Config Event type 125");
-  gHaEvtHandlers->Add(ev125);
+  THcConfigEvtHandler* pconfig = new THcConfigEvtHandler("pconfig", "Config Event type 125");
+  gHaEvtHandlers->Add(pconfig);
   // Add event handler for EPICS events
   THaEpicsEvtHandler* hcepics = new THaEpicsEvtHandler(
       "epics", do_coin ? "HC EPICS event type 182" : "HC EPICS event type 181");
