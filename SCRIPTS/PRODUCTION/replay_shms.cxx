@@ -46,7 +46,7 @@ std::string output_file_pattern(string_view path, string_view content, string_vi
 }
 
 int replay_shms(Int_t RunNumber = 7160, Int_t MaxEvent = -1, Int_t FirstEvent = 0,
-                const bool do_coin = false, const bool do_all = false) {
+                const bool do_all = false, const bool do_coin = false) {
   // ===========================================================================
   // Setup logging
   spdlog::set_level(spdlog::level::warn);
