@@ -41,8 +41,8 @@ std::string coda_file_pattern(bool do_coin) {
 }
 std::string output_file_pattern(string_view path, string_view content, string_view extension,
                                 bool do_coin, bool do_all) {
-  return fmt::format("{}/shms{}_{}{}_{{:05d}}_{{}}.{}", path, do_coin ? "coin_" : "", content,
-                     do_all ? "all_" : "", extension);
+  return fmt::format("{}/shms{}_{}{}_{{:05d}}_{{}}.{}", path, do_coin ? "_coin" : "", content,
+                     do_all ? "_all" : "", extension);
 }
 
 int replay_shms(Int_t RunNumber = 7160, Int_t MaxEvent = -1, Int_t FirstEvent = 0,
