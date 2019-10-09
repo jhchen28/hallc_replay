@@ -25,4 +25,4 @@ do
   esac
 done
 
-bash SCRIPTS/replay.sh -m SHMS $@ || print_the_help
+bash SCRIPTS/replay.sh -m HMS $@ || print_the_help
