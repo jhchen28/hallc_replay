@@ -21,6 +21,7 @@ ROOTfiles
 raw
 raw.copiedtotape
 cache
+logs
 
 # Symbolic links
 hcana

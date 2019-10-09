@@ -12,6 +12,16 @@ function print_the_help {
   exit 
 }
 
+function io_error {
+  echo ERROR: cannot create or write to directory $1
+  exit -1
+}
+function ensure_directory {
+  echo "Ensuring $1 exists and is writable"
+  [[ -d "$1" ]] || mkdir -p $1
+  touch $1/.write_check || io_error $1
+}
+
 function yes_or_no {
   while true; do
     read -p "$* [y/n]: " yn
@@ -63,7 +73,7 @@ do
       shift # past argument
       ;;
     -c|--coin)
-      DO_COIN="true"
+      
       shift # past argument
       ;;
     *)    # unknown option
@@ -97,5 +107,16 @@ fi
 #  exit 
 #fi
 
-hcana -b -q \
-  "SCRIPTS/SHMS/replay_shms.cxx+(${run_number},${n_events},${min_event},${DO_COIN},${DO_ALL})"
+## NOTE: if you change anything here, make sure you make corresponding changes 
+## in the replay script
+REPLAY_ARGS="${run_number},${n_events},${min_event},${DO_COIN},${DO_ALL}"
+REPLAY_CMD="SCRIPTS/PRODUCTION/replay_shms.cxx+(${REPLAY_ARGS})"
+REPORT_DIR="REPORT_OUTPUT/PRODUCTION"
+LOGDIR="logs"
+ROOTDIR="ROOTfiles"
+
+ensure_directory ${REPORT_DIR}
+ensure_directory ${LOGDIR}
+ensure_directory ${ROOTDIR}
+
+hcana -b -q "${REPLAY_CMD}"

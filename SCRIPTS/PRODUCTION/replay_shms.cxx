@@ -37,7 +37,7 @@ using namespace std;
 #include "THcTrigDet.h"
 
 std::string coda_file_pattern(bool do_coin) {
-  return fmt::format("{}_all_{{:05d}}.dat", do_coin? "coin", "shms");
+  return fmt::format("{}_all_{{:05d}}.dat", do_coin ? "coin" : "shms");
 }
 std::string output_file_pattern(string_view path, string_view content, string_view extension,
                                 bool do_coin, bool do_all) {
@@ -45,8 +45,8 @@ std::string output_file_pattern(string_view path, string_view content, string_vi
                      do_all ? "all_" : "", extension);
 }
 
-void replay_shms(Int_t RunNumber = 7160, Int_t MaxEvent = 0, string_view mode = "shms",
-                 const bool do_all = false) {
+int replay_shms(Int_t RunNumber = 7160, Int_t MaxEvent = -1, Int_t FirstEvent = 0,
+                const bool do_coin = false, const bool do_all = false) {
   // ===========================================================================
   // Setup logging
   spdlog::set_level(spdlog::level::warn);
@@ -68,11 +68,6 @@ void replay_shms(Int_t RunNumber = 7160, Int_t MaxEvent = 0, string_view mode = 
       return -1;
     }
   }
-  if (mode != "shms" && mode != "SHMS" && mode != "coin" && mode != "COIN") {
-    cerr << "Invalid mode `" << mode << "`, has to be either `coin` or `shms`\n";
-    return -1;
-  }
-  const bool do_coin = (mode == "coin" || mode == "COIN");
 
   // ===========================================================================
   // Create file name patterns.
@@ -252,7 +247,7 @@ void replay_shms(Int_t RunNumber = 7160, Int_t MaxEvent = 0, string_view mode = 
   // File to record accounting information for cuts
   analyzer->SetSummaryFile(fmt::format(output_file_pattern("REPORT_OUTPUT/PRODUCTION", "summary",
                                                            "report", do_coin, do_all),
-                                       Run Number, MaxEvent)
+                                       RunNumber, MaxEvent)
                                .c_str());
   // Start the actual analysis.
   analyzer->Process(run);
@@ -261,8 +256,10 @@ void replay_shms(Int_t RunNumber = 7160, Int_t MaxEvent = 0, string_view mode = 
       "TEMPLATES/SHMS/PRODUCTION/pstackana_production.template",
       fmt::format(output_file_pattern("REPORT_OUTPUT/PRODUCTION", "replay_production", "report",
                                       do_coin, do_all),
-                  Run Number, MaxEvent)
+                  RunNumber, MaxEvent)
           .c_str());
 
   delete analyzer;
+
+  return 0;
 }
