@@ -10,6 +10,8 @@
 *.pdf
 .nfs*
 *.root
+*.swp
+*.sw*
 
 # Directories
 RAID
