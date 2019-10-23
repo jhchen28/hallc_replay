@@ -1,5 +1,5 @@
-block P.cal.*
-block P.hod.*
+block H.cal.*
+block H.hod.*
 
 #include "DEF-files/HMS/PRODUCTION/TRIG/htrig_histos.def"
 #include "DEF-files/HMS/PRODUCTION/CAL/hcal_histos.def"
