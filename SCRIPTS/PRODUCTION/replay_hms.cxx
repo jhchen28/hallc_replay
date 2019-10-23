@@ -187,7 +187,7 @@ int replay_hms(Int_t RunNumber = 7160, Int_t MaxEvent = -1, Int_t FirstEvent = 0
   hscaler->AddEvtType(129);
   hscaler->SetDelayedType(129);
   hscaler->SetUseFirstEvent(kTRUE);
-  gHaEvtHandlers->Add(Hscaler);
+  gHaEvtHandlers->Add(hscaler);
 
   // Add event handler for prestart event 125.
   THcConfigEvtHandler* hconfig = new THcConfigEvtHandler("hconfig", "Config Event type 125");

@@ -8,7 +8,7 @@ function print_the_help {
   echo "            -n,--n-events      Number of events (default: all)"
   echo "            -s,--skip          Skip N first events (default: 0)"
   echo "            -a,--all           Store ALL variables (default: not set)"
-  echo "            -c,--coin          Run in COIN mode (default: SHMS single-arm mode)"
+  echo "            -c,--coin          Run in COIN mode (default: HMS single-arm mode)"
   exit 
 }
 
