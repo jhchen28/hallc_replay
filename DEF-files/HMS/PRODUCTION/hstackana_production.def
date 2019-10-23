@@ -1,3 +1,6 @@
+block P.cal.*
+block P.hod.*
+
 #include "DEF-files/HMS/PRODUCTION/TRIG/htrig_histos.def"
 #include "DEF-files/HMS/PRODUCTION/CAL/hcal_histos.def"
 #include "DEF-files/HMS/PRODUCTION/CER/hcer_histos.def"
