@@ -24,6 +24,7 @@ raw
 raw.copiedtotape
 cache
 logs
+scratch
 
 # Symbolic links
 hcana
