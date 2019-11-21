@@ -1,5 +1,8 @@
 block P.cal.*
 block P.hod.*
+block P.gtr.*
+block P.ngcer.*
+block P.dc.*
 
 #include "DEF-files/SHMS/PRODUCTION/TRIG/ptrig_histos.def"
 #include "DEF-files/SHMS/PRODUCTION/AERO/paero_histos.def"
