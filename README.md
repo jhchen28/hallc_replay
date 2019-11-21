@@ -1,6 +1,5 @@
-hallc_replay for SIDIS 2018
-This repo is for the hall c SIDIS experiments.
-fix me
+hallc_replay for the 2019-2020 Polarized Helium-3 experiments.
+
 ```
 git add README.md 
 git commit
