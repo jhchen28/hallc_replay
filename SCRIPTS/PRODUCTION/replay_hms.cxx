@@ -187,7 +187,7 @@ int replay_hms(Int_t RunNumber = 7160, Int_t MaxEvent = -1, Int_t FirstEvent = 0
   hscaler->AddEvtType(129);
   hscaler->SetDelayedType(129);
   hscaler->SetUseFirstEvent(kTRUE);
-  gHaEvtHandlers->Add(Hscaler);
+  gHaEvtHandlers->Add(hscaler);
 
   // Add event handler for prestart event 125.
   THcConfigEvtHandler* hconfig = new THcConfigEvtHandler("hconfig", "Config Event type 125");
@@ -239,10 +239,10 @@ int replay_hms(Int_t RunNumber = 7160, Int_t MaxEvent = -1, Int_t FirstEvent = 0
   analyzer->SetOutFile(ROOTFileName.c_str());
   // Define DEF-file+
   // analyzer->SetOdefFile("DEF-files/HMS/PRODUCTION/pstackana_production_all.def");
-  analyzer->SetOdefFile(do_all ? "DEF-files/HMS/PRODUCTION/pstackana_production_all.def"
-                               : "DEF-files/HMS/PRODUCTION/pstackana_production.def");
+  analyzer->SetOdefFile(do_all ? "DEF-files/HMS/PRODUCTION/hstackana_production_all.def"
+                               : "DEF-files/HMS/PRODUCTION/hstackana_production.def");
   // Define cuts file
-  analyzer->SetCutFile("DEF-files/HMS/PRODUCTION/CUTS/pstackana_production_cuts.def");  // optional
+  analyzer->SetCutFile("DEF-files/HMS/PRODUCTION/CUTS/hstackana_production_cuts.def");  // optional
   // File to record accounting information for cuts
   analyzer->SetSummaryFile(fmt::format(output_file_pattern("REPORT_OUTPUT/PRODUCTION", "summary",
                                                            "report", do_coin, do_all),
@@ -252,7 +252,7 @@ int replay_hms(Int_t RunNumber = 7160, Int_t MaxEvent = -1, Int_t FirstEvent = 0
   analyzer->Process(run);
   // Create report file from template
   analyzer->PrintReport(
-      "TEMPLATES/HMS/PRODUCTION/pstackana_production.template",
+      "TEMPLATES/HMS/PRODUCTION/hstackana_production.template",
       fmt::format(output_file_pattern("REPORT_OUTPUT/PRODUCTION", "replay_production", "report",
                                       do_coin, do_all),
                   RunNumber, MaxEvent)

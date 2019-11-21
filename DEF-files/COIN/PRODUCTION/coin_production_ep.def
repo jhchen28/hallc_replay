@@ -8,6 +8,7 @@ block H.hod.*time
 block H.hod.*Time
 block H.gtr.*
 block H.kin.*
+block H.dc.*
 
 block P.hgcer.npe*
 block P.cal.e*
@@ -15,6 +16,7 @@ block P.hod.*time
 block P.hod.*Time
 block P.gtr.*
 block P.kin.*
+block P.dc.*
 
 begin epics
 IBC3H00CRCUR4
