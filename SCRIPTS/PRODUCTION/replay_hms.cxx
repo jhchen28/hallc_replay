@@ -24,6 +24,7 @@ using namespace std;
 #include "THcExtTarCor.h"
 #include "THcGlobals.h"
 #include "THcHallCSpectrometer.h"
+#include "THcHelicity.h"
 #include "THcHodoEff.h"
 #include "THcHodoscope.h"
 #include "THcParmList.h"
@@ -148,8 +149,7 @@ int replay_hms(Int_t RunNumber = 7160, Int_t MaxEvent = -1, Int_t FirstEvent = 0
   THcTrigDet* hms = new THcTrigDet("hms", "HMS Trigger Information");
   hms->SetSpectName("H");
   TRG->AddDetector(hms);
-  TODO Add helicity detector to trigger apparatus THcHelicity* helicity =
-      new THcHelicity("helicity", "Helicity Detector");
+  THcHelicity* helicity = new THcHelicity("helicity", "Helicity Detector");
   TRG->AddDetector(helicity);
 
   // ===========================================================================

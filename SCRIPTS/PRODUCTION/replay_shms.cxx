@@ -24,6 +24,7 @@ using namespace std;
 #include "THcExtTarCor.h"
 #include "THcGlobals.h"
 #include "THcHallCSpectrometer.h"
+#include "THcHelicity.h"
 #include "THcHodoEff.h"
 #include "THcHodoscope.h"
 #include "THcParmList.h"
