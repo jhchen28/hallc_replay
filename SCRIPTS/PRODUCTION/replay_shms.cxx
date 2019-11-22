@@ -154,9 +154,8 @@ int replay_shms(Int_t RunNumber = 7160, Int_t MaxEvent = -1, Int_t FirstEvent = 
   THcTrigDet* shms = new THcTrigDet("shms", "SHMS Trigger Information");
   shms->SetSpectName("P");
   TRG->AddDetector(shms);
-  // TODO Add helicity detector to trigger apparatus
-  // THcHelicity* helicity = new THcHelicity("helicity","Helicity Detector");
-  // TRG->AddDetector(helicity);
+  THcHelicity* helicity = new THcHelicity("helicity","Helicity Detector");
+  TRG->AddDetector(helicity);
 
   // ===========================================================================
   // Phyics and derived quantities
