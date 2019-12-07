@@ -1,0 +1,43 @@
+{
+  "shms": {
+    "default": {
+      "odef": "DEF-files/SHMS/PRODUCTION/pstackana_production.def",
+      "cuts": "DEF-files/SHMS/PRODUCTION/CUTS/pstackana_production_cuts.def"
+    },
+    "all": {
+      "odef": "DEF-files/SHMS/PRODUCTION/pstackana_production_all.def",
+      "cuts": "DEF-files/SHMS/PRODUCTION/CUTS/pstackana_production_cuts.def"
+    },
+    "scalers": {
+      "odef": "DEF-files/SHMS/EPICS/epics_short.def",
+      "cuts": "DEF-files/SHMS/EPICS/pscaler_cuts.def"
+    },
+    "raster": {
+      "odef": "DEF-files/SHMS/RASTER/shms_raster_simple.def",
+      "cuts": "DEF-files/SHMS/RASTER/shms_raster_simple_cuts.def"
+    }
+  },
+  "hms": {
+    "default": {
+      "odef": "DEF-files/HMS/PRODUCTION/hstackana_production.def",
+      "cuts": "DEF-files/HMS/PRODUCTION/CUTS/hstackana_production_cuts.def"
+    },
+    "all": {
+      "odef": "DEF-files/HMS/PRODUCTION/hstackana_production_all.def",
+      "cuts": "DEF-files/HMS/PRODUCTION/CUTS/hstackana_production_cuts.def"
+    },
+    "scalers": {
+      "odef": "DEF-files/HMS/EPICS/epics_short.def",
+      "cuts": "DEF-files/HMS/EPICS/pscaler_cuts.def"
+    },
+    "raster": {
+      "odef": "DEF-files/HMS/RASTER/hms_raster_simple.def",
+      "cuts": "DEF-files/HMS/RASTER/hms_raster_simple_cuts.def"
+    }
+}
+
+
+
+
+
+

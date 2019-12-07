@@ -9,6 +9,8 @@ using namespace std;
 
 // Better formatting
 #include <fmt/format.h>
+// json file parsing
+#include "nlohmann/json.hpp"
 
 // analyzer includes
 #include "THaCut.h"
@@ -41,17 +43,33 @@ std::string coda_file_pattern(bool do_coin) {
   return fmt::format("{}_all_{{:05d}}.dat", do_coin ? "coin" : "shms");
 }
 std::string output_file_pattern(string_view path, string_view content, string_view extension,
-                                bool do_coin, bool do_all) {
-  return fmt::format("{}/shms{}_{}{}_{{:05d}}_{{}}.{}", path, do_coin ? "_coin" : "", content,
-                     do_all ? "_all" : "", extension);
+                                const std::string& mode, const bool do_coin) {
+  return fmt::format("{}/shms{}_{}_{}_{{:05d}}_{{}}.{}", path, do_coin ? "_coin" : "", content,
+                     mode, extension);
 }
 
 int replay_shms(Int_t RunNumber = 7160, Int_t MaxEvent = -1, Int_t FirstEvent = 0,
-                const bool do_all = false, const bool do_coin = false) {
+                const std::string mode = "default", const bool do_coin = false) {
   // ===========================================================================
   // Setup logging
   spdlog::set_level(spdlog::level::warn);
   spdlog::flush_every(std::chrono::seconds(5));
+
+  // ==========================================================================================
+  // Load the DEF-file info database
+  // ==========================================================================================
+  using nlohmann::json;
+  nlohmann::json def_db;
+  {
+    std::ifstream json_input_file("DEF-files/definitions.json");
+    try {
+      json_input_file >> def_db;
+    } catch (json::parse_error) {
+      std::cerr << "error: json file, " << run_list_fname
+                << ", is incomplete or has broken syntax.\n";
+      return -127;
+    }
+  }
 
   // ===========================================================================
   // Get RunNumber and MaxEvent if not provided.
@@ -78,15 +96,13 @@ int replay_shms(Int_t RunNumber = 7160, Int_t MaxEvent = -1, Int_t FirstEvent = 
 
   vector<TString> pathList;
   pathList.push_back(".");
-  pathList.push_back("./DATA/raw");
-  pathList.push_back("./raw_coda");
   pathList.push_back("./raw");
   pathList.push_back("./raw.copiedtotape");
   pathList.push_back("./raw/../raw.copiedtotape");
   pathList.push_back("./cache");
   // 2. Output files
   const auto ROOTFileNamePattern =
-      output_file_pattern("ROOTfiles", "replay_production", "root", do_coin, do_all);
+      output_file_pattern("ROOTfiles", "replay_production", "root", mode, do_coin);
 
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);
@@ -155,7 +171,7 @@ int replay_shms(Int_t RunNumber = 7160, Int_t MaxEvent = -1, Int_t FirstEvent = 
   THcTrigDet* shms = new THcTrigDet("shms", "SHMS Trigger Information");
   shms->SetSpectName("P");
   TRG->AddDetector(shms);
-  THcHelicity* helicity = new THcHelicity("helicity","Helicity Detector");
+  THcHelicity* helicity = new THcHelicity("helicity", "Helicity Detector");
   TRG->AddDetector(helicity);
 
   // ===========================================================================
@@ -207,6 +223,11 @@ int replay_shms(Int_t RunNumber = 7160, Int_t MaxEvent = -1, Int_t FirstEvent = 
   // Analyzer
   // -----------------------------------------------------------
   //
+  // Set up the analyzer - we use the standard one,
+  // but this could be an experiment-specific one as well.
+  // The Analyzer controls the reading of the data, executes
+  // tests/cuts, loops over Acpparatus's and PhysicsModules,
+  // and executes the output routines.
   THcAnalyzer* analyzer = new THcAnalyzer;
   analyzer->SetCodaVersion(2);
   // analyzer->EnableBenchmarks(true);
@@ -245,10 +266,9 @@ int replay_shms(Int_t RunNumber = 7160, Int_t MaxEvent = -1, Int_t FirstEvent = 
   analyzer->SetOutFile(ROOTFileName.c_str());
   // Define DEF-file+
   // analyzer->SetOdefFile("DEF-files/SHMS/PRODUCTION/pstackana_production_all.def");
-  analyzer->SetOdefFile(do_all ? "DEF-files/SHMS/PRODUCTION/pstackana_production_all.def"
-                               : "DEF-files/SHMS/PRODUCTION/pstackana_production.def");
+  analyzer->SetOdefFile(def_db["shms"][mode]["odef"].c_str());
   // Define cuts file
-  analyzer->SetCutFile("DEF-files/SHMS/PRODUCTION/CUTS/pstackana_production_cuts.def");  // optional
+  analyzer->SetCutFile(def_db["shms"][mode]["cut"].c_str());  // optional
   // File to record accounting information for cuts
   analyzer->SetSummaryFile(fmt::format(output_file_pattern("REPORT_OUTPUT/PRODUCTION", "summary",
                                                            "report", do_coin, do_all),
@@ -260,7 +280,7 @@ int replay_shms(Int_t RunNumber = 7160, Int_t MaxEvent = -1, Int_t FirstEvent = 
   analyzer->PrintReport(
       "TEMPLATES/SHMS/PRODUCTION/pstackana_production.template",
       fmt::format(output_file_pattern("REPORT_OUTPUT/PRODUCTION", "replay_production", "report",
-                                      do_coin, do_all),
+                                      mode, do_coin),
                   RunNumber, MaxEvent)
           .c_str());
 
