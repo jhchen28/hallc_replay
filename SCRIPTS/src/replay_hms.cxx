@@ -9,8 +9,6 @@ using namespace std;
 
 // Better formatting
 #include <fmt/format.h>
-// json file parsing
-#include "nlohmann/json.hpp"
 
 // analyzer includes
 #include "THaCut.h"
@@ -43,33 +41,21 @@ std::string coda_file_pattern(bool do_coin) {
   return fmt::format("{}_all_{{:05d}}.dat", do_coin ? "coin" : "hms");
 }
 std::string output_file_pattern(string_view path, string_view content, string_view extension,
-                                const std::string& mode, const bool do_coin) {
+                                string_view mode, const bool do_coin) {
   return fmt::format("{}/hms{}_{}_{}_{{:05d}}_{{}}.{}", path, do_coin ? "_coin" : "", content, mode,
                      extension);
 }
 
-int replay_hms(Int_t RunNumber = 7160, Int_t MaxEvent = -1, Int_t FirstEvent = 0,
-               const std::string mode = "default", const bool do_coin = false) {
+int replay_hms(
+    Int_t RunNumber = 2372, Int_t MaxEvent = -1, Int_t FirstEvent = 0,
+    const std::string& mode      = "default",
+    const std::string& odef_file = "DEF-files/HMS/PRODUCTION/hstackana_production.def",
+    const std::string& cut_file  = "DEF-files/HMS/PRODUCTION/CUTS/hstackana_production_cuts.def",
+    const bool         do_coin   = false) {
   // ===========================================================================
   // Setup logging
   spdlog::set_level(spdlog::level::warn);
   spdlog::flush_every(std::chrono::seconds(5));
-
-  // ==========================================================================================
-  // Load the DEF-file info database
-  // ==========================================================================================
-  using nlohmann::json;
-  nlohmann::json def_db;
-  {
-    std::ifstream json_input_file("DEF-files/definitions.json");
-    try {
-      json_input_file >> def_db;
-    } catch (json::parse_error) {
-      std::cerr << "error: json file, " << run_list_fname
-                << ", is incomplete or has broken syntax.\n";
-      return -127;
-    }
-  }
 
   // ===========================================================================
   // Get RunNumber and MaxEvent if not provided.
@@ -96,10 +82,10 @@ int replay_hms(Int_t RunNumber = 7160, Int_t MaxEvent = -1, Int_t FirstEvent = 0
 
   vector<TString> pathList;
   pathList.push_back(".");
+  pathList.push_back("./cache");
   pathList.push_back("./raw");
   pathList.push_back("./raw.copiedtotape");
   pathList.push_back("./raw/../raw.copiedtotape");
-  pathList.push_back("./cache");
   // 2. Output files
   const auto ROOTFileNamePattern =
       output_file_pattern("ROOTfiles", "replay_production", "root", mode, do_coin);
@@ -259,22 +245,21 @@ int replay_hms(Int_t RunNumber = 7160, Int_t MaxEvent = -1, Int_t FirstEvent = 0
   // Define output ROOT file
   analyzer->SetOutFile(ROOTFileName.c_str());
   // Define DEF-file+
-  // analyzer->SetOdefFile("DEF-files/HMS/PRODUCTION/pstackana_production_all.def");
-  analyzer->SetOdefFile(def_db["hms"][mode]["odef"].c_str());
+  analyzer->SetOdefFile(odef_file.c_str());
   // Define cuts file
-  analyzer->SetCutFile(def_db["hms"][mode]["cut"].c_str());  // optional
+  analyzer->SetCutFile(cut_file.c_str());  // optional
   // File to record accounting information for cuts
-  analyzer->SetSummaryFile(fmt::format(output_file_pattern("REPORT_OUTPUT/PRODUCTION", "summary",
-                                                           "report", mode, do_coin),
-                                       RunNumber, MaxEvent)
-                               .c_str());
+  analyzer->SetSummaryFile(
+      fmt::format(output_file_pattern("REPORT_OUTPUT/" + mode, "summary", "report", mode, do_coin),
+                  RunNumber, MaxEvent)
+          .c_str());
   // Start the actual analysis.
   analyzer->Process(run);
   // Create report file from template
   analyzer->PrintReport(
       "TEMPLATES/HMS/PRODUCTION/hstackana_production.template",
-      fmt::format(output_file_pattern("REPORT_OUTPUT/PRODUCTION", "replay_production", "report",
-                                      do_coin, mode),
+      fmt::format(output_file_pattern("REPORT_OUTPUT/" + mode, "replay_production", "report", mode,
+                                      do_coin),
                   RunNumber, MaxEvent)
           .c_str());
 

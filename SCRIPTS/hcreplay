@@ -1,0 +1,84 @@
+#!/usr/bin/env python3
+
+"""
+Master script to start all replays
+
+Author: Sylvester Joosten <sjoosten@anl.gov>
+
+Main commands:
+    HMS
+    SHMS
+    COIN
+"""
+import os
+import argparse
+import json
+
+DEF_DB_FILE='DEF-files/definitions.json'
+
+class InvalidArgumentError(Exception):
+    pass
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser("Launch the Hall C Replay hcana")
+    parser.add_argument(
+            "command",
+            help="Main commands are HMS and SHMS (COIN will be added later)")
+    parser.add_argument(
+            "-r", "--run",
+            type=int,
+            required=True,
+            help="Run number",
+            dest="run")
+    parser.add_argument(
+            "-n", "--n-events",
+            help="Number of events (default: all)",
+            type=int,
+            dest="events",
+            default=-1)
+    parser.add_argument(
+            "-s", "--skip",
+            dest="skip",
+            type=int,
+            help="Skip N first events (default: 0)",
+            default=0)
+    parser.add_argument(
+            "-m", "--mode",
+            dest="mode",
+            help="Replay mode, as defined in DEF-files/definitions.json",
+            default="default")
+    parser.add_argument(
+            "-c", "--coin",
+            dest="coin",
+            action="store_true",
+            help="Treat this run as a COIN run (only meaningful for HMS and SHMS runs)")
+    args = parser.parse_args()
+
+if args.command not in ['HMS', 'SHMS']:
+    'Command: {} not supporter'.format(args.command)
+    raise InvalidArgumentError
+
+print('Running {} replay (mode: {}) for run {}'.format(args.command, args.mode, args.run))
+if args.coin:
+    print('(Assuming COIN DAQ for this run)')
+print('Event range to analyze: {} - {}'.format(args.skip, args.skip + args.events))
+
+print('Loading definitions and cuts from,', DEF_DB_FILE)
+with open(DEF_DB_FILE, 'r') as f:
+    def_db=json.load(f)[args.command.lower()][args.mode]
+
+## Note: to change these, you will also have to modify the actual replay ROOT scripts
+report_dir='REPORT_OUTPUT/{}'.format(args.mode)
+log_dir='logs'
+root_dir='ROOTfiles'
+
+for dir in [report_dir, log_dir, root_dir]:
+    os.makedirs(dir, exist_ok=True)
+
+script_file = 'SCRIPTS/src/replay_{}.cxx'.format(args.command.lower())
+script_args='{},{},{},\"{}\",\"{}\",\"{}\"'.format(
+       args.run, args.events, args.skip, args.mode, def_db['odef'], def_db['cuts'])
+
+hcana_cmd = "hcana -b -q '{}+({})'".format(script_file, script_args)
+print('Executing:', hcana_cmd)
+os.system(hcana_cmd)
