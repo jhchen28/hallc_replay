@@ -52,6 +52,11 @@ if __name__ == '__main__':
             dest="coin",
             action="store_true",
             help="Treat this run as a COIN run (only meaningful for HMS and SHMS runs)")
+    parser.add_argument(
+            "-f", "--force-rebuild",
+            dest="force",
+            action="store_true",
+            help="Force rebuild replay executable (optional)")
     args = parser.parse_args()
 
 if args.command not in ['HMS', 'SHMS']:
@@ -79,6 +84,9 @@ script_file = 'SCRIPTS/src/replay_{}.cxx'.format(args.command.lower())
 script_args='{},{},{},\"{}\",\"{}\",\"{}\"'.format(
        args.run, args.events, args.skip, args.mode, def_db['odef'], def_db['cuts'])
 
-hcana_cmd = "hcana -b -q '{}+({})'".format(script_file, script_args)
+if not args.force:
+    hcana_cmd = "hcana -b -q '{}+({})'".format(script_file, script_args)
+else:
+    hcana_cmd = "hcana -b -q '{}++({})'".format(script_file, script_args)
 print('Executing:', hcana_cmd)
 os.system(hcana_cmd)
