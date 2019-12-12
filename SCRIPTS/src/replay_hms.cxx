@@ -47,7 +47,7 @@ std::string output_file_pattern(string_view path, string_view content, string_vi
 }
 
 int replay_hms(
-    Int_t RunNumber = 2372, Int_t MaxEvent = -1, Int_t FirstEvent = 0,
+    Int_t RunNumber = 2468, Int_t MaxEvent = -1, Int_t FirstEvent = 0,
     const std::string& mode      = "default",
     const std::string& odef_file = "DEF-files/HMS/PRODUCTION/hstackana_production.def",
     const std::string& cut_file  = "DEF-files/HMS/PRODUCTION/CUTS/hstackana_production_cuts.def",
