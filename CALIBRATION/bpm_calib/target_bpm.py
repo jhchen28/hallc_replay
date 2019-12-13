@@ -1,5 +1,6 @@
 #!/app/bin/python3
 import sys,os
+import gc
 import math
 import time
 import numpy as np
@@ -10,11 +11,14 @@ from subprocess import call
 from subprocess import check_output
 
 # Nominal beam position (note that 3H07C is offset by (+1.0, -1.0))
-BPM_NOMINAL_POS = {
+NOMINAL_POS = {
 '3H07A': {'XPOS': 0.0,
           'YPOS': 0.8},
 '3H07C': {'XPOS': -1.0,
-          'YPOS': 0.3}}
+          'YPOS': 0.3},
+'target': {'XPOS': 0.0,
+           'YPOS': -1.8}
+}
 
 plt.ion()
 fig=plt.figure()
@@ -24,6 +28,12 @@ AZ=-320.42
 BZ=-224.97
 CZ=-129.314
 ZVEC=np.array([AZ,BZ,CZ])
+
+NOMINAL_ZVEC=np.array([AZ,CZ])
+NOMINAL_XVEC=np.array([NOMINAL_POS['3H07A']['XPOS'], 
+    NOMINAL_POS['3H07C']['XPOS']])
+NOMINAL_YVEC=np.array([NOMINAL_POS['3H07A']['YPOS'], 
+    NOMINAL_POS['3H07C']['YPOS']])
 
 #XSLOPE=np.array([-0.9843,-1.116,-0.9645])
 #XOFF=np.array([-0.05355,0.08082,-0.893])
@@ -83,6 +93,14 @@ def f(B, x):
     # Return an array in the same format as y passed to Data or RealData.
     return B[0]*x + B[1]
 
+
+ax1 = fig.add_subplot(221)
+
+ax2 = fig.add_subplot(223)
+ax2.set_xlabel('Distance from target (cm)',fontsize=15)
+
+ax3 = fig.add_subplot(122)
+
 while True:
     time.sleep(0.5)
     #read in epics stuff
@@ -107,9 +125,9 @@ while True:
         YVEC=YRAW*0.0
 
     # Show X Position
-    #ax1=fig.add_subplot(211)
-    ax1=fig.add_subplot(221)
     # define 1st plot -x vs. z
+    ax1.plot(NOMINAL_ZVEC, NOMINAL_XVEC, marker='o', color='black', markersize=8,
+            fillstyle='none', linestyle='none')
     ax1.errorbar(ZVEC, XRAW, yerr=EX, fmt='o', color='blue', markersize=4)
     ax1.errorbar(ZVEC, XVEC, yerr=EX, fmt='o', color='red', markersize=4)
     linear = Model(f)
@@ -123,16 +141,15 @@ while True:
     # Plot the fit
     x_fit = np.linspace(-400, 50, 1000)
     y_fit = f(myoutput.beta, x_fit)
-    plt.plot(x_fit, y_fit, color='black')
+    ax1.plot(x_fit, y_fit, color='black')
 
     #plt.xlabel('Distance from target (cm)',fontsize=15)
-    plt.text(-400,2,"X Pos @ tgt: "+str(xtar));
-    plt.ylabel('X (mm)',fontsize=15)
-    py.ylim([-4,4])
+    #ax1.text(-400,2,"X Pos @ tgt: "+str(xtar))
+    ax1.set_ylim([-4,4])
 
     # Show Y Position
-    #ax2=fig.add_subplot(212)
-    ax2=fig.add_subplot(223)
+    ax2.plot(NOMINAL_ZVEC, NOMINAL_YVEC, marker='o', color='black', markersize=8,
+            fillstyle='none', linestyle='none')
     yraw = ax2.errorbar(ZVEC, YRAW, yerr=EX, fmt='o', color='blue', markersize=4)
     ycor = ax2.errorbar(ZVEC, YVEC, yerr=EX, fmt='o', color='red', markersize=4)
     linear = Model(f)
@@ -146,45 +163,40 @@ while True:
     # Plot the fit
     x_fit = np.linspace(-400, 50, 1000)
     y_fit = f(myoutput.beta, x_fit)
-    plt.plot(x_fit, y_fit, color='black')
+    ax2.plot(x_fit, y_fit, color='black')
 
-    plt.text(-400,2,"Y Pos @ tgt: "+str(ytar));
-    plt.xlabel('Distance from target (cm)',fontsize=15)
-    plt.ylabel('Y (mm)',fontsize=15)
-    plt.legend
-    plt.legend((yraw, ycor), ('raw', 'corrected'), loc='lower right')
-    py.ylim([-4,4])
+    #ax2.text(-400,2,"Y Pos @ tgt: "+str(ytar));
+    ax2.set_ylim([-4,4])
+    ax1.set_ylabel('X (mm)',fontsize=15)
+    ax2.set_ylabel('Y (mm)',fontsize=15)
+    ax3.set_xlabel('Target X (mm)',fontsize=15)
+    ax3.set_ylabel('Target Y (mm)',fontsize=15)
 
     # BPM monitoring-like Output
-    ax3 = fig.add_subplot(122)
+    ax3.plot([NOMINAL_POS['target']['XPOS']], [NOMINAL_POS['target']['YPOS']], marker='o', color='black', markersize=8, fillstyle='none', linestyle='none')
     ax3.errorbar(xtar,ytar, yerr=0, fmt='o', color='red', markersize=4)
     ax3.yaxis.tick_right()
     ax3.yaxis.set_label_position('right')
     ax3.yaxis.grid(color='grey')
     ax3.xaxis.grid(color='grey')
-    plt.text(-3,3.2,"Beam position on target:\n"+8*" "+str(xtar)+" , "+str(ytar));
-    plt.xlabel('Target X (mm)',fontsize=15)
-    plt.ylabel('Target Y (mm)',fontsize=15)
-    py.xlim([-4,4])
-    py.ylim([-4,4])
+    ax3.text(-3,1.2,"Beam position on target:\n"+8*" "+str(xtar)+" , "+str(ytar));
+    ax3.set_xlim([-4,4])
+    ax3.set_ylim([-6,2])
+    ax3.legend((yraw, ycor), ('raw', 'corrected'), loc='lower left')
 
-   # print('xvec',XVEC)
-   # print('yvec',YVEC)
     print('xtar is', xtar, 'ytar', ytar)
 
-    plt.text(-13.5, 4.5,"Nominal raw 3H07A: ({}, {}), 3H07C: ({}, {})".format(
-        BPM_NOMINAL_POS['3H07A']['XPOS'],
-        BPM_NOMINAL_POS['3H07A']['YPOS'],
-        BPM_NOMINAL_POS['3H07C']['XPOS'],
-        BPM_NOMINAL_POS['3H07C']['YPOS']),
+    ax3.text(-13.5, 2.5,"Nominal raw 3H07A: ({}, {}), 3H07C: ({}, {})".format(
+        NOMINAL_POS['3H07A']['XPOS'],
+        NOMINAL_POS['3H07A']['YPOS'],
+        NOMINAL_POS['3H07C']['XPOS'],
+        NOMINAL_POS['3H07C']['YPOS']),
         size=15)
 
-    #    plt.show()
     fig.canvas.draw()
     fig.canvas.flush_events()
     plt.pause(1)
-#    plt.clf()
-    #    plt.draw()
     ax1.clear()
     ax2.clear()
     ax3.clear()
+    gc.collect()
