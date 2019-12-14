@@ -17,6 +17,3 @@ pcut_good_S2X_time        T.shms.p2X_tdcTime > 180 && T.shms.p2X_tdcTime < 220
 pcut_good_S1_S2X_time     pcut_good_S1_time && pcut_good_S2X_time
 
 ALL_SHMS_NO_EDTM          ALL_events && pcut_physics_accepted
-
-; This def file is to be used for the 12/09 ELCLEAN runs where the SHMS ELCLEAN event
-; type was accidentally set to the HMS event type
