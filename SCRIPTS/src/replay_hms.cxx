@@ -82,10 +82,9 @@ int replay_hms(
 
   vector<TString> pathList;
   pathList.push_back(".");
-  pathList.push_back("./cache");
   pathList.push_back("./raw");
-  pathList.push_back("./raw.copiedtotape");
   pathList.push_back("./raw/../raw.copiedtotape");
+  pathList.push_back("./cache");
   // 2. Output files
   const auto ROOTFileNamePattern =
       output_file_pattern("ROOTfiles", "replay_production", "root", mode, do_coin);

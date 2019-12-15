@@ -82,10 +82,10 @@ int replay_shms(
 
   vector<TString> pathList;
   pathList.push_back(".");
-  pathList.push_back("./cache");
   pathList.push_back("./raw");
-  pathList.push_back("./raw.copiedtotape");
   pathList.push_back("./raw/../raw.copiedtotape");
+  pathList.push_back("./cache");
+
   // 2. Output files
   const auto ROOTFileNamePattern =
       output_file_pattern("ROOTfiles", "replay_production", "root", mode, do_coin);
@@ -157,8 +157,8 @@ int replay_shms(
   THcTrigDet* shms = new THcTrigDet("shms", "SHMS Trigger Information");
   shms->SetSpectName("P");
   TRG->AddDetector(shms);
-  THcHelicity* helicity = new THcHelicity("helicity", "Helicity Detector");
-  TRG->AddDetector(helicity);
+  //THcHelicity* helicity = new THcHelicity("helicity", "Helicity Detector");
+  //TRG->AddDetector(helicity);
 
   // ===========================================================================
   // Phyics and derived quantities
