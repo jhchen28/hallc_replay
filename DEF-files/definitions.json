@@ -4,6 +4,14 @@
       "odef": "DEF-files/SHMS/PRODUCTION/pstackana_production.def",
       "cuts": "DEF-files/SHMS/PRODUCTION/CUTS/pstackana_production_cuts.def"
     },
+    "50k": {
+      "odef": "DEF-files/SHMS/PRODUCTION/pstackana_50k.def",
+      "cuts": "DEF-files/SHMS/PRODUCTION/CUTS/pstackana_production_cuts.def"
+    },
+    "hms_evttype": {
+      "odef": "DEF-files/SHMS/PRODUCTION/pstackana_production.def",
+      "cuts": "DEF-files/SHMS/PRODUCTION/CUTS/pstackana_production_cuts_hms_evttype.def"
+    },
     "all": {
       "odef": "DEF-files/SHMS/PRODUCTION/pstackana_production_all.def",
       "cuts": "DEF-files/SHMS/PRODUCTION/CUTS/pstackana_production_cuts.def"
@@ -20,6 +28,10 @@
   "hms": {
     "default": {
       "odef": "DEF-files/HMS/PRODUCTION/hstackana_production.def",
+      "cuts": "DEF-files/HMS/PRODUCTION/CUTS/hstackana_production_cuts.def"
+    },
+    "50k": {
+      "odef": "DEF-files/HMS/PRODUCTION/hstackana_50k.def",
       "cuts": "DEF-files/HMS/PRODUCTION/CUTS/hstackana_production_cuts.def"
     },
     "all": {
