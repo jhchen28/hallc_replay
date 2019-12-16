@@ -6,6 +6,8 @@ t_shms_adc_tdc_offset = 200.
 
 t_shms_tdcchanperns = 0.09766
 
+helicity_freq = 120.0007547169
+
 ; cut variable is pT2
 ; determined for fall 2019 startup
 t_shms_trig_tdcrefcut = -3600.

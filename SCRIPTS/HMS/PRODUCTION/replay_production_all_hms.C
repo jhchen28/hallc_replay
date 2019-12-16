@@ -51,6 +51,9 @@ void replay_production_all_hms(Int_t RunNumber=0, Int_t MaxEvent=0) {
   // Add trigger detector to trigger apparatus
   THcTrigDet* hms = new THcTrigDet("hms", "HMS Trigger Information");
   TRG->AddDetector(hms);
+  // Add helicity detector to trigger apparatus
+  THcHelicity* heli = new THcHelicity("helicity", "Helicity Detector");
+  TRG->AddDetector(heli);
 
   // Set up the equipment to be analyzed.
   THcHallCSpectrometer* HMS = new THcHallCSpectrometer("H", "HMS");
