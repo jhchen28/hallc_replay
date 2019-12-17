@@ -1,0 +1,12 @@
+#*******************
+#* Trigger Variables
+#********************
+
+block T.heli.nqrt
+block T.heli.hel
+block T.heli.helrep
+block T.heli.helpred
+block T.heli.mps
+block T.heli.pcheck
+block T.heli.cycle
+block T.heli.qrt

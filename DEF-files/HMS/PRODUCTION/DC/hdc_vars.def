@@ -1,0 +1,8 @@
+#**************************
+#* Drift Chamber Variables
+#**************************
+
+block H.dc.x_fp
+block H.dc.xp_fp
+block H.dc.y_fp
+block H.dc.yp_fp
