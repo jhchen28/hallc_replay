@@ -6,34 +6,35 @@
 # DC REFERENCE TIMES
 #-------------------
 
-TH1F ptrig_pdc_ref1  'SHMS PDC Reference Time 1; TDC Time (ns); Counts / 1 ns;'  T.shms.pDCREF1_tdcTime  4000 0 4000
-TH1F ptrig_pdc_ref2  'SHMS PDC Reference Time 2; TDC Time (ns); Counts / 1 ns;'  T.shms.pDCREF2_tdcTime  4000 0 4000
-TH1F ptrig_pdc_ref3  'SHMS PDC Reference Time 3; TDC Time (ns); Counts / 1 ns;'  T.shms.pDCREF3_tdcTime  4000 0 4000
-TH1F ptrig_pdc_ref4  'SHMS PDC Reference Time 4; TDC Time (ns); Counts / 1 ns;'  T.shms.pDCREF4_tdcTime  4000 0 4000
-TH1F ptrig_pdc_ref5  'SHMS PDC Reference Time 5; TDC Time (ns); Counts / 1 ns;'  T.shms.pDCREF5_tdcTime  4000 0 4000
-TH1F ptrig_pdc_ref6  'SHMS PDC Reference Time 6; TDC Time (ns); Counts / 1 ns;'  T.shms.pDCREF6_tdcTime  4000 0 4000
-TH1F ptrig_pdc_ref7  'SHMS PDC Reference Time 7; TDC Time (ns); Counts / 1 ns;'  T.shms.pDCREF7_tdcTime  4000 0 4000
-TH1F ptrig_pdc_ref8  'SHMS PDC Reference Time 8; TDC Time (ns); Counts / 1 ns;'  T.shms.pDCREF8_tdcTime  4000 0 4000
-TH1F ptrig_pdc_ref9  'SHMS PDC Reference Time 9; TDC Time (ns); Counts / 1 ns;'  T.shms.pDCREF9_tdcTime  4000 0 4000
-TH1F ptrig_pdc_ref10 'SHMS PDC Reference Time 10; TDC Time (ns); Counts / 1 ns;' T.shms.pDCREF10_tdcTime 4000 0 4000
+TH1F ptrig_pdc_ref1  'SHMS PDC Reference Time 1; TDC Time (ns); Counts / 1 ns;'  T.shms.pDCREF1_tdcTime  75 1775 1850
+TH1F ptrig_pdc_ref2  'SHMS PDC Reference Time 2; TDC Time (ns); Counts / 1 ns;'  T.shms.pDCREF2_tdcTime  75 1775 1850
+TH1F ptrig_pdc_ref3  'SHMS PDC Reference Time 3; TDC Time (ns); Counts / 1 ns;'  T.shms.pDCREF3_tdcTime  75 1775 1850
+TH1F ptrig_pdc_ref4  'SHMS PDC Reference Time 4; TDC Time (ns); Counts / 1 ns;'  T.shms.pDCREF4_tdcTime  75 1775 1850
+TH1F ptrig_pdc_ref5  'SHMS PDC Reference Time 5; TDC Time (ns); Counts / 1 ns;'  T.shms.pDCREF5_tdcTime  75 1775 1850
+TH1F ptrig_pdc_ref6  'SHMS PDC Reference Time 6; TDC Time (ns); Counts / 1 ns;'  T.shms.pDCREF6_tdcTime  75 1775 1850
+TH1F ptrig_pdc_ref7  'SHMS PDC Reference Time 7; TDC Time (ns); Counts / 1 ns;'  T.shms.pDCREF7_tdcTime  75 1775 1850
+TH1F ptrig_pdc_ref8  'SHMS PDC Reference Time 8; TDC Time (ns); Counts / 1 ns;'  T.shms.pDCREF8_tdcTime  75 1775 1850
+TH1F ptrig_pdc_ref9  'SHMS PDC Reference Time 9; TDC Time (ns); Counts / 1 ns;'  T.shms.pDCREF9_tdcTime  75 1775 1850
+TH1F ptrig_pdc_ref10 'SHMS PDC Reference Time 10; TDC Time (ns); Counts / 1 ns;' T.shms.pDCREF10_tdcTime 75 1775 1850
 
 #------------------------
 # TRIGGER REFERENCE TIMES
 #------------------------
 
-TH1F ptrig_p1x_good_tdc 'SHMS p1x Good TDC Time; Good TDC Time (ns); Counts / 1 ns' T.shms.p1X_tdcTime 800 0 800 
-TH1F ptrig_p1y_good_tdc 'SHMS p1y Good TDC Time; Good TDC Time (ns); Counts / 1 ns' T.shms.p1Y_tdcTime 800 0 800 
-TH1F ptrig_p2x_good_tdc 'SHMS p2x Good TDC Time; Good TDC Time (ns); Counts / 1 ns' T.shms.p2X_tdcTime 800 0 800 
-TH1F ptrig_p2y_good_tdc 'SHMS p2y Good TDC Time; Good TDC Time (ns); Counts / 1 ns' T.shms.p2Y_tdcTime 800 0 800 
+TH1F ptrig_p1x_good_tdc 'SHMS p1x Good TDC Time; Good TDC Time (ns); Counts / 1 ns' T.shms.p1X_tdcTime 75 175 250 
+TH1F ptrig_p1y_good_tdc 'SHMS p1y Good TDC Time; Good TDC Time (ns); Counts / 1 ns' T.shms.p1Y_tdcTime 75 175 250 
+TH1F ptrig_p2x_good_tdc 'SHMS p2x Good TDC Time; Good TDC Time (ns); Counts / 1 ns' T.shms.p2X_tdcTime 75 175 250 
+TH1F ptrig_p2y_good_tdc 'SHMS p2y Good TDC Time; Good TDC Time (ns); Counts / 1 ns' T.shms.p2Y_tdcTime 75 175 250
+
 
 # TH1F ptrig_p1T_good_tdc 'SHMS p1x/p1y Coincidence Good TDC Time; Good TDC Time (ns); Counts / 1 ns' T.shms.p1T_tdcTime 800 0 800 
 # TH1F ptrig_p2T_good_tdc 'SHMS p2x/p2y Coincidence Good TDC Time; Good TDC Time (ns); Counts / 1 ns' T.shms.p2T_tdcTime 800 0 800 
 
-TH1F ptrig_pT1_good_tdc 'SHMS pT1 Good TDC Time (Slot 20, Channel 15); Good TDC Time (ns); Counts / 1 ns' T.shms.pT1_tdcTime 800 0 800 
-TH1F ptrig_pT2_good_tdc 'SHMS pT2 Good TDC Time (Slot 19, Channel 31); Good TDC Time (ns); Counts / 1 ns' T.shms.pT2_tdcTime 800 0 800 
-TH1F ptrig_pT3_good_tdc 'SHMS pT3 Good TDC Time (Slot 19, Channel 38); Good TDC Time (ns); Counts / 1 ns' T.shms.pT3_tdcTime 800 0 800 
+TH1F ptrig_pT1_good_tdc 'SHMS pT1 Good TDC Time (Slot 20, Channel 15); Good TDC Time (ns); Counts / 1 ns' T.shms.pT1_tdcTime 10 295 305 
+TH1F ptrig_pT2_good_tdc 'SHMS pT2 Good TDC Time (Slot 19, Channel 31); Good TDC Time (ns); Counts / 1 ns' T.shms.pT2_tdcTime 10 295 305 
+TH1F ptrig_pT3_good_tdc 'SHMS pT3 Good TDC Time (Slot 19, Channel 38); Good TDC Time (ns); Counts / 1 ns' T.shms.pT3_tdcTime 10 280 290 
 
-TH1F ptrig_pFADC_TREF_ROC2_good_tdc 'SHMS pFADC_TREF_ROC2 Good Pulse Time; Good Pulse Time (ns); Counts / 1 ns' T.shms.pFADC_TREF_ROC2_adcPulseTime 800 0 800 
+TH1F ptrig_pFADC_TREF_ROC2_good_tdc 'SHMS pFADC_TREF_ROC2 Good Pulse Time; Good Pulse Time (ns); Counts / 1 ns' T.shms.pFADC_TREF_ROC2_adcPulseTime 10 195 205 
 
 # TH2F ptrig_ch1xy_ch2x 'SHMS Hodo Trig; 1X1Y Trig (ns); 2X Trig (ns)' T.shms.p1T_tdcTime T.shms.p2X_tdcTime 200 100 300 200 100 300 
 # TH2F ptrig_ch1x_ch2x  'SHMS Hodo Trig; 1X Trig (ns); 2X Trig (ns)'   T.shms.p1X_tdcTime T.shms.p2X_tdcTime 200 100 300 200 100 300 

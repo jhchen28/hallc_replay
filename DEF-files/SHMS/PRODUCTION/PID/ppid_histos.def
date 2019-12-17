@@ -37,8 +37,9 @@ TH2F pcal_hgnpe_etracknorm 'SHMS HG Cer Npe vs. Cal E/p; Normalized Track Energy
 
 # TH2F pcal_xtrack_vs_etrack 'SHMS Calorimeter X-Track vs Total Track Energy; Track Energy Deposition (Gev) / 0.1 GeV; X Track (cm) / 1 cm' P.cal.etrack P.cal.xtrack 100 0 10 200 -100 100 pcut_CleanTrack
 # TH2F pcal_ytrack_vs_etrack 'SHMS Calorimeter Y-Track vs Total Track Energy; Track Energy Deposition (Gev) / 0.1 GeV; Y Track (cm) / 1 cm' P.cal.etrack P.cal.ytrack 100 0 10 200 -100 100 pcut_CleanTrack
-TH2F pcal_xtrack_vs_etracknorm 'SHMS Calorimeter X-Track vs Total Track Energy; Normalized Track Energy Deposition (Gev) / 0.025; X Track (cm) / 1 cm' P.cal.etottracknorm P.cal.xtrack 60 0 1.5 120 -60 60 pcut_CleanTrack
-TH2F pcal_ytrack_vs_etracknorm 'SHMS Calorimeter Y-Track vs Total Track Energy; Normalized Track Energy Deposition (Gev) / 0.025; Y Track (cm) / 1 cm' P.cal.etottracknorm P.cal.ytrack 60 0 1.5 100 -50 50 pcut_CleanTrack
+TH2F pcal_xtrack_vs_etracknorm 'SHMS Calorimeter X-Track vs Normalized Track Energy; Normalized Track Energy Deposition (Gev) / 0.025; X Track (cm) / 1 cm' P.cal.etottracknorm P.cal.xtrack 60 0 1.5 120 -60 60 pcut_CleanTrack
+TH2F pcal_ytrack_vs_etracknorm 'SHMS Calorimeter Y-Track vs Normalized Track Energy; Normalized Track Energy Deposition (Gev) / 0.025; Y Track (cm) / 1 cm' P.cal.etottracknorm P.cal.ytrack 60 0 1.5 100 -50 50 pcut_CleanTrack
+TH2F pcal_zvert_vs_etracknorm 'SHMS Calorimeter Z-Vertex vs Normalized Track Energy; Normalized Track Energy Deposition (Gev) / 0.025; Z Vertex (cm) / 1 cm' P.cal.etottracknorm P.react.z 60 0 1.5 70 -35 35 pcut_CleanTrack
 # TH2F pcal_xtrack_vs_etrack_elec 'SHMS Calorimeter X-Track vs Total Track Energy; Track Energy Deposition (Gev) / 0.1 GeV; X Track (cm) / 1 cm' P.cal.etrack P.cal.xtrack 100 0 10 200 -100 100 pcut_CleanTrack&&pcut_cer_hg_elec&&pcut_cal_elec
 # TH2F pcal_ytrack_vs_etrack_elec 'SHMS Calorimeter Y-Track vs Total Track Energy; Track Energy Deposition (Gev) / 0.1 GeV; Y Track (cm) / 1 cm' P.cal.etrack P.cal.ytrack 100 0 10 200 -100 100 pcut_CleanTrack&&pcut_cer_hg_elec&&pcut_cal_elec
 # TH2F pcal_xtrack_vs_etrack_pi 'SHMS Calorimeter X-Track vs Total Track Energy; Track Energy Deposition (Gev) / 0.1 GeV; X Track (cm) / 1 cm' P.cal.etrack P.cal.xtrack 100 0 10 200 -100 100 pcut_CleanTrack&&pcut_cer_hg_pi&&pcut_cal_pi
@@ -48,19 +49,19 @@ TH2F pcal_ytrack_vs_etracknorm 'SHMS Calorimeter Y-Track vs Total Track Energy; 
 # SHMS PID AND ACCEPTANCE PLOTS
 #-------------------------------
 
-TH2F hgc_vs_prshw      'SHMS HGC NPE Sum vs. PreSh Energy; Total PreSh Energy Deposition / 0.01 GeV; HGC NPE Sum / 0.5' P.cal.pr.eplane P.hgcer.npeSum 400 0 4 80 0 40 P.cal.pr.eplane>0.0&&P.hgcer.npeSum>0.0 
+TH2F hgc_vs_prshw      'SHMS HGC NPE Sum vs. PreSh Energy; Total PreSh Energy Deposition / 0.020 GeV; HGC NPE Sum / 0.5' P.cal.pr.eplane P.hgcer.npeSum 75 0 1.5 30 0 15 P.cal.pr.eplane>0.0&&P.hgcer.npeSum>0.0&&pcut_CleanTrack 
 # TH2F hgc_vs_prshw_elec 'SHMS Electron HGC NPE Sum vs. PreSh Energy; Total PreSh Energy Deposition / 0.01 GeV; HGC NPE Sum / 0.5' P.cal.pr.eplane P.hgcer.npeSum 400 0 4 80 0 40 pcut_CleanTrack&&pcut_cer_hg_elec&&pcut_cal_elec
 # TH2F hgc_vs_prshw_pi   'SHMS Pion HGC NPE Sum vs. PreSh Energy; Total PreSh Energy Deposition / 0.01 GeV; HGC NPE Sum / 0.5' P.cal.pr.eplane P.hgcer.npeSum 400 0 4 80 0 40 pcut_CleanTrack&&pcut_cer_hg_pi&&pcut_cal_pi
 
-TH2F ngc_vs_prshw      'SHMS NGC NPE Sum vs. PreSh Energy; Total PreSh Energy Deposition / 0.01 GeV; NGC NPE Sum / 0.5' P.cal.pr.eplane P.ngcer.npeSum 400 0 4 80 0 40 P.cal.pr.eplane>0.0&&P.ngcer.npeSum>0.0 
+TH2F ngc_vs_prshw      'SHMS NGC NPE Sum vs. PreSh Energy; Total PreSh Energy Deposition / 0.020 GeV; NGC NPE Sum / 0.5' P.cal.pr.eplane P.ngcer.npeSum 75 0 1.5 50 0 25 P.cal.pr.eplane>0.0&&P.ngcer.npeSum>0.0&&pcut_CleanTrack
 # TH2F ngc_vs_prshw_elec 'SHMS Electron NGC NPE Sum vs. PreSh Energy; Total PreSh Energy Deposition / 0.01 GeV; NGC NPE Sum / 0.5' P.cal.pr.eplane P.ngcer.npeSum 400 0 4 80 0 40 pcut_CleanTrack&&pcut_cer_hg_elec&&pcut_cal_elec
 # TH2F ngc_vs_prshw_pi   'SHMS Pion NGC NPE Sum vs. PreSh Energy; Total PreSh Energy Deposition / 0.01 GeV; NGC NPE Sum / 0.5' P.cal.pr.eplane P.ngcer.npeSum 400 0 4 80 0 40 pcut_CleanTrack&&pcut_cer_hg_pi&&pcut_cal_pi
 
-TH2F pcal_shw_vs_prshw      'SHMS Shower vs. PreShower Energy Deposition; PreShower Energy / 0.01 GeV; Shower Energy / 0.01 GeV' P.cal.pr.eplane P.cal.fly.earray 400 0 4 1200 0 12 P.cal.pr.eplane>0.0&&P.cal.fly.earray>0.0 
+TH2F pcal_shw_vs_prshw      'SHMS Shower vs. PreShower Energy Deposition; PreShower Energy / 0.020 GeV; Shower Energy / 0.020 GeV' P.cal.pr.eplane P.cal.fly.earray 75 0 1.5 200 0 4 P.cal.pr.eplane>0.0&&P.cal.fly.earray>0.0&&pcut_CleanTrack 
 # TH2F pcal_shw_vs_prshw_elec 'SHMS Electron Shower vs. PreShower Energy Deposition; PreShower Energy / 0.01 GeV; Shower Energy / 0.01 GeV' P.cal.pr.eplane P.cal.fly.earray 400 0 4 1200 0 12 pcut_CleanTrack&&pcut_cer_hg_elec&&pcut_cal_elec
 # TH2F pcal_shw_vs_prshw_pi   'SHMS Pion Shower vs. PreShower Energy Deposition; PreShower Energy / 0.01 GeV; Shower Energy / 0.01 GeV' P.cal.pr.eplane P.cal.fly.earray 400 0 4 1200 0 12 pcut_CleanTrack&&pcut_cer_hg_pi&&pcut_cal_pi
 
-TH2F pcal_delta_etracknorm      'SHMS Delta vs. Cal E/p; Normalized Track Energy Deposition / 0.025; Delta / 0.25' P.cal.etracknorm P.gtr.dp 60 0. 1.5 128 -10. 22. pcut_CleanTrack
+# TH2F pcal_delta_etracknorm      'SHMS Delta vs. Cal E/p; Normalized Track Energy Deposition / 0.025; Delta / 0.25' P.cal.etracknorm P.gtr.dp 60 0. 1.5 128 -10. 22. pcut_CleanTrack
 # TH2F pcal_delta_etracknorm_elec 'SHMS Delta vs. Cal E/p; Normalized Track Energy Deposition / 0.025; Delta / 0.25' P.cal.etracknorm P.gtr.dp 60 0. 1.5 152 -25. 13. pcut_CleanTrack&&pcut_cer_hg_elec&&pcut_cal_elec
 # TH2F pcal_delta_etracknorm_pi   'SHMS Delta vs. Cal E/p; Normalized Track Energy Deposition / 0.025; Delta / 0.25' P.cal.etracknorm P.gtr.dp 60 0. 1.5 152 -25. 13. pcut_CleanTrack&&pcut_cer_hg_pi&&pcut_cal_pi
 
