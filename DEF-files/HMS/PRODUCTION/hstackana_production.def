@@ -28,8 +28,8 @@ variable H.cer.yAtCer
 
 # block H.dc.*
 variable H.dc.ntrack
-variable HH.dc.x_fp
-variable HH.dc.xp_fp
+variable H.dc.x_fp
+variable H.dc.xp_fp
 variable H.dc.y_fp
 variable H.dc.yp_fp
 
@@ -109,7 +109,7 @@ block H.kin.*
 ## block H.react.* <-- not sure what these are for
 
 ## BCM
-block H.bcm.* 
+#block H.bcm.* 
 
 begin epics
 IBC3H00CRCUR4
