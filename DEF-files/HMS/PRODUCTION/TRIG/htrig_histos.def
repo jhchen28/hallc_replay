@@ -70,3 +70,11 @@ TH1F htrig_hASum_adc_pped 'HMS Pre-Shower A Shower Plane Pulse Pedestal;  Pulse 
 TH1F htrig_hBSum_adc_pped 'HMS Pre-Shower B Shower Plane Pulse Pedestal;  Pulse Pedestal (mV); Counts / 0.5 mV;' T.hms.hBSUM_adcPed 400 0 200  T.hms.hBSUM_adcPed>0.0
 TH1F htrig_hCSum_adc_pped 'HMS Pre-Shower C Shower Plane Pulse Pedestal;  Pulse Pedestal (mV); Counts / 0.5 mV;' T.hms.hCSUM_adcPed 400 0 200  T.hms.hCSUM_adcPed>0.0
 TH1F htrig_hDSum_adc_pped 'HMS Pre-Shower D Shower Plane Pulse Pedestal;  Pulse Pedestal (mV); Counts / 0.5 mV;' T.hms.hDSUM_adcPed 400 0 200  T.hms.hDSUM_adcPed>0.0
+
+#-----------------
+# Helicity Histos
+#-----------------
+
+TH1F htrig_heli      'HMS Actual Helicity;    Actual Helicity;    Number of Entries' T.heli.hel     9 -1.5 1.5
+TH1F htrig_heli_rep  'HMS Reported Helicity;  Reported Helicity;  Number of Entries' T.heli.helrep  9 -1.5 1.5
+TH1F htrig_heli_pred 'HMS Predicted Helicity; Predicted Helicity; Number of Entries' T.heli.helpred 9 -1.5 1.5

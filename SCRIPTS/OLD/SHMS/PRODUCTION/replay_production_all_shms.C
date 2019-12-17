@@ -21,8 +21,8 @@ void replay_production_all_shms (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   pathList.push_back(".");
   pathList.push_back("./raw");
   pathList.push_back("./raw/../raw.copiedtotape");
-  pathList.push_back("./cache");
 
+ 
   const char* ROOTFileNamePattern = "ROOTfiles/shms_replay_production_all_%d_%d.root";
   
   // Load global parameters
@@ -30,6 +30,7 @@ void replay_production_all_shms (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   gHcParms->AddString("g_ctp_database_filename", "DBASE/SHMS/standard.database");
   gHcParms->Load(gHcParms->GetString("g_ctp_database_filename"), RunNumber);
   gHcParms->Load(gHcParms->GetString("g_ctp_parm_filename"));
+  //gHcParms->Load(gHcParms->GetString("g_ctp_trigdet_filename"), RunNumber);
   gHcParms->Load(gHcParms->GetString("g_ctp_kinematics_filename"), RunNumber);
   // Load parameters for SHMS trigger configuration
   gHcParms->Load("PARAM/TRIG/tshms.param");
@@ -50,6 +51,9 @@ void replay_production_all_shms (Int_t RunNumber = 0, Int_t MaxEvent = 0) {
   // Add trigger detector to trigger apparatus
   THcTrigDet* shms = new THcTrigDet("shms", "SHMS Trigger Information");
   TRG->AddDetector(shms);
+  // Add helicity detector to trigger apparatus
+  THcHelicity* heli = new THcHelicity("helicity", "Helicity Detector");
+  TRG->AddDetector(heli);
 
   // Set up the equipment to be analyzed
   THcHallCSpectrometer* SHMS = new THcHallCSpectrometer("P", "SHMS");
