@@ -1872,9 +1872,16 @@ ppartmass = 0.00051099
 ptheta_lab = 30.0
 ppcentral = 2.0
 
-9523-99999
+9523-9662
 gpbeam = 10.38
 gtargmass_amu = 1.00794 
 ppartmass = 0.00051099
 ptheta_lab = 30.0
 ppcentral = 2.0
+
+9663-9999
+gpbeam = 10.38
+gtargmass_amu = 1.00794 
+ppartmass = 0.00051099
+ptheta_lab = 30.0
+ppcentral = 2.4
