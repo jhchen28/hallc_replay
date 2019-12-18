@@ -5,3 +5,6 @@ hcut_Clean1Track           H.gtr.index == 0
 hcut_Clean2Track           H.gtr.index == 1
 hcut_Clean3Track           H.gtr.index == 2
 hcut_Clean4Track           H.gtr.index == 3
+hcut_Elastic1Pass          H.gtr.index > -1 && H.gtr.dp > -8.0 && H.gtr.dp < 8.0 && H.hod.1x.negAdcCounter > 8
+hcut_Elastic1Passy         H.gtr.index > -1 && H.gtr.dp > -8.0 && H.gtr.dp < 8.0 && H.gtr.y < 2 && H.gtr.y > -2
+

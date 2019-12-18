@@ -1,0 +1,8 @@
+#**************************************
+# Extended Target Correction Histograms
+#**************************************
+
+TH2F hpaddle_hodo1xdp '1x hodo vs dp; dp; id;' H.gtr.dp H.hod.1x.negAdcCounter 200 -10 10 16 0 16 hcut_CleanTrack
+TH2F hpaddle_hodo2xdp '2x hodo vs dp; dp; id;' H.gtr.dp H.hod.2x.negAdcCounter 200 -10 10 16 0 16 hcut_CleanTrack
+TH2F hpaddle_hodo1ydp '1y hodo vs dp; dp; id;' H.gtr.dp H.hod.1y.negAdcCounter 200 -10 10 16 0 16 hcut_CleanTrack
+TH2F hpaddle_hodo2ydp '2y hodo vs dp; dp; id;' H.gtr.dp H.hod.2y.negAdcCounter 200 -10 10 16 0 16 hcut_CleanTrack

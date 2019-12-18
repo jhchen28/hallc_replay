@@ -5,6 +5,8 @@ pcut_Clean1Track     P.gtr.index == 0
 pcut_Clean2Track     P.gtr.index == 1
 pcut_Clean3Track     P.gtr.index == 2
 pcut_Clean4Track     P.gtr.index == 3
+pcut_Elastic1Pass    P.gtr.index > -1 && P.gtr.dp > -8.0 && P.gtr.dp < 8.0 && P.hod.1x.negAdcCounter > 8
+pcut_Elastic1Pass    P.gtr.index > -1 && P.gtr.dp > -8.0 && P.gtr.dp < 8.0 && P.gtr.y > -2 && P.gtr.y < 2
 
 pcut_CleanTrack_cer_elec     (P.gtr.index > -1) && pcut_cer_elec_both
 pcut_p1hit1_cer_elec	     p1hit1 && pcut_cer_elec_both
