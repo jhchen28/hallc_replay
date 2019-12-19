@@ -23,4 +23,6 @@
 # #include "DEF-files/SHMS/PRODUCTION/TRIG/ptrig_vars.def"
 #include "DEF-files/SHMS/PRODUCTION/ELAS/pelas_histos.def"
 #include "DEF-files/SHMS/PRODUCTION/ELAS/pelas_cut_histos.def"
+#include "DEF-files/SHMS/PRODUCTION/ELAS/pelas_cut2_histos.def"
 #include "DEF-files/SHMS/PRODUCTION/ELAS/ppad_histos.def"
+#include "DEF-files/SHMS/PRODUCTION/ELAS/ppad_cut2_histos.def"
