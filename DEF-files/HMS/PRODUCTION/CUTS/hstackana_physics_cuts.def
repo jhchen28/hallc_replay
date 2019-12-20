@@ -5,6 +5,9 @@ hcut_Clean1Track           H.gtr.index == 0
 hcut_Clean2Track           H.gtr.index == 1
 hcut_Clean3Track           H.gtr.index == 2
 hcut_Clean4Track           H.gtr.index == 3
-hcut_Elastic1Pass          H.gtr.index > -1 && H.gtr.dp > -8.0 && H.gtr.dp < 8.0 && H.hod.1x.negAdcCounter > 8
-hcut_Elastic1Passy         H.gtr.index > -1 && H.gtr.dp > -8.0 && H.gtr.dp < 8.0 && H.gtr.y < 2 && H.gtr.y > -2
+
+hcut_Elastic1Pass H.gtr.dp > -10 && H.gtr.dp < 10 && -0.08 < H.gtr.th && H.gtr.th < 0.08 && -0.04 < H.gtr.ph && H.gtr.ph < 0.04 && abs(H.gtr.y) < 10.0 && H.cal.etracknorm > 0.80 && H.cal.etracknorm < 2. && H.cer.npeSum > 0.5
+hcut_Elastic1Passy H.gtr.dp > -10 && H.gtr.dp < 10 && -0.08 < H.gtr.th && H.gtr.th < 0.08 && -0.04 < H.gtr.ph && H.gtr.ph < 0.04 && abs(H.gtr.y) < 2.0 && H.cal.etracknorm > 0.80 && H.cal.etracknorm < 2. && H.cer.npeSum > 0.5
+hcut_GlassElas H.gtr.index > -1 && H.gtr.dp > -8.0 && H.gtr.dp < 8.0 && H.gtr.dp > (20*H.gtr.th + 0.5)
+hcut_GlassElasVeto H.gtr.index > -1 && H.gtr.dp > -8.0 && H.gtr.dp < 8.0 && H.gtr.dp < (20*H.gtr.th + 0.5) && abs(H.gtr.y) < 2
 

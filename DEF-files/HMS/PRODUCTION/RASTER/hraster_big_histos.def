@@ -51,6 +51,6 @@ formula FRYBraw_V H.rb.raster.frybRawAdc*(1./4096.)/25.
 TH2F hFRApos_XvsY_us 'HMS FRA X vs Y (Upstream Foil Cut); FRA X Position (cm); FRA Y Position (cm)' H.rb.raster.fr_xa H.rb.raster.fr_ya 150 -0.6 0.6 150 -0.6 0.6 H.dc.ntrack>0&&H.react.z<6.67&&H.react.z>-6.67&&H.cal.etot>0.2&&hcut_CleanTrack
 TH2F hFRBpos_XvsY_us 'HMS FRB X vs Y (Upstream Foil Cut); FRB X Position (cm); FRB Y Position (cm)' H.rb.raster.fr_xb H.rb.raster.fr_yb 150 -0.6 0.6 150 -0.6 0.6 H.dc.ntrack>0&&H.react.z<6.67&&H.react.z>-6.67&&H.cal.etot>0.2&&hcut_CleanTrack
 
-TH2F hFRApos_XvsY_ds 'HMS FRA X vs Y (Downstream Foil Cut); FRA X Position (cm); FRA Y Position (cm)' H.rb.raster.fr_xa H.rb.raster.fr_ya 150 -0.6 0.6 150 -0.6 0.6 H.dc.ntrack>0&&H.react.z>6.67&&H.react.z<20.01&&H.cal.etot>0.2&&hcut_CleanTrack
-TH2F hFRBpos_XvsY_ds 'HMS FRB X vs Y (Downstream Foil Cut); FRB X Position (cm); FRB Y Position (cm)' H.rb.raster.fr_xb H.rb.raster.fr_yb 150 -0.6 0.6 150 -0.6 0.6 H.dc.ntrack>0&&H.react.z>6.67&&H.react.z<20.01&&H.cal.etot>0.2&&hcut_CleanTrack
+TH2F hFRApos_XvsY_ds2 'HMS FRA X vs Y (Downstream Foil Cut); FRA X Position (cm); FRA Y Position (cm)' H.rb.raster.fr_xa H.rb.raster.fr_ya 150 -0.6 0.6 150 -0.6 0.6 H.dc.ntrack>0&&H.react.z>6.67&&H.react.z<20.01&&H.cal.etot>0.2&&hcut_CleanTrack
+TH2F hFRBpos_XvsY_ds2 'HMS FRB X vs Y (Downstream Foil Cut); FRB X Position (cm); FRB Y Position (cm)' H.rb.raster.fr_xb H.rb.raster.fr_yb 150 -0.6 0.6 150 -0.6 0.6 H.dc.ntrack>0&&H.react.z>6.67&&H.react.z<20.01&&H.cal.etot>0.2&&hcut_CleanTrack
 
