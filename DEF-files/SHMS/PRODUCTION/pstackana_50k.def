@@ -10,7 +10,6 @@
 #include "DEF-files/SHMS/PRODUCTION/KIN/pkin_histos.def"
 #include "DEF-files/SHMS/PRODUCTION/GTR/pgtr_histos.def"
 #include "DEF-files/SHMS/PRODUCTION/RASTER/praster_histos.def"
-#include "DEF-files/SHMS/PRODUCTION/RASTER/praster_big_histos.def"
 #include "DEF-files/SHMS/PRODUCTION/REACT/preact_histos.def"
 #include "DEF-files/SHMS/PRODUCTION/PID/ppid_histos.def"
 #include "DEF-files/SHMS/PRODUCTION/EXTCOR/pextcor_histos.def"

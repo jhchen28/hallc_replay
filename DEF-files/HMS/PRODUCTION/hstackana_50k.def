@@ -8,7 +8,6 @@
 #include "DEF-files/HMS/PRODUCTION/KIN/hkin_histos.def"
 #include "DEF-files/HMS/PRODUCTION/GTR/hgtr_histos.def"
 #include "DEF-files/HMS/PRODUCTION/RASTER/hraster_histos.def"
-#include "DEF-files/HMS/PRODUCTION/RASTER/hraster_big_histos.def"
 #include "DEF-files/HMS/PRODUCTION/REACT/hreact_histos.def"
 #include "DEF-files/HMS/PRODUCTION/PID/hpid_histos.def"
 #include "DEF-files/HMS/PRODUCTION/EXTCOR/hextcor_histos.def"
