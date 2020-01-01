@@ -11,34 +11,34 @@ Run Length   : {H.1MHz.scalerTime:%.3f} sec
 * Beamline
 ***********
 With no cuts on BCM{gBCM_Current_threshold_index+1}.
-  
-BCM1 Current: {H.BCM1.scalerCharge/H.1MHz.scalerTime:%.3f} uA		  
-BCM2 Current: {H.BCM2.scalerCharge/H.1MHz.scalerTime:%.3f} uA		 
-BCM4A Current: {H.BCM4A.scalerCharge/H.1MHz.scalerTime:%.3f} uA		  
-BCM4B Current: {H.BCM4B.scalerCharge/H.1MHz.scalerTime:%.3f} uA		 
-BCM4C Current: {H.BCM4C.scalerCharge/H.1MHz.scalerTime:%.3f} uA		 
-Unser Current: {H.Unser.scalerCharge/H.1MHz.scalerTime:%.3f} uA		  
+
+BCM1 Current: {H.BCM1.scalerCharge/H.1MHz.scalerTime:%.3f} uA
+BCM2 Current: {H.BCM2.scalerCharge/H.1MHz.scalerTime:%.3f} uA
+BCM4A Current: {H.BCM4A.scalerCharge/H.1MHz.scalerTime:%.3f} uA
+BCM4B Current: {H.BCM4B.scalerCharge/H.1MHz.scalerTime:%.3f} uA
+BCM4C Current: {H.BCM4C.scalerCharge/H.1MHz.scalerTime:%.3f} uA
+Unser Current: {H.Unser.scalerCharge/H.1MHz.scalerTime:%.3f} uA
 
 BCM1  Charge: {H.BCM1.scalerCharge:%.3f} uC
-BCM2  Charge: {H.BCM2.scalerCharge:%.3f} uC	
-BCM4A Charge: {H.BCM4A.scalerCharge:%.3f} uC		  
-BCM4B Charge: {H.BCM4B.scalerCharge:%.3f} uC		 
-BCM4C Charge: {H.BCM4C.scalerCharge:%.3f} uC		 
+BCM2  Charge: {H.BCM2.scalerCharge:%.3f} uC
+BCM4A Charge: {H.BCM4A.scalerCharge:%.3f} uC
+BCM4B Charge: {H.BCM4B.scalerCharge:%.3f} uC
+BCM4C Charge: {H.BCM4C.scalerCharge:%.3f} uC
 Unser Charge: {H.Unser.scalerCharge:%.3f} uC
 
 Cut on BCM{gBCM_Current_threshold_index+1} current of {gBCM_Current_threshold} uA. Beam over threshold for {H.1MHz.scalerTimeCut:%.3f}s, or {((H.1MHz.scalerTimeCut/H.1MHz.scalerTime)*100.):%.3f}% of total run time.
-BCM1 Beam Cut Current: {H.BCM1.scalerChargeCut/H.1MHz.scalerTimeCut:%.3f} uA		  
-BCM2 Beam Cut Current: {H.BCM2.scalerChargeCut/H.1MHz.scalerTimeCut:%.3f} uA		 
-BCM4A Beam Cut Current: {H.BCM4A.scalerChargeCut/H.1MHz.scalerTimeCut:%.3f} uA		  
-BCM4B Beam Cut Current: {H.BCM4B.scalerChargeCut/H.1MHz.scalerTimeCut:%.3f} uA		 
-BCM4C Beam Cut Current: {H.BCM4C.scalerChargeCut/H.1MHz.scalerTimeCut:%.3f} uA		 
-Unser Beam Cut Current: {H.Unser.scalerChargeCut/H.1MHz.scalerTimeCut:%.3f} uA		  
+BCM1 Beam Cut Current: {H.BCM1.scalerChargeCut/H.1MHz.scalerTimeCut:%.3f} uA
+BCM2 Beam Cut Current: {H.BCM2.scalerChargeCut/H.1MHz.scalerTimeCut:%.3f} uA
+BCM4A Beam Cut Current: {H.BCM4A.scalerChargeCut/H.1MHz.scalerTimeCut:%.3f} uA
+BCM4B Beam Cut Current: {H.BCM4B.scalerChargeCut/H.1MHz.scalerTimeCut:%.3f} uA
+BCM4C Beam Cut Current: {H.BCM4C.scalerChargeCut/H.1MHz.scalerTimeCut:%.3f} uA
+Unser Beam Cut Current: {H.Unser.scalerChargeCut/H.1MHz.scalerTimeCut:%.3f} uA
 
 BCM1  Beam Cut Charge: {H.BCM1.scalerChargeCut:%.3f} uC
 BCM2  Beam Cut Charge: {H.BCM2.scalerChargeCut:%.3f} uC
-BCM4A Beam Cut Charge: {H.BCM4A.scalerChargeCut:%.3f} uC		  
-BCM4B Beam Cut Charge: {H.BCM4B.scalerChargeCut:%.3f} uC		 
-BCM4C Beam Cut Charge: {H.BCM4C.scalerChargeCut:%.3f} uC		 
+BCM4A Beam Cut Charge: {H.BCM4A.scalerChargeCut:%.3f} uC
+BCM4B Beam Cut Charge: {H.BCM4B.scalerChargeCut:%.3f} uC
+BCM4C Beam Cut Charge: {H.BCM4C.scalerChargeCut:%.3f} uC
 Unser Beam Cut Charge: {H.Unser.scalerChargeCut:%.3f} uC
 
 ********************
@@ -134,8 +134,8 @@ HMS TRIG1 Computer Live Time : {(hms_trigs.npassed / (H.hTRIG1.scaler/ghconfig_t
 HMS TRIG2 Computer Live Time : {(hms_trigs.npassed / (H.hTRIG2.scaler/ghconfig_ti_ps_factors[1]))*100.0:%3.2f} %
 HMS TRIG3 Computer Live Time : {(hms_trigs.npassed / (H.hTRIG3.scaler/ghconfig_ti_ps_factors[2]))*100.0:%3.2f} %
 
-HMS Computer Live Time : {(hcut_TRIG1.npassed / H.hTRIG1.scaler)*100.0:%3.4f} % 
-HMS Computer Dead Time : {100.0 - (hcut_TRIG1.npassed / H.hTRIG1.scaler)*100.0:%3.4f} % 
+HMS Computer Live Time : {(hcut_TRIG1.npassed / H.hTRIG1.scaler)*100.0:%3.4f} %
+HMS Computer Dead Time : {100.0 - (hcut_TRIG1.npassed / H.hTRIG1.scaler)*100.0:%3.4f} %
 
 Pre-Scaled Ps1 HMS Computer Live Time : {(hcut_TRIG1.npassed / (H.hTRIG1.scaler/ghconfig_ti_ps_factors[0]))*100.0:%3.4f} %
 Pre-Scaled Ps1 HMS Computer Dead Time : {100.0 - (hcut_TRIG1.npassed / (H.hTRIG1.scaler/ghconfig_ti_ps_factors[0]))*100.0:%3.4f} %
@@ -179,12 +179,12 @@ EL-CLEAN Pre-Trigger 50 ns Gate  : {H.hTRIG3.scalerCut/H.1MHz.scalerTimeCut/1000
 = Hodoscopes
 =:=:=:=:=:=:=:
 
-H1X : {H.S1X.scalerCut} [ {(H.S1X.scalerCut/H.1MHz.scalerTimeCut)/1000.:%.3f} kHz ] AND between + and - sides of H1X 
+H1X : {H.S1X.scalerCut} [ {(H.S1X.scalerCut/H.1MHz.scalerTimeCut)/1000.:%.3f} kHz ] AND between + and - sides of H1X
 H1Y : {H.S1Y.scalerCut} [ {(H.S1Y.scalerCut/H.1MHz.scalerTimeCut)/1000.:%.3f} kHz ] AND between + and - sides of H1Y
 H2X : {H.S2X.scalerCut} [ {(H.S2X.scalerCut/H.1MHz.scalerTimeCut)/1000.:%.3f} kHz ] AND between + and - sides of H2X
 H2Y : {H.S2Y.scalerCut} [ {(H.S2Y.scalerCut/H.1MHz.scalerTimeCut)/1000.:%.3f} kHz ] AND between + and - sides of H2Y
 
-H1XH1Y : {H.S1XS1Y.scalerCut} [ {(H.S1XS1Y.scalerCut/H.1MHz.scalerTimeCut)/1000.:%.3f}  kHz ] AND between H1X and H1Y planes 
+H1XH1Y : {H.S1XS1Y.scalerCut} [ {(H.S1XS1Y.scalerCut/H.1MHz.scalerTimeCut)/1000.:%.3f}  kHz ] AND between H1X and H1Y planes
 H2XH2Y : {H.S2XS2Y.scalerCut} [ {(H.S2XS2Y.scalerCut/H.1MHz.scalerTimeCut)/1000.:%.3f}  kHz ] AND between H2X and H2Y planes
 
 =:=:=:=:=:=:
@@ -205,10 +205,10 @@ DSUM :	     {H.DSUM.scalerCut}  [ {(H.DSUM.scalerCut/H.1MHz.scalerTimeCut)/1000.
 ****************
 
 hmsDC1Planes_large  Counts:{hmsDC1Planes_large.npassed} /hms_trigs : {hmsDC1Planes_large.npassed/hms_trigs.npassed}
-hmsDC2Planes_large  Counts:{hmsDC2Planes_large.npassed}  /hms_trigs : {hmsDC2Planes_large.npassed/hms_trigs.npassed}  
+hmsDC2Planes_large  Counts:{hmsDC2Planes_large.npassed}  /hms_trigs : {hmsDC2Planes_large.npassed/hms_trigs.npassed}
 
 hmsDC1Planes6       Counts:  {hmsDC1Planes6hits.npassed} /hms_trigs : {hmsDC1Planes6hits.npassed/hms_trigs.npassed}
-hmsDC2Planes6  	    Counts:  {hmsDC2Planes6hits.npassed} /hms_trigs : {hmsDC2Planes6hits.npassed/hms_trigs.npassed}  
+hmsDC2Planes6  	    Counts:  {hmsDC2Planes6hits.npassed} /hms_trigs : {hmsDC2Planes6hits.npassed/hms_trigs.npassed}
 
 hmsDC1x1Planes5	    Counts:  {hmsDC1_5hits_x1.npassed} eff : {hmsDC1_6hits_x1.npassed/hmsDC1_5hits_x1.npassed}
 hmsDC1u1Planes5	    Counts:  {hmsDC1_5hits_u1.npassed} eff : {hmsDC1_6hits_u1.npassed/hmsDC1_5hits_u1.npassed}
@@ -225,19 +225,19 @@ hmsDC2v2Planes5	    Counts:  {hmsDC2_5hits_v2.npassed} eff : {hmsDC2_6hits_v2.np
 hmsDC2x2Planes5	    Counts:  {hmsDC2_5hits_x2.npassed} eff : {hmsDC2_6hits_x2.npassed/hmsDC2_5hits_x2.npassed}
 
 I'm pretty sure that these are the "raw" number of counts. "Raw" means one or more hits per dc plane.
-hmsDC1_1hit_x1:      {hmsDC1_1hit_x1.npassed} 		
-hmsDC1_1hit_u1:      {hmsDC1_1hit_u1.npassed}		
-hmsDC1_1hit_u2:      {hmsDC1_1hit_u2.npassed}		
-hmsDC1_1hit_v1:      {hmsDC1_1hit_v1.npassed}		
-hmsDC1_1hit_u2:      {hmsDC1_1hit_u2.npassed}		
-hmsDC1_1hit_x2:      {hmsDC1_1hit_x2.npassed}		
+hmsDC1_1hit_x1:      {hmsDC1_1hit_x1.npassed}
+hmsDC1_1hit_u1:      {hmsDC1_1hit_u1.npassed}
+hmsDC1_1hit_u2:      {hmsDC1_1hit_u2.npassed}
+hmsDC1_1hit_v1:      {hmsDC1_1hit_v1.npassed}
+hmsDC1_1hit_u2:      {hmsDC1_1hit_u2.npassed}
+hmsDC1_1hit_x2:      {hmsDC1_1hit_x2.npassed}
 
-hmsDC2_1hit_x1:      {hmsDC2_1hit_x1.npassed}		
-hmsDC2_1hit_u1:      {hmsDC2_1hit_u1.npassed}		
-hmsDC2_1hit_u2:      {hmsDC2_1hit_u2.npassed}		
-hmsDC2_1hit_v1:      {hmsDC2_1hit_v1.npassed}		
-hmsDC2_1hit_u2:      {hmsDC2_1hit_u2.npassed}		
-hmsDC2_1hit_x2:      {hmsDC2_1hit_x2.npassed}		
+hmsDC2_1hit_x1:      {hmsDC2_1hit_x1.npassed}
+hmsDC2_1hit_u1:      {hmsDC2_1hit_u1.npassed}
+hmsDC2_1hit_u2:      {hmsDC2_1hit_u2.npassed}
+hmsDC2_1hit_v1:      {hmsDC2_1hit_v1.npassed}
+hmsDC2_1hit_u2:      {hmsDC2_1hit_u2.npassed}
+hmsDC2_1hit_x2:      {hmsDC2_1hit_x2.npassed}
 
 "Good" means one or two hits per dc plane.
 hcut_goodHDC1x1:	     {hcut_goodHDC1x1.npassed}	eff : {hcut_goodHDC1x1.npassed/(hms_trigs.npassed+.0001):%5.3f}
@@ -271,13 +271,13 @@ hcut_realhdc2u1:	     {hcut_realhdc2u1.npassed}
 hcut_realhdc2v1:	     {hcut_realhdc2v1.npassed}
 hcut_realhdc2v2:	     {hcut_realhdc2v2.npassed}
 hcut_realhdc2x2:	     {hcut_realhdc2x2.npassed}
-    	   	       
+
 **HODOSCOPE**
 "Any" means one or more hits per scint plane.
 hcut_anys1x:    	     {hcut_anys1x.npassed}	eff: {hcut_anys1x.npassed/(hms_trigs.npassed+.0001):%5.3f}	BAD = ??
 hcut_anys1y: 	     	     {hcut_anys1y.npassed}	eff: {hcut_anys1y.npassed/(hms_trigs.npassed+.0001):%5.3f}
 hcut_anys2x:	     	     {hcut_anys2x.npassed}	eff: {hcut_anys2x.npassed/(hms_trigs.npassed+.0001):%5.3f}
-hcut_anys2y: 	     	     {hcut_anys2y.npassed}	eff: {hcut_anys2y.npassed/(hms_trigs.npassed+.0001):%5.3f} 
+hcut_anys2y: 	     	     {hcut_anys2y.npassed}	eff: {hcut_anys2y.npassed/(hms_trigs.npassed+.0001):%5.3f}
 
 "Good" means one or two hits per scint plane.
 hcut_goods1x:  	     {hcut_goods1x.npassed}	 eff: {hcut_goods1x.npassed/(hms_trigs.npassed+.0001):%5.3f}	BAD = ??
@@ -289,13 +289,13 @@ hcut_goods2:	     {hcut_goods2.npassed}	 eff: {hcut_goods2.npassed/(hms_trigs.np
 hcut_goods1s2: 	     {hcut_goods1s2.npassed}       eff: {hcut_goods1s2.npassed/(hms_trigs.npassed+.0001):%5.3f}
 
 hcut_FoundTrack:	     {hcut_FoundTrack.npassed}	 eff: {hcut_FoundTrack.npassed/(hms_trigs.npassed+.0001):%5.3f}	BAD = ??
-hcut_Found1Track:	     {hcut_Found1Track.npassed}	 eff: {hcut_Found1Track.npassed/(hms_trigs.npassed+.0001):%5.3f} 
-hcut_Found2Track:	     {hcut_Found2Track.npassed}	 eff: {hcut_Found2Track.npassed/(hms_trigs.npassed+.0001):%5.3f} 
-hcut_Found3Track:	     {hcut_Found3Track.npassed}	 eff: {hcut_Found3Track.npassed/(hms_trigs.npassed+.0001):%5.3f} 
-hcut_Found4Track:	     {hcut_Found4Track.npassed}	 eff: {hcut_Found4Track.npassed/(hms_trigs.npassed+.0001):%5.3f} 
+hcut_Found1Track:	     {hcut_Found1Track.npassed}	 eff: {hcut_Found1Track.npassed/(hms_trigs.npassed+.0001):%5.3f}
+hcut_Found2Track:	     {hcut_Found2Track.npassed}	 eff: {hcut_Found2Track.npassed/(hms_trigs.npassed+.0001):%5.3f}
+hcut_Found3Track:	     {hcut_Found3Track.npassed}	 eff: {hcut_Found3Track.npassed/(hms_trigs.npassed+.0001):%5.3f}
+hcut_Found4Track:	     {hcut_Found4Track.npassed}	 eff: {hcut_Found4Track.npassed/(hms_trigs.npassed+.0001):%5.3f}
 
 hcut_Clean1Track:	     {hcut_Clean1Track.npassed}	 eff: {hcut_Clean1Track.npassed/(hms_trigs.npassed+.0001):%5.3f}	 BAD = ??
-hcut_Clean2Track:	     {hcut_Clean2Track.npassed}	 eff: {hcut_Clean2Track.npassed/(hms_trigs.npassed+.0001):%5.3f} 
+hcut_Clean2Track:	     {hcut_Clean2Track.npassed}	 eff: {hcut_Clean2Track.npassed/(hms_trigs.npassed+.0001):%5.3f}
 hcut_Clean3Track:	     {hcut_Clean3Track.npassed}	 eff: {hcut_Clean3Track.npassed/(hms_trigs.npassed+.0001):%5.3f}
 hcut_Clean4Track:	     {hcut_Clean4Track.npassed}	 eff: {hcut_Clean4Track.npassed/(hms_trigs.npassed+.0001):%5.3f}
 hcut_CleanTrack:	     {hcut_CleanTrack.npassed}	 eff: {hcut_CleanTrack.npassed/(hms_trigs.npassed+.0001):%5.3f}
@@ -372,7 +372,7 @@ hC	     Counts: {H.cal.stat_trksum3} eff : {H.cal.stat_hitsum3 / H.cal.stat_trks
 hD	     Counts: {H.cal.stat_trksum4} eff : {H.cal.stat_hitsum4 / H.cal.stat_trksum4}
 
 **************************
-* Hodoscope Efficiencies * 
+* Hodoscope Efficiencies *
 **************************
 
 Efficiencies for hodoscopes is the fraction of times scin. was hit when track
@@ -473,7 +473,7 @@ H1X7+:  {H.hod.1x7.negScalerCut} [ {(H.hod.1x7.negScalerCut/H.1MHz.scalerTimeCut
 H1X8+:  {H.hod.1x8.negScalerCut} [ {(H.hod.1x8.negScalerCut/H.1MHz.scalerTimeCut)/1000.:%.3f} kHz ]
 H1X9+:  {H.hod.1x9.negScalerCut} [ {(H.hod.1x9.negScalerCut/H.1MHz.scalerTimeCut)/1000.:%.3f} kHz ]
 H1X10+: {H.hod.1x10.negScalerCut} [ {(H.hod.1x10.negScalerCut/H.1MHz.scalerTimeCut)/1000.:%.3f} kHz ]
-H1X11+: {H.hod.1x11.negScalerCut} [ {(H.hod.1x11.negScalerCut/H.1MHz.scalerTimeCut)/1000.:%.3f} kHz ] 
+H1X11+: {H.hod.1x11.negScalerCut} [ {(H.hod.1x11.negScalerCut/H.1MHz.scalerTimeCut)/1000.:%.3f} kHz ]
 H1X12+: {H.hod.1x12.negScalerCut} [ {(H.hod.1x12.negScalerCut/H.1MHz.scalerTimeCut)/1000.:%.3f} kHz ]
 H1X13+: {H.hod.1x13.negScalerCut} [ {(H.hod.1x13.negScalerCut/H.1MHz.scalerTimeCut)/1000.:%.3f} kHz ]
 H1X14+: {H.hod.1x14.negScalerCut} [ {(H.hod.1x14.negScalerCut/H.1MHz.scalerTimeCut)/1000.:%.3f} kHz ]
@@ -496,7 +496,7 @@ H1X13-: {H.hod.1x13.negScalerCut} [ {(H.hod.1x13.negScalerCut/H.1MHz.scalerTimeC
 H1X14-: {H.hod.1x14.negScalerCut} [ {(H.hod.1x14.negScalerCut/H.1MHz.scalerTimeCut)/1000.:%.3f} kHz ]
 H1X15-: {H.hod.1x15.negScalerCut} [ {(H.hod.1x15.negScalerCut/H.1MHz.scalerTimeCut)/1000.:%.3f} kHz ]
 H1X16-: {H.hod.1x16.negScalerCut} [ {(H.hod.1x16.negScalerCut/H.1MHz.scalerTimeCut)/1000.:%.3f} kHz ]
- 
+
 H1Y1+:  {H.hod.1y1.negScalerCut} [ {(H.hod.1y1.negScalerCut/H.1MHz.scalerTimeCut)/1000.:%.3f} kHz ]
 H1Y2+:  {H.hod.1y2.negScalerCut} [ {(H.hod.1y2.negScalerCut/H.1MHz.scalerTimeCut)/1000.:%.3f} kHz ]
 H1Y3+:  {H.hod.1y3.negScalerCut} [ {(H.hod.1y3.negScalerCut/H.1MHz.scalerTimeCut)/1000.:%.3f} kHz ]
@@ -555,7 +555,7 @@ H2X16-: {H.hod.2x16.negScalerCut} [ {(H.hod.2x16.negScalerCut/H.1MHz.scalerTimeC
 
 H2Y1+:  {H.hod.2y1.negScalerCut} [ {(H.hod.2y1.negScalerCut/H.1MHz.scalerTimeCut)/1000.:%.3f} kHz ]
 H2Y2+:  {H.hod.2y2.negScalerCut} [ {(H.hod.2y2.negScalerCut/H.1MHz.scalerTimeCut)/1000.:%.3f} kHz ]
-H2Y3+:  {H.hod.2y3.negScalerCut} [ {(H.hod.2y3.negScalerCut/H.1MHz.scalerTimeCut)/1000.:%.3f} kHz ] 
+H2Y3+:  {H.hod.2y3.negScalerCut} [ {(H.hod.2y3.negScalerCut/H.1MHz.scalerTimeCut)/1000.:%.3f} kHz ]
 H2Y4+:  {H.hod.2y4.negScalerCut} [ {(H.hod.2y4.negScalerCut/H.1MHz.scalerTimeCut)/1000.:%.3f} kHz ]
 H2Y5+:  {H.hod.2y5.negScalerCut} [ {(H.hod.2y5.negScalerCut/H.1MHz.scalerTimeCut)/1000.:%.3f} kHz ]
 H2Y6+:  {H.hod.2y6.negScalerCut} [ {(H.hod.2y6.negScalerCut/H.1MHz.scalerTimeCut)/1000.:%.3f} kHz ]
@@ -574,3 +574,14 @@ H2Y7-:  {H.hod.2y7.negScalerCut} [ {(H.hod.2y7.negScalerCut/H.1MHz.scalerTimeCut
 H2Y8-:  {H.hod.2y8.negScalerCut} [ {(H.hod.2y8.negScalerCut/H.1MHz.scalerTimeCut)/1000.:%.3f} kHz ]
 H2Y9-:  {H.hod.2y9.negScalerCut} [ {(H.hod.2y9.negScalerCut/H.1MHz.scalerTimeCut)/1000.:%.3f} kHz ]
 H2Y10-: {H.hod.2y10.negScalerCut} [ {(H.hod.2y10.negScalerCut/H.1MHz.scalerTimeCut)/1000.:%.3f} kHz ]
+
+Scalers     Gated Charge    Charge Asymmetry (ppm)
+BCM1:       {gH_hscaler_charge[0]:%12.2f}   {gH_hscaler_charge_asy[0]*1e6:%12.2f}
+BCM2:       {gH_hscaler_charge[1]:%12.2f}   {gH_hscaler_charge_asy[1]*1e6:%12.2f}
+BCM4A:      {gH_hscaler_charge[3]:%12.2f}   {gH_hscaler_charge_asy[3]*1e6:%12.2f}
+BCM4B:      {gH_hscaler_charge[4]:%12.2f}   {gH_hscaler_charge_asy[4]*1e6:%12.2f}
+BCM4C:      {gH_hscaler_charge[5]:%12.2f}   {gH_hscaler_charge_asy[5]*1e6:%12.2f}
+Unser:      {gH_hscaler_charge[2]:%12.2f}   {gH_hscaler_charge_asy[2]*1e6:%12.2f}
+Time(s):    {gH_hscaler_time:%12.2f}    {gH_hscaler_time_asy*1e6:%12.2f}
+Gates:      {(gH_hscaler_triggers_plus+gH_hscaler_triggers_minus):%12.2f}   {gH_hscaler_trigger_asy*1e6:%12.2f}
+

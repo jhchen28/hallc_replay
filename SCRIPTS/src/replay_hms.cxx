@@ -25,6 +25,7 @@ using namespace std;
 #include "THcGlobals.h"
 #include "THcHallCSpectrometer.h"
 #include "THcHelicity.h"
+#include "THcHelicityScaler.h"
 #include "THcHodoEff.h"
 #include "THcHodoscope.h"
 #include "THcParmList.h"
@@ -189,6 +190,11 @@ int replay_hms(
   hscaler->SetDelayedType(129);
   hscaler->SetUseFirstEvent(kTRUE);
   gHaEvtHandlers->Add(hscaler);
+
+  // helicity scaler
+  auto helscaler = new THcHelicityScaler("H", "Hall C helicity scalers");
+  hscaler->SetROC(5);
+  gHaEvtHandlers->Add(helscaler);
 
   // Add event handler for prestart event 125.
   THcConfigEvtHandler* hconfig = new THcConfigEvtHandler("hconfig", "Config Event type 125");
