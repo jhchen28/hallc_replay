@@ -200,7 +200,7 @@ int replay_shms(
 
   // helicity scaler
   auto helscaler = new THcHelicityScaler("P", "Hall C helicity scalers");
-  hscaler->SetROC(8);
+  helscaler->SetROC(8);
   gHaEvtHandlers->Add(helscaler);
 
   // Add event handler for prestart event 125.
