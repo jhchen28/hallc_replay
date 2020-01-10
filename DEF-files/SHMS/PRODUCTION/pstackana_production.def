@@ -108,6 +108,7 @@ block P.kin.*
 #block P.rb.*
 
 ## block P.react.* <-- not sure what for
+block P.react.*
 
 begin epics
 IBC3H00CRCUR4

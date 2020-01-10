@@ -107,6 +107,7 @@ block H.kin.*
 #block H.rb.*
 
 ## block H.react.* <-- not sure what these are for
+block H.react.*
 
 ## BCM
 #block H.bcm.* 
