@@ -46,11 +46,11 @@ gfrxa_adc_zero_offset = 64310
 gfrxb_adc_zero_offset = 67210
 gfrya_adc_zero_offset = 67500
 gfryb_adc_zero_offset = 61840
-;
-gfrxa_adcpercm = 96000
-gfrxb_adcpercm = 97086
-gfrya_adcpercm = -88300
-gfryb_adcpercm = -84800
+; for 1-pass running need factor of 2 since only one coil is used
+gfrxa_adcpercm = 96000*2
+gfrxb_adcpercm = 97086*2
+gfrya_adcpercm = -88300*2
+gfryb_adcpercm = -84800*2
 
  
  
