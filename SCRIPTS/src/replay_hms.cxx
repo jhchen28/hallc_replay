@@ -99,8 +99,9 @@ int replay_hms(
   gHcParms->Load(gHcParms->GetString("g_ctp_kinematics_filename"), RunNumber);
   // Load parameters for HMS trigger configuration
   gHcParms->Load("PARAM/TRIG/thms.param");
+
   // Load fadc debug parameters
-  gHcParms->Load("PARAM/HMS/GEN/p_fadc_debug.param");
+  gHcParms->Load("PARAM/HMS/GEN/h_fadc_debug.param");
 
   // Load the Hall C detector map
   gHcDetectorMap = new THcDetectorMap();
