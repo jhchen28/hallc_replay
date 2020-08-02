@@ -112,7 +112,7 @@ block H.gtr.*
 block H.kin.*
 
 ## raster
-#block H.rb.*
+block H.rb.*
 
 ## block H.react.* <-- not sure what these are for
 block H.react.*

@@ -45,8 +45,15 @@ formula FRYBraw_V P.rb.raster.frybRawAdc*(1./4096.)/25.
 # TH2F pFRApos_XvsY_notrack 'SHMS FRA X vs Y (No Track); FRA X Position (cm); FRA Y Position (cm)' P.rb.raster.fr_xa P.rb.raster.fr_ya 150 -0.6 0.6 150 -0.6 0.6
 # TH2F pFRBpos_XvsY_notrack 'SHMS FRB X vs Y (No Track); FRB X Position (cm); FRB Y Position (cm)' P.rb.raster.fr_xb P.rb.raster.fr_yb 150 -0.6 0.6 150 -0.6 0.6
 
-# TH2F pFRApos_XvsY_track 'SHMS FRA X vs Y (Track Cut); FRA X Position (cm); FRA Y Position (cm)' P.rb.raster.fr_xa P.rb.raster.fr_ya 150 -0.6 0.6 150 -0.6 0.6 P.dc.ntrack>0
-# TH2F pFRBpos_XvsY_track 'SHMS FRB X vs Y (Track Cut); FRB X Position (cm); FRB Y Position (cm)' P.rb.raster.fr_xb P.rb.raster.fr_yb 150 -0.6 0.6 150 -0.6 0.6 P.dc.ntrack>0
+TH2F pFRApos_XvsY_track 'SHMS FRA X vs Y (Track Cut); FRA X Position (cm); FRA Y Position (cm)' P.rb.raster.fr_xa P.rb.raster.fr_ya 150 -0.6 0.6 150 -0.6 0.6 P.dc.ntrack>0&&P.react.z<10&&P.react.z>-10
+TH2F pFRBpos_XvsY_track 'SHMS FRB X vs Y (Track Cut); FRB X Position (cm); FRB Y Position (cm)' P.rb.raster.fr_xb P.rb.raster.fr_yb 150 -0.6 0.6 150 -0.6 0.6 P.dc.ntrack>0&&P.react.z<10&&P.react.z>-10
+
+
+TH1F pFRApos_X_track 'SHMS FRA X (Track Cut); FRA X Position (cm); Counts' P.rb.raster.fr_xa 150 -0.6 0.6 P.dc.ntrack>0&&P.react.z<10&&P.react.z>-10
+TH1F pFRBpos_X_track 'SHMS FRB X (Track Cut); FRB X Position (cm); Counts' P.rb.raster.fr_xb 150 -0.6 0.6 P.dc.ntrack>0&&P.react.z<10&&P.react.z>-10
+TH1F pFRApos_Y_track 'SHMS FRA Y (Track Cut); FRA Y Position (cm); Counts' P.rb.raster.fr_ya 150 -0.6 0.6 P.dc.ntrack>0&&P.react.z<10&&P.react.z>-10
+TH1F pFRBpos_Y_track 'SHMS FRB Y (Track Cut); FRB Y Position (cm); Counts' P.rb.raster.fr_yb 150 -0.6 0.6 P.dc.ntrack>0&&P.react.z<10&&P.react.z>-10
+
 
 TH2F pFRApos_XvsY_us 'SHMS FRA X vs Y (Upstream Foil Cut); FRA X Position (cm); FRA Y Position (cm)' P.rb.raster.fr_xa P.rb.raster.fr_ya 150 -0.6 0.6 150 -0.6 0.6 P.dc.ntrack>0&&P.react.z<6.67&&P.react.z>-6.67&&P.cal.etot>0.2&&pcut_CleanTrack
 TH2F pFRBpos_XvsY_us 'SHMS FRB X vs Y (Upstream Foil Cut); FRB X Position (cm); FRB Y Position (cm)' P.rb.raster.fr_xb P.rb.raster.fr_yb 150 -0.6 0.6 150 -0.6 0.6 P.dc.ntrack>0&&P.react.z<6.67&&P.react.z>-6.67&&P.cal.etot>0.2&&pcut_CleanTrack

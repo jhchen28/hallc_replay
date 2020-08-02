@@ -113,7 +113,7 @@ block P.gtr.*
 block P.kin.*
 
 ## Raster stuff
-#block P.rb.*
+block P.rb.*
 
 ## block P.react.* <-- not sure what for
 block P.react.*
