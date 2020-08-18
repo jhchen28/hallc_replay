@@ -4,19 +4,19 @@ pcut_cer_ng_elec    	  P.ngcer.npeSum > 0.5
 pcut_cer_ng_pi      	  P.ngcer.npeSum <= 0.5
 pcut_cer_hg_elec	  P.hgcer.npeSum > 0.5
 pcut_cer_hg_pi	  	  P.hgcer.npeSum <= 0.5
-pcut_cer_pi_both       	  pcut_cer_ng_pi && pcut_cer_hg_pi
-pcut_cer_elec_both     	  pcut_cer_ng_elec && pcut_cer_hg_elec
+pcut_cer_pi_both       	  pcut_cer_ng_pi && pcut_cer_ng_pi
+pcut_cer_elec_both     	  pcut_cer_ng_elec && pcut_cer_ng_elec
 pcut_cal_elec          	  P.cal.etracknorm > 0.6 && P.cal.etracknorm < 1.6
 pcut_cal_pi            	  P.cal.etracknorm <= 0.6 && P.cal.etracknorm > 0.
-pcut_elec_all          	  pcut_cer_ng_elec && pcut_cer_hg_elec && pcut_cal_elec
-pcut_pi_all            	  pcut_cer_ng_pi && pcut_cer_hg_pi && pcut_cal_pi
+pcut_elec_all          	  pcut_cer_ng_elec && pcut_cer_ng_elec && pcut_cal_elec
+pcut_pi_all            	  pcut_cer_ng_pi && pcut_cer_ng_pi && pcut_cal_pi
 
 shmsScinGood        P.hod.goodscinhit == 1
 shmsGoodBetanotrk   P.hod.betanotrack > 0.5 && P.hod.betanotrack < 1.4
 
 shmsScinShould      shmsScinGood && shmsGoodBetanotrk && !shmsDCany_large 
-shmsScinShoulde     shmsScinShould &&  P.cal.etotnorm > 0.6 && P.cal.etotnorm < 1.6 && P.hgcer.npeSum > 0.5
-#shmsScinShouldh     shmsScinShould && P.cal.etotnorm <= 0.6 && P.cal.etotnorm > 0. && P.hgcer.npeSum < 0.2
+shmsScinShoulde     shmsScinShould &&  P.cal.etotnorm > 0.6 && P.cal.etotnorm < 1.6 && pcut_cer_ng_elec
+#shmsScinShouldh     shmsScinShould && P.cal.etotnorm <= 0.6 && P.cal.etotnorm > 0. && P.ngcer.npeSum < 0.2
 shmsScinShouldh     shmsScinShould && P.cal.etotnorm <= 0.6 && P.cal.etotnorm > 0.
 shmsScinDid         shmsScinShould && P.dc.ntrack > 0
 shmsScinDide        shmsScinShoulde && P.dc.ntrack > 0
