@@ -7,6 +7,15 @@ Run #: {gen_run_number}
 1 MhZ Pulses : {P.1MHz.scaler}
 Run Length   : {P.1MHz.scalerTime:%.3f} sec
 
+******************************
+* Shift Checklist Information
+******************************
+SHMS TRIG1 Computer Live Time : {(shms_trigs.npassed / (P.pTRIG1.scaler/gpconfig_ti_ps_factors[0]))*100.0:%3.2f} %
+SHMS TRIG2 Computer Live Time : {(shms_trigs.npassed / (P.pTRIG2.scaler/gpconfig_ti_ps_factors[1]))*100.0:%3.2f} %
+SHMS TRIG3 Computer Live Time : {(shms_trigs.npassed / (P.pTRIG3.scaler/gpconfig_ti_ps_factors[2]))*100.0:%3.2f} %
+
+Elec Fiducial Tracking Eff    : {shmsScinDide.npassed / (shmsScinShoulde.npassed+0.0001):%8.4f} +- {(sqrt(shmsScinShoulde.npassed-shmsScinDide.npassed) / (shmsScinShoulde.npassed+.0001)):%8.4f}
+
 ***********
 * Beamline
 ***********
