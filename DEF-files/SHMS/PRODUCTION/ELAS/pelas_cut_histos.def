@@ -1,0 +1,9 @@
+#**************************************
+# Extended Target Correction Histograms
+#**************************************
+
+TH1F ppad_w_cut  'SHMS W (-3.5 < Y_{tar} < 3.5); W (GeV); Number of Entries / 0.050 GeV' P.kin.W 500 0.6 1.6 pcut_Elastic1Passy
+TH1F ppad_dp_cut 'SHMS dp (-3.5 < Y_{tar} < 3.5); dp; Number of Entries' P.gtr.dp 500 -10 10 pcut_Elastic1Passy
+TH2F ppad_th_dp_cut 'SHMS {theta} vs. dp; dp; {theta};' P.gtr.dp P.gtr.th 200 -10 10 100 -0.05 0.05 pcut_Elastic1Passy
+TH2F ppad_dy_dp_cut 'SHMS Golden Track Y_{tar} vs. dp (-3.5 < Y_{tar} < 3.5); dp; Y_{tar} (cm);' P.gtr.dp P.gtr.y 200 -10 10 96 -12.0 12.0 pcut_Elastic1Passy
+

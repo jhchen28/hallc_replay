@@ -25,6 +25,7 @@ using namespace std;
 #include "THcGlobals.h"
 #include "THcHallCSpectrometer.h"
 #include "THcHelicity.h"
+#include "THcHelicityScaler.h"
 #include "THcHodoEff.h"
 #include "THcHodoscope.h"
 #include "THcParmList.h"
@@ -41,13 +42,17 @@ std::string coda_file_pattern(bool do_coin) {
   return fmt::format("{}_all_{{:05d}}.dat", do_coin ? "coin" : "hms");
 }
 std::string output_file_pattern(string_view path, string_view content, string_view extension,
-                                bool do_coin, bool do_all) {
-  return fmt::format("{}/hms{}_{}{}_{{:05d}}_{{}}.{}", path, do_coin ? "_coin" : "", content,
-                     do_all ? "_all" : "", extension);
+                                string_view mode, const bool do_coin) {
+  return fmt::format("{}/hms{}_{}_{}_{{:05d}}_{{}}.{}", path, do_coin ? "_coin" : "", content, mode,
+                     extension);
 }
 
-int replay_hms(Int_t RunNumber = 7160, Int_t MaxEvent = -1, Int_t FirstEvent = 0,
-               const bool do_all = false, const bool do_coin = false) {
+int replay_hms(
+    Int_t RunNumber = 2468, Int_t MaxEvent = -1, Int_t FirstEvent = 0,
+    const std::string& mode      = "default",
+    const std::string& odef_file = "DEF-files/HMS/PRODUCTION/hstackana_production.def",
+    const std::string& cut_file  = "DEF-files/HMS/PRODUCTION/CUTS/hstackana_production_cuts.def",
+    const bool         do_coin   = false) {
   // ===========================================================================
   // Setup logging
   spdlog::set_level(spdlog::level::warn);
@@ -78,15 +83,12 @@ int replay_hms(Int_t RunNumber = 7160, Int_t MaxEvent = -1, Int_t FirstEvent = 0
 
   vector<TString> pathList;
   pathList.push_back(".");
-  pathList.push_back("./DATA/raw");
-  pathList.push_back("./raw_coda");
   pathList.push_back("./raw");
-  pathList.push_back("./raw.copiedtotape");
   pathList.push_back("./raw/../raw.copiedtotape");
   pathList.push_back("./cache");
   // 2. Output files
   const auto ROOTFileNamePattern =
-      output_file_pattern("ROOTfiles", "replay_production", "root", do_coin, do_all);
+      output_file_pattern("ROOTfiles", "replay_production", "root", mode, do_coin);
 
   // Load global parameters
   gHcParms->Define("gen_run_number", "Run Number", RunNumber);
@@ -97,8 +99,9 @@ int replay_hms(Int_t RunNumber = 7160, Int_t MaxEvent = -1, Int_t FirstEvent = 0
   gHcParms->Load(gHcParms->GetString("g_ctp_kinematics_filename"), RunNumber);
   // Load parameters for HMS trigger configuration
   gHcParms->Load("PARAM/TRIG/thms.param");
+
   // Load fadc debug parameters
-  gHcParms->Load("PARAM/HMS/GEN/p_fadc_debug.param");
+  gHcParms->Load("PARAM/HMS/GEN/h_fadc_debug.param");
 
   // Load the Hall C detector map
   gHcDetectorMap = new THcDetectorMap();
@@ -189,6 +192,11 @@ int replay_hms(Int_t RunNumber = 7160, Int_t MaxEvent = -1, Int_t FirstEvent = 0
   hscaler->SetUseFirstEvent(kTRUE);
   gHaEvtHandlers->Add(hscaler);
 
+  // helicity scaler
+  auto helscaler = new THcHelicityScaler("H", "Hall C helicity scalers");
+  helscaler->SetROC(5);
+  gHaEvtHandlers->Add(helscaler);
+
   // Add event handler for prestart event 125.
   THcConfigEvtHandler* hconfig = new THcConfigEvtHandler("hconfig", "Config Event type 125");
   gHaEvtHandlers->Add(hconfig);
@@ -201,6 +209,11 @@ int replay_hms(Int_t RunNumber = 7160, Int_t MaxEvent = -1, Int_t FirstEvent = 0
   // Analyzer
   // -----------------------------------------------------------
   //
+  // Set up the analyzer - we use the standard one,
+  // but this could be an experiment-specific one as well.
+  // The Analyzer controls the reading of the data, executes
+  // tests/cuts, loops over Acpparatus's and PhysicsModules,
+  // and executes the output routines.
   THcAnalyzer* analyzer = new THcAnalyzer;
   analyzer->SetCodaVersion(2);
   // analyzer->EnableBenchmarks(true);
@@ -238,23 +251,21 @@ int replay_hms(Int_t RunNumber = 7160, Int_t MaxEvent = -1, Int_t FirstEvent = 0
   // Define output ROOT file
   analyzer->SetOutFile(ROOTFileName.c_str());
   // Define DEF-file+
-  // analyzer->SetOdefFile("DEF-files/HMS/PRODUCTION/pstackana_production_all.def");
-  analyzer->SetOdefFile(do_all ? "DEF-files/HMS/PRODUCTION/hstackana_production_all.def"
-                               : "DEF-files/HMS/PRODUCTION/hstackana_production.def");
+  analyzer->SetOdefFile(odef_file.c_str());
   // Define cuts file
-  analyzer->SetCutFile("DEF-files/HMS/PRODUCTION/CUTS/hstackana_production_cuts.def");  // optional
+  analyzer->SetCutFile(cut_file.c_str());  // optional
   // File to record accounting information for cuts
-  analyzer->SetSummaryFile(fmt::format(output_file_pattern("REPORT_OUTPUT/PRODUCTION", "summary",
-                                                           "report", do_coin, do_all),
-                                       RunNumber, MaxEvent)
-                               .c_str());
+  analyzer->SetSummaryFile(
+      fmt::format(output_file_pattern("REPORT_OUTPUT/" + mode, "summary", "report", mode, do_coin),
+                  RunNumber, MaxEvent)
+          .c_str());
   // Start the actual analysis.
   analyzer->Process(run);
   // Create report file from template
   analyzer->PrintReport(
       "TEMPLATES/HMS/PRODUCTION/hstackana_production.template",
-      fmt::format(output_file_pattern("REPORT_OUTPUT/PRODUCTION", "replay_production", "report",
-                                      do_coin, do_all),
+      fmt::format(output_file_pattern("REPORT_OUTPUT/" + mode, "replay_production", "report", mode,
+                                      do_coin),
                   RunNumber, MaxEvent)
           .c_str());
 

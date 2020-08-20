@@ -1,3 +1,7 @@
-TH1F preactx 'SHMS React x; React x (cm);' P.react.x 100 -5 5
-TH1F preacty 'SHMS React x; React y (cm);' P.react.y 100 -5 5
-TH1F preactz 'SHMS React x; React z (cm);' P.react.z 100 -15 15
+#---------------------------
+# Reaction Vertex Histograms
+#---------------------------
+
+# TH1F px_vertex 'SHMS X Vertex; X_{vertex} (cm); Number of Entries / 1.0 cm;' P.react.x 10 -5 5 pcut_CleanTrack
+# TH1F py_vertex 'SHMS Y Vertex; Y_{Vertex} (cm); Number of Entries / 1.0 cm;' P.react.y 10 -5 5 pcut_CleanTrack
+TH1F pz_vertex 'SHMS Z Vertex; Z_{vertex} (cm); Number of Entries / 1.0 cm;' P.react.z 70 -35 35 pcut_CleanTrack

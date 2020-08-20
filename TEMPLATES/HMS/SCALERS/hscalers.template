@@ -10,36 +10,36 @@ Run Length   : {H.1MHz.scalerTime:%.3f} sec
 ***********
 * Beamline
 ***********
-  
+
 With no cuts on BCM{gBCM_Current_threshold_index+1}.
-  
-BCM1 Current: {H.BCM1.scalerCharge/H.1MHz.scalerTime:%.3f} uA		  
-BCM2 Current: {H.BCM2.scalerCharge/H.1MHz.scalerTime:%.3f} uA		 
-BCM4A Current: {H.BCM4A.scalerCharge/H.1MHz.scalerTime:%.3f} uA		  
-BCM4B Current: {H.BCM4B.scalerCharge/H.1MHz.scalerTime:%.3f} uA		 
-BCM4C Current: {H.BCM4C.scalerCharge/H.1MHz.scalerTime:%.3f} uA		 
-Unser Current: {H.Unser.scalerCharge/H.1MHz.scalerTime:%.3f} uA		  
+
+BCM1 Current: {H.BCM1.scalerCharge/H.1MHz.scalerTime:%.3f} uA
+BCM2 Current: {H.BCM2.scalerCharge/H.1MHz.scalerTime:%.3f} uA
+BCM4A Current: {H.BCM4A.scalerCharge/H.1MHz.scalerTime:%.3f} uA
+BCM4B Current: {H.BCM4B.scalerCharge/H.1MHz.scalerTime:%.3f} uA
+BCM4C Current: {H.BCM4C.scalerCharge/H.1MHz.scalerTime:%.3f} uA
+Unser Current: {H.Unser.scalerCharge/H.1MHz.scalerTime:%.3f} uA
 
 BCM1  Charge: {H.BCM1.scalerCharge:%.3f} uC
-BCM2  Charge: {H.BCM2.scalerCharge:%.3f} uC	
-BCM4A Charge: {H.BCM4A.scalerCharge:%.3f} uC		  
-BCM4B Charge: {H.BCM4B.scalerCharge:%.3f} uC		 
-BCM4C Charge: {H.BCM4C.scalerCharge:%.3f} uC		 
+BCM2  Charge: {H.BCM2.scalerCharge:%.3f} uC
+BCM4A Charge: {H.BCM4A.scalerCharge:%.3f} uC
+BCM4B Charge: {H.BCM4B.scalerCharge:%.3f} uC
+BCM4C Charge: {H.BCM4C.scalerCharge:%.3f} uC
 Unser Charge: {H.Unser.scalerCharge:%.3f} uC
 
 Cut on BCM{gBCM_Current_threshold_index+1} current of {gBCM_Current_threshold} uA. Beam over threshold for {H.1MHz.scalerTimeCut:%.3f}s, or {((H.1MHz.scalerTimeCut/H.1MHz.scalerTime)*100.):%.3f}% of total run time.
-BCM1 Beam Cut Current: {H.BCM1.scalerCharge/H.1MHz.scalerTime:%.3f} uA		  
-BCM2 Beam Cut Current: {H.BCM2.scalerCharge/H.1MHz.scalerTime:%.3f} uA		 
-BCM4A Beam Cut Current: {H.BCM4A.scalerCharge/H.1MHz.scalerTime:%.3f} uA		  
-BCM4B Beam Cut Current: {H.BCM4B.scalerCharge/H.1MHz.scalerTime:%.3f} uA		 
-BCM4C Beam Cut Current: {H.BCM4C.scalerCharge/H.1MHz.scalerTime:%.3f} uA		 
-Unser Beam Cut Current: {H.Unser.scalerCharge/H.1MHz.scalerTime:%.3f} uA		  
+BCM1 Beam Cut Current: {H.BCM1.scalerCharge/H.1MHz.scalerTime:%.3f} uA
+BCM2 Beam Cut Current: {H.BCM2.scalerCharge/H.1MHz.scalerTime:%.3f} uA
+BCM4A Beam Cut Current: {H.BCM4A.scalerCharge/H.1MHz.scalerTime:%.3f} uA
+BCM4B Beam Cut Current: {H.BCM4B.scalerCharge/H.1MHz.scalerTime:%.3f} uA
+BCM4C Beam Cut Current: {H.BCM4C.scalerCharge/H.1MHz.scalerTime:%.3f} uA
+Unser Beam Cut Current: {H.Unser.scalerCharge/H.1MHz.scalerTime:%.3f} uA
 
 BCM1  Beam Cut Charge: {H.BCM1.scalerChargeCut:%.3f} uC
 BCM2  Beam Cut Charge: {H.BCM2.scalerChargeCut:%.3f} uC
-BCM4A Beam Cut Charge: {H.BCM4A.scalerChargeCut:%.3f} uC		  
-BCM4B Beam Cut Charge: {H.BCM4B.scalerChargeCut:%.3f} uC		 
-BCM4C Beam Cut Charge: {H.BCM4C.scalerChargeCut:%.3f} uC		 
+BCM4A Beam Cut Charge: {H.BCM4A.scalerChargeCut:%.3f} uC
+BCM4B Beam Cut Charge: {H.BCM4B.scalerChargeCut:%.3f} uC
+BCM4C Beam Cut Charge: {H.BCM4C.scalerChargeCut:%.3f} uC
 Unser Beam Cut Charge: {H.Unser.scalerChargeCut:%.3f} uC
 
 
@@ -58,7 +58,7 @@ Ps6_factor = {ghconfig_ti_ps_factors[5]}
 * Triggers
 ***********
 
-=:=:=:=:=:=:=:  
+=:=:=:=:=:=:=:
 = 3/4 Trigger
 =:=:=:=:=:=:=:
 
@@ -111,9 +111,9 @@ Estimated Physics 3/4 Triggers : {(H.hTRIG1.scalerRate - H.EDTM.scalerRate)*H.1M
 Physics 3/4 Trigger Rate       : {(H.hTRIG1.scalerRate - H.EDTM.scalerRate)/1000.:%.3f} kHz
 Accepted Physics Triggers      : {physics_accepted.npassed}
 
-=:=:=:=:=:=:=:=:  
+=:=:=:=:=:=:=:=:
 = HMS Triggers
-=:=:=:=:=:=:=:=: 
+=:=:=:=:=:=:=:=:
 
 hEL_LO_LO :	{H.hEL_LO_LO.scaler}	[ {(H.hEL_LO_LO.scaler/H.1MHz.scalerTime)/1000.:%.3f} kHz ]
 hEL_LO    :	{H.hEL_LO.scaler}	[ {(H.hEL_LO.scaler/H.1MHz.scalerTime)/1000.:%.3f} kHz ]
@@ -129,9 +129,9 @@ hTRIG4 : 	{H.hTRIG4.scaler} 	[ {(H.hTRIG4.scaler/H.1MHz.scalerTime)/1000.:%.3f} 
 hTRIG5 :  	{H.hTRIG5.scaler} 	[ {(H.hTRIG5.scaler/H.1MHz.scalerTime)/1000.:%.3f} kHz ]
 hTRIG6 :  	{H.hTRIG6.scaler} 	[ {(H.hTRIG6.scaler/H.1MHz.scalerTime)/1000.:%.3f} kHz ]
 
-=:=:=:=:=:=:=:=: 
+=:=:=:=:=:=:=:=:
 = HMS Triggers
-=:=:=:=:=:=:=:=: 
+=:=:=:=:=:=:=:=:
 
 hEL_LO_LO :	{H.hEL_LO_LO.scaler}	[ {(H.hEL_LO_LO.scaler/H.1MHz.scalerTime)/1000.:%.3f} kHz ]
 hEL_LO    :	{H.hEL_LO.scaler}	[ {(H.hEL_LO.scaler/H.1MHz.scalerTime)/1000.:%.3f} kHz ]
@@ -158,8 +158,8 @@ hTRIG6_cut :  	{H.hTRIG6.scalerCut} 	[ {(H.hTRIG6.scaler/H.1MHz.scalerTime)/1000
 = Live/Dead Time Calculations
 =:=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:
 
-HMS Computer Live Time : {(TRIG1.npassed / H.hTRIG1.scaler)*100.0:%3.4f} % 
-HMS Computer Dead Time : {100.0 - (TRIG1.npassed / H.hTRIG1.scaler)*100.0:%3.4f} % 
+HMS Computer Live Time : {(TRIG1.npassed / H.hTRIG1.scaler)*100.0:%3.4f} %
+HMS Computer Dead Time : {100.0 - (TRIG1.npassed / H.hTRIG1.scaler)*100.0:%3.4f} %
 
 Pre-Scaled Ps1 HMS Computer Live Time : {(TRIG1.npassed / (H.hTRIG1.scaler/ghconfig_ti_ps_factors[0]))*100.0:%3.4f} %
 Pre-Scaled Ps1 HMS Computer Dead Time : {100.0 - (TRIG1.npassed / (H.hTRIG1.scaler/ghconfig_ti_ps_factors[0]))*100.0:%3.4f} %
@@ -204,12 +204,12 @@ EL-CLEAN Pre-Trigger 50 ns Gate  : {H.hTRIG3.scalerRate/1000.:%.3f} kHz
 = Hodoscopes
 =:=:=:=:=:=:=:
 
-H1X : {H.S1X.scaler} [ {(H.S1X.scaler/H.1MHz.scalerTime)/1000.:%.3f} kHz ] AND between + and - sides of H1X 
+H1X : {H.S1X.scaler} [ {(H.S1X.scaler/H.1MHz.scalerTime)/1000.:%.3f} kHz ] AND between + and - sides of H1X
 H1Y : {H.S1Y.scaler} [ {(H.S1Y.scaler/H.1MHz.scalerTime)/1000.:%.3f} kHz ] AND between + and - sides of H1Y
 H2X : {H.S2X.scaler} [ {(H.S2X.scaler/H.1MHz.scalerTime)/1000.:%.3f} kHz ] AND between + and - sides of H2X
 H2Y : {H.S2Y.scaler} [ {(H.S2Y.scaler/H.1MHz.scalerTime)/1000.:%.3f} kHz ] AND between + and - sides of H2Y
 
-H1XH1Y : {H.S1XS1Y.scaler} [ {(H.S1XS1Y.scaler/H.1MHz.scalerTime)/1000.:%.3f}  kHz ] AND between H1X and H1Y planes 
+H1XH1Y : {H.S1XS1Y.scaler} [ {(H.S1XS1Y.scaler/H.1MHz.scalerTime)/1000.:%.3f}  kHz ] AND between H1X and H1Y planes
 H2XH2Y : {H.S2XS2Y.scaler} [ {(H.S2XS2Y.scaler/H.1MHz.scalerTime)/1000.:%.3f}  kHz ] AND between H2X and H2Y planes
 
 =:=:=:=:=:=:
@@ -244,7 +244,7 @@ H1X7+:  {H.hod.1x7.posScaler} [ {(H.hod.1x7.posScaler/H.1MHz.scalerTime)/1000.:%
 H1X8+:  {H.hod.1x8.posScaler} [ {(H.hod.1x8.posScaler/H.1MHz.scalerTime)/1000.:%.3f} kHz ]
 H1X9+:  {H.hod.1x9.posScaler} [ {(H.hod.1x9.posScaler/H.1MHz.scalerTime)/1000.:%.3f} kHz ]
 H1X10+: {H.hod.1x10.posScaler} [ {(H.hod.1x10.posScaler/H.1MHz.scalerTime)/1000.:%.3f} kHz ]
-H1X11+: {H.hod.1x11.posScaler} [ {(H.hod.1x11.posScaler/H.1MHz.scalerTime)/1000.:%.3f} kHz ] 
+H1X11+: {H.hod.1x11.posScaler} [ {(H.hod.1x11.posScaler/H.1MHz.scalerTime)/1000.:%.3f} kHz ]
 H1X12+: {H.hod.1x12.posScaler} [ {(H.hod.1x12.posScaler/H.1MHz.scalerTime)/1000.:%.3f} kHz ]
 H1X13+: {H.hod.1x13.posScaler} [ {(H.hod.1x13.posScaler/H.1MHz.scalerTime)/1000.:%.3f} kHz ]
 H1X14+: {H.hod.1x14.posScaler} [ {(H.hod.1x14.posScaler/H.1MHz.scalerTime)/1000.:%.3f} kHz ]
@@ -267,7 +267,7 @@ H1X13-: {H.hod.1x13.negScaler} [ {(H.hod.1x13.negScaler/H.1MHz.scalerTime)/1000.
 H1X14-: {H.hod.1x14.negScaler} [ {(H.hod.1x14.negScaler/H.1MHz.scalerTime)/1000.:%.3f} kHz ]
 H1X15-: {H.hod.1x15.negScaler} [ {(H.hod.1x15.negScaler/H.1MHz.scalerTime)/1000.:%.3f} kHz ]
 H1X16-: {H.hod.1x16.negScaler} [ {(H.hod.1x16.negScaler/H.1MHz.scalerTime)/1000.:%.3f} kHz ]
- 
+
 H1Y1+:  {H.hod.1y1.posScaler} [ {(H.hod.1y1.posScaler/H.1MHz.scalerTime)/1000.:%.3f} kHz ]
 H1Y2+:  {H.hod.1y2.posScaler} [ {(H.hod.1y2.posScaler/H.1MHz.scalerTime)/1000.:%.3f} kHz ]
 H1Y3+:  {H.hod.1y3.posScaler} [ {(H.hod.1y3.posScaler/H.1MHz.scalerTime)/1000.:%.3f} kHz ]
@@ -326,7 +326,7 @@ H2X16-: {H.hod.2x16.negScaler} [ {(H.hod.2x16.negScaler/H.1MHz.scalerTime)/1000.
 
 H2Y1+:  {H.hod.2y1.posScaler} [ {(H.hod.2y1.posScaler/H.1MHz.scalerTime)/1000.:%.3f} kHz ]
 H2Y2+:  {H.hod.2y2.posScaler} [ {(H.hod.2y2.posScaler/H.1MHz.scalerTime)/1000.:%.3f} kHz ]
-H2Y3+:  {H.hod.2y3.posScaler} [ {(H.hod.2y3.posScaler/H.1MHz.scalerTime)/1000.:%.3f} kHz ] 
+H2Y3+:  {H.hod.2y3.posScaler} [ {(H.hod.2y3.posScaler/H.1MHz.scalerTime)/1000.:%.3f} kHz ]
 H2Y4+:  {H.hod.2y4.posScaler} [ {(H.hod.2y4.posScaler/H.1MHz.scalerTime)/1000.:%.3f} kHz ]
 H2Y5+:  {H.hod.2y5.posScaler} [ {(H.hod.2y5.posScaler/H.1MHz.scalerTime)/1000.:%.3f} kHz ]
 H2Y6+:  {H.hod.2y6.posScaler} [ {(H.hod.2y6.posScaler/H.1MHz.scalerTime)/1000.:%.3f} kHz ]
@@ -345,3 +345,4 @@ H2Y7-:  {H.hod.2y7.negScaler} [ {(H.hod.2y7.negScaler/H.1MHz.scalerTime)/1000.:%
 H2Y8-:  {H.hod.2y8.negScaler} [ {(H.hod.2y8.negScaler/H.1MHz.scalerTime)/1000.:%.3f} kHz ]
 H2Y9-:  {H.hod.2y9.negScaler} [ {(H.hod.2y9.negScaler/H.1MHz.scalerTime)/1000.:%.3f} kHz ]
 H2Y10-: {H.hod.2y10.negScaler} [ {(H.hod.2y10.negScaler/H.1MHz.scalerTime)/1000.:%.3f} kHz ]
+

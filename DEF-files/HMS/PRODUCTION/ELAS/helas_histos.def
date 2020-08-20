@@ -1,0 +1,9 @@
+#**************************************
+# Extended Target Correction Histograms
+#**************************************
+
+TH1F hpad_w  'HMS W; W (GeV); Number of Entries / 0.050 GeV' H.kin.W 500 0.6 1.6 hcut_CleanTrack
+TH1F hpad_dp 'HMS dp; dp; Number of Entries' H.gtr.dp 500 -10 10 hcut_CleanTrack
+TH2F hpad_th_dp 'HMS {theta} vs. dp; dp; {theta};' H.gtr.dp H.gtr.th 200 -10 10 100 -0.05 0.05 hcut_CleanTrack
+TH2F hpad_dy_dp 'HMS Golden Track Y_{tar} vs. dp; dp; Y_{tar} (cm);' H.gtr.dp H.gtr.y 200 -10 10 96 -12.0 12.0 hcut_CleanTrack
+

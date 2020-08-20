@@ -6,39 +6,39 @@
 # HMS HODO GOOD ADC Multiplicities 
 #-----------------------------------
 
-TH1F hhodo_1x_good_adc_mult_pos 'HMS 1X+ Good ADC Multiplicity; Number of PMTs Hit; Total Number of Good +ADC Hits' H.hod.1x.totNumGoodPosAdcHits 16 0.5 16.5
-TH1F hhodo_1y_good_adc_mult_pos 'HMS 1Y+ Good ADC Multiplicity; Number of PMTs Hit; Total Number of Good +ADC Hits' H.hod.1y.totNumGoodPosAdcHits 10 0.5 10.5
-TH1F hhodo_2x_good_adc_mult_pos 'HMS 2X+ Good ADC Multiplicity; Number of PMTs Hit; Total Number of Good +ADC Hits' H.hod.2x.totNumGoodPosAdcHits 16 0.5 16.5
-TH1F hhodo_2y_good_adc_mult_pos 'HMS 2Y+ Good ADC Multiplicity; Number of PMTs Hit; Total Number of Good +ADC Hits' H.hod.2y.totNumGoodPosAdcHits 10 0.5 10.5
+TH1F hhodo_1x_good_adc_mult_pos 'HMS 1X+ Good ADC Multiplicity; Number of PMTs Hit; Total Number of Good +ADC Hits' H.hod.1x.totNumGoodPosAdcHits 4 0.5 4.5
+TH1F hhodo_1y_good_adc_mult_pos 'HMS 1Y+ Good ADC Multiplicity; Number of PMTs Hit; Total Number of Good +ADC Hits' H.hod.1y.totNumGoodPosAdcHits 4 0.5 4.5
+TH1F hhodo_2x_good_adc_mult_pos 'HMS 2X+ Good ADC Multiplicity; Number of PMTs Hit; Total Number of Good +ADC Hits' H.hod.2x.totNumGoodPosAdcHits 4 0.5 4.5
+TH1F hhodo_2y_good_adc_mult_pos 'HMS 2Y+ Good ADC Multiplicity; Number of PMTs Hit; Total Number of Good +ADC Hits' H.hod.2y.totNumGoodPosAdcHits 4 0.5 4.5
 
-TH1F hhodo_1x_good_adc_mult_neg 'HMS 1X- Good ADC Multiplicity; Number of PMTs Hit; Total Number of Good -ADC Hits' H.hod.1x.totNumGoodNegAdcHits 16 0.5 16.5
-TH1F hhodo_1y_good_adc_mult_neg 'HMS 1Y- Good ADC Multiplicity; Number of PMTs Hit; Total Number of Good -ADC Hits' H.hod.1y.totNumGoodNegAdcHits 10 0.5 10.5
-TH1F hhodo_2x_good_adc_mult_neg 'HMS 2X- Good ADC Multiplicity; Number of PMTs Hit; Total Number of Good -ADC Hits' H.hod.2x.totNumGoodNegAdcHits 16 0.5 16.5
-TH1F hhodo_2y_good_adc_mult_neg 'HMS 2Y- Good ADC Multiplicity; Number of PMTs Hit; Total Number of Good -ADC Hits' H.hod.2y.totNumGoodNegAdcHits 10 0.5 10.5
+TH1F hhodo_1x_good_adc_mult_neg 'HMS 1X- Good ADC Multiplicity; Number of PMTs Hit; Total Number of Good -ADC Hits' H.hod.1x.totNumGoodNegAdcHits 4 0.5 4.5
+TH1F hhodo_1y_good_adc_mult_neg 'HMS 1Y- Good ADC Multiplicity; Number of PMTs Hit; Total Number of Good -ADC Hits' H.hod.1y.totNumGoodNegAdcHits 4 0.5 4.5
+TH1F hhodo_2x_good_adc_mult_neg 'HMS 2X- Good ADC Multiplicity; Number of PMTs Hit; Total Number of Good -ADC Hits' H.hod.2x.totNumGoodNegAdcHits 4 0.5 4.5
+TH1F hhodo_2y_good_adc_mult_neg 'HMS 2Y- Good ADC Multiplicity; Number of PMTs Hit; Total Number of Good -ADC Hits' H.hod.2y.totNumGoodNegAdcHits 4 0.5 4.5
 
-TH1F hhodo_1x_good_adc_mult 'HMS 1X Good ADC Multiplicity; Number of PMTs Hit; Total Number of Good ADC Hits' H.hod.1x.totNumGoodAdcHits 16 0.5 16.5
-TH1F hhodo_1y_good_adc_mult 'HMS 1Y Good ADC Multiplicity; Number of PMTs Hit; Total Number of Good ADC Hits' H.hod.1y.totNumGoodAdcHits 10 0.5 10.5
-TH1F hhodo_2x_good_adc_mult 'HMS 2X Good ADC Multiplicity; Number of PMTs Hit; Total Number of Good ADC Hits' H.hod.2x.totNumGoodAdcHits 16 0.5 16.5
-TH1F hhodo_2y_good_adc_mult 'HMS 2Y Good ADC Multiplicity; Number of PMTs Hit; Total Number of Good ADC Hits' H.hod.2y.totNumGoodAdcHits 10 0.5 10.5
+TH1F hhodo_1x_good_adc_mult 'HMS 1X Good ADC Multiplicity; Number of PMTs Hit; Total Number of Good ADC Hits' H.hod.1x.totNumGoodAdcHits 4 0.5 4.5
+TH1F hhodo_1y_good_adc_mult 'HMS 1Y Good ADC Multiplicity; Number of PMTs Hit; Total Number of Good ADC Hits' H.hod.1y.totNumGoodAdcHits 4 0.5 4.5
+TH1F hhodo_2x_good_adc_mult 'HMS 2X Good ADC Multiplicity; Number of PMTs Hit; Total Number of Good ADC Hits' H.hod.2x.totNumGoodAdcHits 4 0.5 4.5
+TH1F hhodo_2y_good_adc_mult 'HMS 2Y Good ADC Multiplicity; Number of PMTs Hit; Total Number of Good ADC Hits' H.hod.2y.totNumGoodAdcHits 4 0.5 4.5
 
 #-----------------------------------
 # HMS HODO Good TDC Multiplicities
 #-----------------------------------
 
-TH1F hhodo_1x_good_tdc_mult_pos 'HMS 1X+ Good TDC Multiplicity; Number of PMTs Hit; Total Number of Good +TDC Hits' H.hod.1x.totNumGoodPosTdcHits 16 0.5 16.5
-TH1F hhodo_1y_good_tdc_mult_pos 'HMS 1Y+ Good TDC Multiplicity; Number of PMTs Hit; Total Number of Good +TDC Hits' H.hod.1y.totNumGoodPosTdcHits 10 0.5 10.5
-TH1F hhodo_2x_good_tdc_mult_pos 'HMS 2X+ Good TDC Multiplicity; Number of PMTs Hit; Total Number of Good +TDC Hits' H.hod.2x.totNumGoodPosTdcHits 16 0.5 16.5
-TH1F hhodo_2y_good_tdc_mult_pos 'HMS 2Y+ Good TDC Multiplicity; Number of PMTs Hit; Total Number of Good +TDC Hits' H.hod.2y.totNumGoodPosTdcHits 10 0.5 10.5
+TH1F hhodo_1x_good_tdc_mult_pos 'HMS 1X+ Good TDC Multiplicity; Number of PMTs Hit; Total Number of Good +TDC Hits' H.hod.1x.totNumGoodPosTdcHits 4 0.5 4.5
+TH1F hhodo_1y_good_tdc_mult_pos 'HMS 1Y+ Good TDC Multiplicity; Number of PMTs Hit; Total Number of Good +TDC Hits' H.hod.1y.totNumGoodPosTdcHits 4 0.5 4.5
+TH1F hhodo_2x_good_tdc_mult_pos 'HMS 2X+ Good TDC Multiplicity; Number of PMTs Hit; Total Number of Good +TDC Hits' H.hod.2x.totNumGoodPosTdcHits 4 0.5 4.5
+TH1F hhodo_2y_good_tdc_mult_pos 'HMS 2Y+ Good TDC Multiplicity; Number of PMTs Hit; Total Number of Good +TDC Hits' H.hod.2y.totNumGoodPosTdcHits 4 0.5 4.5
 
-TH1F hhodo_1x_good_tdc_mult_neg 'HMS 1X- Good TDC Multiplicity; Number of PMTs Hit; Total Number of Good -TDC Hits' H.hod.1x.totNumGoodNegTdcHits 16 0.5 16.5
-TH1F hhodo_1y_good_tdc_mult_neg 'HMS 1Y- Good TDC Multiplicity; Number of PMTs Hit; Total Number of Good -TDC Hits' H.hod.1y.totNumGoodNegTdcHits 10 0.5 10.5
-TH1F hhodo_2x_good_tdc_mult_neg 'HMS 2X- Good TDC Multiplicity; Number of PMTs Hit; Total Number of Good -TDC Hits' H.hod.2x.totNumGoodNegTdcHits 16 0.5 16.5
-TH1F hhodo_2y_good_tdc_mult_neg 'HMS 2Y- Good TDC Multiplicity; Number of PMTs Hit; Total Number of Good -TDC Hits' H.hod.2y.totNumGoodNegTdcHits 10 0.5 10.5
+TH1F hhodo_1x_good_tdc_mult_neg 'HMS 1X- Good TDC Multiplicity; Number of PMTs Hit; Total Number of Good -TDC Hits' H.hod.1x.totNumGoodNegTdcHits 4 0.5 4.5
+TH1F hhodo_1y_good_tdc_mult_neg 'HMS 1Y- Good TDC Multiplicity; Number of PMTs Hit; Total Number of Good -TDC Hits' H.hod.1y.totNumGoodNegTdcHits 4 0.5 4.5
+TH1F hhodo_2x_good_tdc_mult_neg 'HMS 2X- Good TDC Multiplicity; Number of PMTs Hit; Total Number of Good -TDC Hits' H.hod.2x.totNumGoodNegTdcHits 4 0.5 4.5
+TH1F hhodo_2y_good_tdc_mult_neg 'HMS 2Y- Good TDC Multiplicity; Number of PMTs Hit; Total Number of Good -TDC Hits' H.hod.2y.totNumGoodNegTdcHits 4 0.5 4.5
 
-TH1F hhodo_1x_good_tdc_mult 'HMS 1X Good TDC Multiplicity; Number of PMTs Hit; Total Number of Good TDC Hits' H.hod.1x.totNumGoodTdcHits 16 0.5 16.5
-TH1F hhodo_1y_good_tdc_mult 'HMS 1Y Good TDC Multiplicity; Number of PMTs Hit; Total Number of Good TDC Hits' H.hod.1y.totNumGoodTdcHits 10 0.5 10.5
-TH1F hhodo_2x_good_tdc_mult 'HMS 2X Good TDC Multiplicity; Number of PMTs Hit; Total Number of Good TDC Hits' H.hod.2x.totNumGoodTdcHits 16 0.5 16.5
-TH1F hhodo_2y_good_tdc_mult 'HMS 2Y Good TDC Multiplicity; Number of PMTs Hit; Total Number of Good TDC Hits' H.hod.2y.totNumGoodTdcHits 10 0.5 10.5
+TH1F hhodo_1x_good_tdc_mult 'HMS 1X Good TDC Multiplicity; Number of PMTs Hit; Total Number of Good TDC Hits' H.hod.1x.totNumGoodTdcHits 4 0.5 4.5
+TH1F hhodo_1y_good_tdc_mult 'HMS 1Y Good TDC Multiplicity; Number of PMTs Hit; Total Number of Good TDC Hits' H.hod.1y.totNumGoodTdcHits 4 0.5 4.5
+TH1F hhodo_2x_good_tdc_mult 'HMS 2X Good TDC Multiplicity; Number of PMTs Hit; Total Number of Good TDC Hits' H.hod.2x.totNumGoodTdcHits 4 0.5 4.5
+TH1F hhodo_2y_good_tdc_mult 'HMS 2Y Good TDC Multiplicity; Number of PMTs Hit; Total Number of Good TDC Hits' H.hod.2y.totNumGoodTdcHits 4 0.5 4.5
 
 #---------------------------------
 # HMS HODO GOOD ADC OCCUPANCIES

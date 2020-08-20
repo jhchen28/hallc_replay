@@ -1,0 +1,8 @@
+variable H.hod.1x.negAdcCounter
+variable H.hod.1x.posAdcCounter
+variable H.hod.2x.negAdcCounter
+variable H.hod.2x.posAdcCounter
+variable H.hod.1y.negAdcCounter
+variable H.hod.1y.posAdcCounter
+variable H.hod.2y.negAdcCounter
+variable H.hod.2y.posAdcCounter

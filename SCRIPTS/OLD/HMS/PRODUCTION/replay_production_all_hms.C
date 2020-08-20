@@ -41,12 +41,19 @@ void replay_production_all_hms(Int_t RunNumber=0, Int_t MaxEvent=0) {
   gHcDetectorMap = new THcDetectorMap();
   gHcDetectorMap->Load("MAPS/HMS/DETEC/STACK/hms_stack.map");
 
+  // Add the dec data class for debugging
+  Podd::DecData *decData = new Podd::DecData("D", "Decoder Raw Data");
+  gHaApps->Add(decData);
+
   // Add trigger apparatus
   THaApparatus* TRG = new THcTrigApp("T", "TRG");
   gHaApps->Add(TRG);
   // Add trigger detector to trigger apparatus
   THcTrigDet* hms = new THcTrigDet("hms", "HMS Trigger Information");
   TRG->AddDetector(hms);
+  // Add helicity detector to trigger apparatus
+  THcHelicity* heli = new THcHelicity("helicity", "Helicity Detector");
+  TRG->AddDetector(heli);
 
   // Set up the equipment to be analyzed.
   THcHallCSpectrometer* HMS = new THcHallCSpectrometer("H", "HMS");

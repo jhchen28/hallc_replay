@@ -1,0 +1,8 @@
+variable P.hod.1x.negAdcCounter
+variable P.hod.1x.posAdcCounter
+variable P.hod.2x.negAdcCounter
+variable P.hod.2x.posAdcCounter
+variable P.hod.1y.negAdcCounter
+variable P.hod.1y.posAdcCounter
+variable P.hod.2y.negAdcCounter
+variable P.hod.2y.posAdcCounter
