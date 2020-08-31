@@ -52,6 +52,8 @@ Unser Beam Cut Charge: {H.Unser.scalerChargeCut:%.3f} uC
 
 ********************
 * DAQ Configuration
+* These reflect the true prescaling applied to the triggers, not the internal
+* 'psX' value that is set in the prescale GUI.  ('-1' == disabled)
 ********************
 
 Ps1_factor = {ghconfig_ti_ps_factors[0]}
