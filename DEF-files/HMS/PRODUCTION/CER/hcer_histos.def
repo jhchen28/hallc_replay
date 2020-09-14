@@ -10,7 +10,7 @@ TH1F hcer_good_occ 'HMS Cherenkov Good Occupancy; PMT Number; Number of Entries'
 TH1F hcer_good_mult 'HMS Cherenkov Good Multiplicity; Number of PMTs Hit; Total Number of Good ADC Hits / PMT' H.cer.totNumGoodAdcHits 2 0.5 2.5
 
 # HMS CER Num. of P.E. / PMT
-TH2F hcer_npe 'HMS Cherenkov Number of Photoelectrons vs. PMT Number; PMT Number; Number of Photoelectrons / 0.5 Photoelectrons' [I+1] H.cer.npe 2 0.5 2.5 40 0 20 H.cal.etot>0.2&&H.dc.ntrack>0
+TH2F hcer_npe 'HMS Cherenkov Number of Photoelectrons vs. PMT Number; PMT Number; Number of Photoelectrons / 0.5 Photoelectrons' [I+1] H.cer.npe 2 0.5 2.5 76 2 40 H.cal.etot>0.2&&H.dc.ntrack>0
 
 # HMS CER Total Number of  P.E.
 TH1F hcer_tot_npe 'HMS Cherenkov Total Number of Photoelectrons; Total Number of Photoelectrons; Number of Entries / 0.5 Photoelectrons' H.cer.npeSum 40 0 20 H.cal.etot>0.2&&H.dc.ntrack>0
