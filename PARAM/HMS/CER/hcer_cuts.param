@@ -22,7 +22,12 @@ hcer_npe_thresh = 0.5
 ; ADC time window cut values used to select "good" ADC events
 hcer_adc_tdc_offset= 0.
 
-; fall 2019 startup
+;; fall 2019 startup
+;; cut variable is H.cer.goodAdcTdcDiffTime
+;hcer_adcTimeWindowMin =   60.,  60.
+;hcer_adcTimeWindowMax =  200., 200.
+
+; infinite cuts
 ; cut variable is H.cer.goodAdcTdcDiffTime
-hcer_adcTimeWindowMin =   60.,  60.
-hcer_adcTimeWindowMax =  200., 200.
+hcer_adcTimeWindowMin =   -1000.,  -1000.
+hcer_adcTimeWindowMax =  1000., 1000.

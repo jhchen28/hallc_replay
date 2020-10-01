@@ -15,12 +15,12 @@
 ; hcer_adcrefcut=-100000.
 ; hcal_adcrefcut=-100000.
 
-; determined for fall 2019 startup
+; Fall2019-Sp2020 offline analysis
 ; cut variable = hDCREF2
 hdc_tdcrefcut=-20000.
 ; cut variable = hT2
-hhodo_tdcrefcut=-1200.
+hhodo_tdcrefcut=-1400.
 ; cut variable = hFADC_TREF_ROC1
-hhodo_adcrefcut=-3000.
-hcer_adcrefcut=-3000.
-hcal_adcrefcut=-3000.
+hhodo_adcrefcut=-3400.
+hcer_adcrefcut=-3400.
+hcal_adcrefcut=-3400.
