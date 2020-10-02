@@ -16,3 +16,7 @@ block H.dc.*
 #block H.react.*
 #block H.extcor.*
 #block H.bcm.*
+
+#just for pid
+variable H.cal.etot
+variable H.ngcer.npeSum
