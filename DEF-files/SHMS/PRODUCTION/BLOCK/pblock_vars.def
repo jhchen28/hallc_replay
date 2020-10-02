@@ -2,19 +2,19 @@
 # Block Definitions *
 #********************
 
-block D.*
-block T.shms.*
-block T.heli.*
-block P.ngcer.*
+#block D.*
+#block T.shms.*
+#block T.heli.*
+#block P.ngcer.*
 block P.dc.*
-block P.hod.*
-block P.hgcer.*
-block P.aero.*
-block P.cal.*
-block P.tr.*
-block P.gtr.*
-block P.kin.*
-block P.rb.*
-block P.react.*
-block P.extcor.*
+#block P.hod.*
+#block P.hgcer.*
+#block P.aero.*
+#block P.cal.*
+#block P.tr.*
+#block P.gtr.*
+#block P.kin.*
+#block P.rb.*
+#block P.react.*
+#block P.extcor.*
 #block P.bcm.*
