@@ -40,7 +40,7 @@ class DC_calib
   void GetTwentyPercent_Peak();
   void FitWireDriftTime();
   void WriteTZeroParam();
-  void WriteLookUpTable();
+  void WriteLookUpTable(string calibType);
 
 
  private:

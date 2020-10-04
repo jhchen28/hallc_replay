@@ -1618,8 +1618,10 @@ void DC_calib::WriteTZeroParam()
 } //end WriteTZeroParam() Method
 
 //_________________________________________________________________________________
-void DC_calib::WriteLookUpTable()
+void DC_calib::WriteLookUpTable(string calibType = "tzero")
 {
+  TH1F *plane_dt_tmp;
+
   otxtfile_name = "./"+spec+"_DC_"+mode.c_str()+"Log_"+std::to_string(run_NUM)+"/"+spectre+"dc_calib_"+std::to_string(run_NUM)+".param";
   out_txtFILE.open(otxtfile_name);
   Double_t t_offset_firstbin = 0.0;
@@ -1632,13 +1634,17 @@ void DC_calib::WriteLookUpTable()
   out_txtFILE << "; bin size in ns" << "\n";
   out_txtFILE << spectre+"driftbinsz=1" << "\n";
   
-//Loop over each plane of hms/shms Drift Chambers (DC1 & DC2)
-
+  //Loop over each plane of hms/shms Drift Chambers (DC1 & DC2)
   for (int ip=0; ip<NPLANES; ip++){
    
-    
+    if(calibType=="tzero"){
+      plane_dt_tmp =(TH1F* ) plane_dt_corr[ip].Clone();
+    }else if(calibType=="dist"){
+      plane_dt_tmp =(TH1F* ) plane_dt[ip].Clone();
+    }
+
     //Get bin corresponding to t0 = 0 ns
-    bin_t0[ip] = plane_dt_corr[ip].GetXaxis()->FindBin(t_offset_firstbin);
+    bin_t0[ip] = plane_dt_tmp->GetXaxis()->FindBin(t_offset_firstbin);
    
     //Get final bin 
     bin_final[ip] = bin_t0[ip] + TOTAL_BINS;
@@ -1649,7 +1655,7 @@ void DC_calib::WriteLookUpTable()
 
     for (int bin = bin_t0[ip]; bin <= bin_final[ip]; bin ++ ) {
      
-      bin_Content[ip] = plane_dt_corr[ip].GetBinContent(bin);
+      bin_Content[ip] = plane_dt_tmp->GetBinContent(bin);
      
       binContent_TOTAL[ip] = bin_Content[ip] + binContent_TOTAL[ip];
      
@@ -1668,7 +1674,7 @@ void DC_calib::WriteLookUpTable()
    
     for (int bin = bin_t0[ip]; bin <= bin_final[ip]; bin++) {
      
-      bin_Content[ip] = plane_dt_corr[ip].GetBinContent(bin);
+      bin_Content[ip] = plane_dt_tmp->GetBinContent(bin);
       binSUM[ip] = binSUM[ip] + bin_Content[ip];
      
      
@@ -1676,14 +1682,14 @@ void DC_calib::WriteLookUpTable()
       bin_count = bin_count + 1;
      
       if (bin_count <= 16 ) {
-	out_txtFILE << setprecision(5) << lookup_value[ip] << fixed << ",";
+	       out_txtFILE << setprecision(5) << lookup_value[ip] << fixed << ",";
       }
      
       else if (bin_count >16 && bin_count <= TOTAL_BINS) {
-	out_txtFILE << setprecision(5) << lookup_value[ip] << ((bin_count+1) % 20 ? "," : "\n") << fixed; 
+	       out_txtFILE << setprecision(5) << lookup_value[ip] << ((bin_count+1) % 20 ? "," : "\n") << fixed; 
       }
       else {
-	out_txtFILE  << setprecision(5) << lookup_value[ip] <<  fixed << endl;	  
+	       out_txtFILE  << setprecision(5) << lookup_value[ip] <<  fixed << endl;	  
       }
      
     } //END LOOP OVER plane drift time BINS
