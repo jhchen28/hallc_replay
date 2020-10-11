@@ -6,7 +6,7 @@
 #include <ctime>
 using namespace std;
 
-int main_calib_distonly(TString type = "SHMS",int run = 9644, int entries = -1, const string mode = "wire", TString calibType = "tzero")
+int main_calib_distonly(TString type = "SHMS",int run = 9644, int entries = -1, const string mode = "wire"/*"wire or card"*/, TString calibType = "tzero"/*tzero or dist*/, const string fitOption = "integral"/*raw or integral*/)
 {
 
   //prevent root from displaying graphs while executing
@@ -28,7 +28,7 @@ int main_calib_distonly(TString type = "SHMS",int run = 9644, int entries = -1, 
                                                                                                         // |
                                                                                                         // v
   type.ToUpper();
-  DC_calib obj(type.Data(), rootFile.Data(), run, entries, "pid_elec", mode);
+  DC_calib obj(type.Data(), rootFile.Data(), run, -1, "pid_elec", mode);
   //use the following line if you want to specify the root file path                                                   
   //DC_calib obj("SHMS", "../../../ROOTfiles/shms_replay_production_all_09644_-1_wireCal.root", 9644, -1, "pid_elec", "wire");                                                                                                        
 
@@ -40,15 +40,13 @@ int main_calib_distonly(TString type = "SHMS",int run = 9644, int entries = -1, 
   obj.CreateHistoNames();
   obj.EventLoop("FillUncorrectedTimes"); // if you only want to do drift distance calibration, use option "FillUncorrectedTimes" only
   if(!calibType.CompareTo("tzero")){
-    obj.Calculate_tZero();
+    obj.Calculate_tZero(fitOption);
     obj.EventLoop("ApplyT0Correction");
     obj.WriteTZeroParam();
     obj.WriteLookUpTable(calibType.Data()); // if you only want to do drift distance calibration, use option "dist", for tzero calib use "tzero"
     obj.WriteToFile(1);  //set argument to (1) for debugging
   }else if(!calibType.CompareTo("dist")){
-
     obj.WriteLookUpTable(calibType.Data()); // if you only want to do drift distance calibration, use option "dist", for tzero calib use "tzero"
-    cout<<"test"<<endl;
   }
 
   //stop clock

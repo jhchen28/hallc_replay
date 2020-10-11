@@ -6,6 +6,7 @@
 #define NBINS 400
 #define MINBIN -50.0
 #define MAXBIN 350.0
+#define MINENTRIES 150 
 #define TOTAL_BINS 189  
 class DC_calib
 {
@@ -36,9 +37,10 @@ class DC_calib
   void EventLoop(string option);
   void WriteToFile(Int_t debug);
   // void CalcT0Historical();
-  void Calculate_tZero();
+  void Calculate_tZero(string fitOption);
   void GetTwentyPercent_Peak();
   void FitWireDriftTime();
+  void FitWireIntegralDriftTime();
   void WriteTZeroParam();
   void WriteLookUpTable(string calibType);
 
@@ -99,6 +101,7 @@ class DC_calib
   Double_t drift_time[NPLANES][1000];
 
   Double_t wire_num[NPLANES][1000];
+  Double_t *wire_integral[NPLANES];
 
   Int_t nwires[NPLANES];
 
@@ -106,6 +109,8 @@ class DC_calib
   //Declare variables to plot and save histo (dt = drift time)
   TString plane_dt_name;
   TString plane_dt_title;
+  TString plane_wire_name;
+  TString plane_wire_title;
 
   TString plane_dt_name_corr;
   TString plane_dt_title_corr;
@@ -115,7 +120,9 @@ class DC_calib
   TString cell_dt_title;
 
   TString fitted_cell_dt_name;
-  TString fitted_cell_dt_title;  
+  TString fitted_cell_dt_title;
+  TString fitted_cell_dt_integral_name;
+  TString fitted_cell_dt_integral_title;    
   
   TString dt_vs_wire_name;
   TString dt_vs_wire_title;
@@ -129,9 +136,11 @@ class DC_calib
   //Declare variables to store histograms
   TH1F *plane_dt;
   TH1F *plane_dt_corr;
+  TH1F *plane_wire;
   TH1F **cell_dt;
   TH1F **cell_dt_corr;
   TH1F **fitted_cell_dt;
+  TH1F **fitted_cell_dt_integral;
   TH2F *dt_vs_wire;
   TH2F *dt_vs_wire_corr;
 
@@ -153,7 +162,9 @@ class DC_calib
   Double_t **time_max;
   Double_t **twenty_perc_maxContent;
   Double_t **ref_time;
- 
+  Int_t **wireSegLow;
+  Int_t **wireSegHigh;
+
   //variables to be used in loop over bins for wire drift time
   Int_t content_bin;      //stores content for each bin
   Int_t counts;           //a counter used to count the number of bins that have >20% max bin content for a plane 
