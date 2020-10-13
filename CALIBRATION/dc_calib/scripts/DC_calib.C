@@ -1373,7 +1373,7 @@ void DC_calib::FitWireDriftTime()
 } //End FitWireDriftTime() method
 
 //____________________________________________________________________________________
-void DC_calib::FitWireIntegralDriftTime()
+void DC_calib::FitWireIntegralDriftTime(string fitFunc)
 {
 	int firstBinWire=0, lastBinWire=0;
 	Double_t entries_wire = 0, entris_tmp=0;
@@ -1384,9 +1384,15 @@ void DC_calib::FitWireIntegralDriftTime()
 	int adjLow=0, adjHigh=0;
 	int cell_entries_tmp=0;
 	Double_t fitThrsLow=0.05, fitThrsHigh=0.3;
+	if(fitFunc=="heaviside"){
+		fitThrsHigh=0.22;
+	}else if(fitFunc=="linear"){
+		fitThrsHigh=0.3;
+	}
 
 
 	TF1 *tZero_fit = new TF1("tZero_fit", "[0]*x + [1]", MINBIN, MAXBIN);
+	TF1 *tZero_fit_heaviside = new TF1("tZero_fit_heaviside", "([1]*(x-[0])+[2]*(x-[0])^2+[3]*(x-[0])^3)/(1+e^(-1000*(x-[0])))", MINBIN, MAXBIN);
 
 	//Loop over Planes
 	for (Int_t ip = 0; ip < NPLANES; ip++){		
@@ -1423,7 +1429,7 @@ void DC_calib::FitWireIntegralDriftTime()
 	    //Loop over DC sense wires with nentries above a threshold
 		for (wire = firstBinWire+1;  wire < lastBinWire; wire++){
 		
-			if(cell_dt[ip][wire].GetEntries()==0){
+			if(cell_dt[ip][wire].GetEntries()<MINENTRIES*0.2){
 				cout<<"No events for plane: "<< plane_names[ip]<<", "<<"wire: "<< wire+1<<". Fill the Histogram with adjacent non-zero Histograms"<<endl;
 
 				adjLow=1;
@@ -1449,7 +1455,7 @@ void DC_calib::FitWireIntegralDriftTime()
 			for(int i=0; i<NBINS; i++){
 				cell_dt_integral_tmp[i]=cell_dt_integral_tmp[i]*cell_entries_tmp;
 		        fitted_cell_dt_integral[ip][wire].SetBinContent(i, cell_dt_integral_tmp[i]);
-
+		        fitted_cell_dt_integral[ip][wire].SetBinError(i, 1);
 		        if(cell_dt_integral_tmp[i]>=fitThrsLow * cell_entries_tmp &&(!fitRmin_flag)){
 		            fitRmin=fitted_cell_dt_integral[ip][wire].GetBinCenter(i);
 		            fitRmin_flag++;       
@@ -1459,21 +1465,41 @@ void DC_calib::FitWireIntegralDriftTime()
 		        }
 	    	}
 
-			tZero_fit->SetParName(0, "slope");
-		    tZero_fit->SetParName(1, "y-int");
-		    tZero_fit->SetParameter(0, 1.0);
-		    tZero_fit->SetParameter(1, 1.0);
+	    	if(fitFunc=="linear"){	
+				tZero_fit->SetParName(0, "slope");
+			    tZero_fit->SetParName(1, "y-int");
+			    tZero_fit->SetParameter(0, 1.0);
+			    tZero_fit->SetParameter(1, 1.0);
 
-		    fitted_cell_dt_integral[ip][wire].Fit("tZero_fit","Q","",fitRmin,fitRmax);
-		    gStyle->SetOptFit(1);
+			    fitted_cell_dt_integral[ip][wire].Fit("tZero_fit","Q","",fitRmin,fitRmax);
+			    gStyle->SetOptFit(1);
 
-		  	m = tZero_fit->GetParameter(0);
-		  	y_int = tZero_fit->GetParameter(1);
-		  	m_err = tZero_fit->GetParError(0);
-		  	y_int_err = tZero_fit->GetParError(1);
-	  
-	      	t_zero[ip][wire] = - y_int/m ;
-	      	t_zero_err[ip][wire] = sqrt(y_int_err*y_int_err/(m*m) + y_int*y_int*m_err*m_err/(m*m*m*m) );
+			  	m = tZero_fit->GetParameter(0);
+			  	y_int = tZero_fit->GetParameter(1);
+			  	m_err = tZero_fit->GetParError(0);
+			  	y_int_err = tZero_fit->GetParError(1);
+		  
+		      	t_zero[ip][wire] = - y_int/m ;
+		      	t_zero_err[ip][wire] = sqrt(y_int_err*y_int_err/(m*m) + y_int*y_int*m_err*m_err/(m*m*m*m) );
+		   	}else if(fitFunc=="heaviside"){	
+				tZero_fit_heaviside->SetParName(0, "start point");
+				tZero_fit_heaviside->SetParName(1, "1st order");
+				tZero_fit_heaviside->SetParName(2, "2nd order");
+				tZero_fit_heaviside->SetParName(3, "3rd order");			    
+				tZero_fit_heaviside->SetParameter(0, 0);
+				tZero_fit_heaviside->SetParameter(1, 14);
+				tZero_fit_heaviside->SetParameter(2, 1.0);
+				tZero_fit_heaviside->SetParameter(3, 1.0);
+
+			    fitted_cell_dt_integral[ip][wire].Fit("tZero_fit_heaviside","Q","",-40,fitRmax);
+			    gStyle->SetOptFit(1);
+
+			  	m = tZero_fit_heaviside->GetParameter(0);
+			  	m_err = tZero_fit_heaviside->GetParError(0);
+		  
+		      	t_zero[ip][wire] = m;
+		      	t_zero_err[ip][wire] = m_err;
+		   	}
 
 
 
@@ -1506,7 +1532,7 @@ void DC_calib::FitWireIntegralDriftTime()
 			for(int i=0; i<NBINS; i++){
 				cell_dt_integral_tmp[i]=cell_dt_integral_tmp[i]*cell_entries_tmp;
 		        fitted_cell_dt_integral[ip][wireSegLow[ip][j]].SetBinContent(i, cell_dt_integral_tmp[i]);
-
+		        fitted_cell_dt_integral[ip][wire].SetBinError(i, 1);
 		        if(cell_dt_integral_tmp[i]>=fitThrsLow * cell_entries_tmp &&(!fitRmin_flag)){
 		            fitRmin=fitted_cell_dt_integral[ip][wireSegLow[ip][j]].GetBinCenter(i);
 		            fitRmin_flag++;       
@@ -1516,33 +1542,58 @@ void DC_calib::FitWireIntegralDriftTime()
 		        }
 
 	    	}
-			// cout<<"test4"<<endl;
 
-	    	fitted_cell_dt_integral[ip][wireSegLow[ip][j]].Fit("tZero_fit","Q","",fitRmin,fitRmax);
-		    gStyle->SetOptFit(1);
+		    if(fitFunc=="linear"){
+		    	fitted_cell_dt_integral[ip][wireSegLow[ip][j]].Fit("tZero_fit","Q","",fitRmin,fitRmax);
+			    gStyle->SetOptFit(1);
 
-		    m = tZero_fit->GetParameter(0);
-		  	y_int = tZero_fit->GetParameter(1);
-		  	m_err = tZero_fit->GetParError(0);
-		  	y_int_err = tZero_fit->GetParError(1);
-	  		// cout<<"test5"<<endl;
-
-	  		if(j==0){
-				for(wire = 0; wire <= wireSegLow[ip][j]; wire++){
-					t_zero[ip][wire] = - y_int/m ;
-	      			t_zero_err[ip][wire] = sqrt(y_int_err*y_int_err/(m*m) + y_int*y_int*m_err*m_err/(m*m*m*m) );
+			    m = tZero_fit->GetParameter(0);
+			  	y_int = tZero_fit->GetParameter(1);
+			  	m_err = tZero_fit->GetParError(0);
+			  	y_int_err = tZero_fit->GetParError(1);
+		  		// cout<<"test5"<<endl;
+		  		if(j==0){
+					for(wire = 0; wire <= wireSegLow[ip][j]; wire++){
+						t_zero[ip][wire] = - y_int/m ;
+		      			t_zero_err[ip][wire] = sqrt(y_int_err*y_int_err/(m*m) + y_int*y_int*m_err*m_err/(m*m*m*m) );
+					}
+				}else if(j>=1){
+					for(wire = wireSegLow[ip][j-1]+1; wire <= wireSegLow[ip][j]; wire++){
+						t_zero[ip][wire] = - y_int/m ;
+		      			t_zero_err[ip][wire] = sqrt(y_int_err*y_int_err/(m*m) + y_int*y_int*m_err*m_err/(m*m*m*m) );
+					}
 				}
-			}else if(j>=1){
-				for(wire = wireSegLow[ip][j-1]+1; wire <= wireSegLow[ip][j]; wire++){
-					t_zero[ip][wire] = - y_int/m ;
-	      			t_zero_err[ip][wire] = sqrt(y_int_err*y_int_err/(m*m) + y_int*y_int*m_err*m_err/(m*m*m*m) );
-				}
-			}
-	      	// cout<<"j"<<j<<" y"<<y_int<<" m"<<m<<endl;
+			}else if(fitFunc=="heaviside"){	
+				tZero_fit_heaviside->SetParName(0, "start point");
+				tZero_fit_heaviside->SetParName(1, "1st order");
+				tZero_fit_heaviside->SetParName(2, "2nd order");
+				tZero_fit_heaviside->SetParName(3, "3rd order");			    
+				tZero_fit_heaviside->SetParameter(0, -1);
+				tZero_fit_heaviside->SetParameter(1, 14);
+				tZero_fit_heaviside->SetParameter(2, 1.0);
+				tZero_fit_heaviside->SetParameter(3, 1.0);
 
+			    fitted_cell_dt_integral[ip][wire].Fit("tZero_fit_heaviside","Q","",-40,fitRmax);
+			    gStyle->SetOptFit(1);
+
+			  	m = tZero_fit_heaviside->GetParameter(0);
+			  	m_err = tZero_fit_heaviside->GetParError(0);
+		  
+		  		if(j==0){
+					for(wire = 0; wire <= wireSegLow[ip][j]; wire++){
+						t_zero[ip][wire] = m ;
+		      			t_zero_err[ip][wire] = m_err;
+					}
+				}else if(j>=1){
+					for(wire = wireSegLow[ip][j-1]+1; wire <= wireSegLow[ip][j]; wire++){
+						t_zero[ip][wire] = m ;
+		      			t_zero_err[ip][wire] = m_err;
+					}
+				}
+		   	}
 	
 		}
-		cout<<"wireSegsHigh"<<wireSegsHigh<<endl;
+
 		for(int j=0; j<wireSegsHigh; j++){
 
 			if(j==0){
@@ -1556,20 +1607,17 @@ void DC_calib::FitWireIntegralDriftTime()
 				}
 				cell_dt[ip][wireSegHigh[ip][j]].SetTitle(spec + " DC Plane " +plane_names[ip] + Form(": Fitted Wire_%d to %d", (int)wireSegHigh[ip][j-1]+1,(int)wireSegHigh[ip][j]));
 			}
-			// if(cell_dt[ip][wire].GetEntries()==0){
-				cout<<"ip"<<ip<<" wire"<<wire<<" value"<<cell_dt_integral_tmp[200]<<" entries"<<cell_dt[ip][wire].GetEntries()<<endl;
-
-			// }			
+		
 			
 			cell_dt_integral_tmp = cell_dt[ip][wireSegHigh[ip][j]].GetIntegral();
-			cell_entries_tmp = cell_dt[ip][wire].GetEntries();
+			cell_entries_tmp = cell_dt[ip][wireSegHigh[ip][j]].GetEntries();
 			fitRmin=fitRmax=0;
 			fitRmin_flag=fitRmax_flag=0;
 
 			for(int i=0; i<NBINS; i++){
 				cell_dt_integral_tmp[i]=cell_dt_integral_tmp[i]*cell_entries_tmp;
 		        fitted_cell_dt_integral[ip][wireSegHigh[ip][j]].SetBinContent(i, cell_dt_integral_tmp[i]);
-
+		        fitted_cell_dt_integral[ip][wire].SetBinError(i, 1);
 		        if(cell_dt_integral_tmp[i]>=fitThrsLow * cell_entries_tmp &&(!fitRmin_flag)){
 		            fitRmin=fitted_cell_dt_integral[ip][wireSegHigh[ip][j]].GetBinCenter(i);
 		            fitRmin_flag++;       
@@ -1579,27 +1627,55 @@ void DC_calib::FitWireIntegralDriftTime()
 		        }
 
 	    	}
+	    	if(fitFunc=="linear"){
+		    	fitted_cell_dt_integral[ip][wireSegHigh[ip][j]].Fit("tZero_fit","Q","",fitRmin,fitRmax);
+			    gStyle->SetOptFit(1);
 
-	    	fitted_cell_dt_integral[ip][wireSegHigh[ip][j]].Fit("tZero_fit","Q","",fitRmin,fitRmax);
-		    gStyle->SetOptFit(1);
+			    m = tZero_fit->GetParameter(0);
+			  	y_int = tZero_fit->GetParameter(1);
+			  	m_err = tZero_fit->GetParError(0);
+			  	y_int_err = tZero_fit->GetParError(1);
+		  		
 
-		    m = tZero_fit->GetParameter(0);
-		  	y_int = tZero_fit->GetParameter(1);
-		  	m_err = tZero_fit->GetParError(0);
-		  	y_int_err = tZero_fit->GetParError(1);
-	  		
-
-	  		if(j==0){
-				for(wire = nwires[ip]-1; wire >= wireSegHigh[ip][j]; wire--){
-					t_zero[ip][wire] = - y_int/m ;
-	      			t_zero_err[ip][wire] = sqrt(y_int_err*y_int_err/(m*m) + y_int*y_int*m_err*m_err/(m*m*m*m) );
+		  		if(j==0){
+					for(wire = nwires[ip]-1; wire >= wireSegHigh[ip][j]; wire--){
+						t_zero[ip][wire] = - y_int/m ;
+		      			t_zero_err[ip][wire] = sqrt(y_int_err*y_int_err/(m*m) + y_int*y_int*m_err*m_err/(m*m*m*m) );
+					}
+				}else if(j>=1){
+					for(wire = wireSegHigh[ip][j-1]+1; wire >= wireSegHigh[ip][j]; wire--){
+						t_zero[ip][wire] = - y_int/m ;
+		      			t_zero_err[ip][wire] = sqrt(y_int_err*y_int_err/(m*m) + y_int*y_int*m_err*m_err/(m*m*m*m) );
+					}
 				}
-			}else if(j>=1){
-				for(wire = wireSegHigh[ip][j-1]+1; wire >= wireSegHigh[ip][j]; wire--){
-					t_zero[ip][wire] = - y_int/m ;
-	      			t_zero_err[ip][wire] = sqrt(y_int_err*y_int_err/(m*m) + y_int*y_int*m_err*m_err/(m*m*m*m) );
+			}else if(fitFunc=="heaviside"){	
+				tZero_fit_heaviside->SetParName(0, "start point");
+				tZero_fit_heaviside->SetParName(1, "1st order");
+				tZero_fit_heaviside->SetParName(2, "2nd order");
+				tZero_fit_heaviside->SetParName(3, "3rd order");			    
+				tZero_fit_heaviside->SetParameter(0, 0);
+				tZero_fit_heaviside->SetParameter(1, 14);
+				tZero_fit_heaviside->SetParameter(2, 1.0);
+				tZero_fit_heaviside->SetParameter(3, 1.0);
+
+			    fitted_cell_dt_integral[ip][wire].Fit("tZero_fit_heaviside","Q","",-40,fitRmax);
+			    gStyle->SetOptFit(1);
+
+			  	m = tZero_fit_heaviside->GetParameter(0);
+			  	m_err = tZero_fit_heaviside->GetParError(0);
+		  
+		  		if(j==0){
+					for(wire = nwires[ip]-1; wire >= wireSegHigh[ip][j]; wire--){
+						t_zero[ip][wire] = m ;
+		      			t_zero_err[ip][wire] = m_err;
+					}
+				}else if(j>=1){
+					for(wire = wireSegHigh[ip][j-1]+1; wire >= wireSegHigh[ip][j]; wire--){
+						t_zero[ip][wire] = m ;
+						t_zero_err[ip][wire] = m_err;
+					}
 				}
-			}
+		   	}
 			
 
 	
@@ -1833,7 +1909,7 @@ void DC_calib::FitCardDriftTime()
 } //end FitCardDriftTime() method
 
 //________________________________________________________________
-void DC_calib::Calculate_tZero(string fitOption)
+void DC_calib::Calculate_tZero(string fitOption, string fitFunc="heaviside")
 {
   
   //CalcT0Historical();
@@ -1844,7 +1920,7 @@ void DC_calib::Calculate_tZero(string fitOption)
       		GetTwentyPercent_Peak();
       		FitWireDriftTime();
       	}else if(fitOption=="integral"){
-      		FitWireIntegralDriftTime();
+      		FitWireIntegralDriftTime(fitFunc);
       	}
     }
 

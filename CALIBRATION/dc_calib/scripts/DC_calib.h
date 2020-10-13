@@ -37,10 +37,10 @@ class DC_calib
   void EventLoop(string option);
   void WriteToFile(Int_t debug);
   // void CalcT0Historical();
-  void Calculate_tZero(string fitOption);
+  void Calculate_tZero(string fitOption, string fitFunc);
   void GetTwentyPercent_Peak();
   void FitWireDriftTime();
-  void FitWireIntegralDriftTime();
+  void FitWireIntegralDriftTime(string fitFunc);
   void WriteTZeroParam();
   void WriteLookUpTable(string calibType);
 
