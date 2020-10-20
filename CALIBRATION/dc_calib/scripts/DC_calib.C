@@ -1504,10 +1504,9 @@ void DC_calib::FitWireIntegralDriftTime(string fitFunc)
 
 
 		}
-		cout<<"plane_names[ip]"<<plane_names[ip]<<" wireSegsHigh "<<wireSegsHigh<<" wireSegsLow "<<wireSegsLow<<endl;
 		
 		for(int j=0; j<wireSegsLow; j++){
-			// cout<<"test1"<<endl;
+
 			if(j==0){
 				for(wire = 0; wire < wireSegLow[ip][j]; wire++){
 					cell_dt[ip][wireSegLow[ip][j]].Add(&cell_dt[ip][wire]);
@@ -1520,14 +1519,12 @@ void DC_calib::FitWireIntegralDriftTime(string fitFunc)
 				cell_dt[ip][wireSegLow[ip][j]].SetTitle(spec + " DC Plane " +plane_names[ip] + Form(": Uncorr Wire_%d to %d", (int)wireSegLow[ip][j-1]+1,(int)wireSegLow[ip][j]));
 			}
 
-			// cout<<"test2"<<endl;
 			
 			cell_dt_integral_tmp = cell_dt[ip][wireSegLow[ip][j]].GetIntegral();
 			cell_entries_tmp = cell_dt[ip][wireSegLow[ip][j]].GetEntries();
 			fitRmin=fitRmax=0;
 			fitRmin_flag=fitRmax_flag=0;
 
-			// cout<<"test3"<<endl;
 
 			for(int i=0; i<NBINS; i++){
 				cell_dt_integral_tmp[i]=cell_dt_integral_tmp[i]*cell_entries_tmp;
@@ -1551,7 +1548,7 @@ void DC_calib::FitWireIntegralDriftTime(string fitFunc)
 			  	y_int = tZero_fit->GetParameter(1);
 			  	m_err = tZero_fit->GetParError(0);
 			  	y_int_err = tZero_fit->GetParError(1);
-		  		// cout<<"test5"<<endl;
+ 
 		  		if(j==0){
 					for(wire = 0; wire <= wireSegLow[ip][j]; wire++){
 						t_zero[ip][wire] = - y_int/m ;
@@ -1580,16 +1577,16 @@ void DC_calib::FitWireIntegralDriftTime(string fitFunc)
 			  	m_err = tZero_fit_heaviside->GetParError(0);
 		  
 		  		if(j==0){
-					for(wire = 0; wire <= wireSegLow[ip][j]; wire++){
-						t_zero[ip][wire] = m ;
-		      			t_zero_err[ip][wire] = m_err;
-					}
-				}else if(j>=1){
-					for(wire = wireSegLow[ip][j-1]+1; wire <= wireSegLow[ip][j]; wire++){
-						t_zero[ip][wire] = m ;
-		      			t_zero_err[ip][wire] = m_err;
-					}
-				}
+  					for(wire = 0; wire <= wireSegLow[ip][j]; wire++){
+  						t_zero[ip][wire] = m ;
+  		      	t_zero_err[ip][wire] = m_err;
+  					}
+				  }else if(j>=1){
+  					for(wire = wireSegLow[ip][j-1]+1; wire <= wireSegLow[ip][j]; wire++){
+  						t_zero[ip][wire] = m ;
+  		        t_zero_err[ip][wire] = m_err;
+  					}
+  				}
 		   	}
 	
 		}
@@ -1667,7 +1664,7 @@ void DC_calib::FitWireIntegralDriftTime(string fitFunc)
 		  		if(j==0){
 					for(wire = nwires[ip]-1; wire >= wireSegHigh[ip][j]; wire--){
 						t_zero[ip][wire] = m ;
-		      			t_zero_err[ip][wire] = m_err;
+		      	t_zero_err[ip][wire] = m_err;
 					}
 				}else if(j>=1){
 					for(wire = wireSegHigh[ip][j-1]+1; wire >= wireSegHigh[ip][j]; wire--){
@@ -1952,15 +1949,18 @@ void DC_calib::WriteTZeroParam()
        //cout << "Plane: " << ip << " ::  wire: " << wire+1 << " :: " << "tzero_final: "<< t_zero_final[ip][wire] << endl;
        if (wire <= 10) 
 	 { 
-	   out_txtFILE << setprecision(6) << t_zero_final[ip][wire] << fixed << ",";
+	   out_txtFILE << setprecision(6) << (t_zero[ip][wire] + offset[ip][wire]) << fixed << ",";
+     // cout<<   (t_zero[ip][wire] + offset[ip][wire]) << ",";
 	 }
        else if (wire>10 && wire <(nwires[ip]-1))
 	 {
-	   out_txtFILE << setprecision(6) << t_zero_final[ip][wire] << ((wire+1) % 16 ? ", " : "\n") << fixed;
+	   out_txtFILE << setprecision(6) << (t_zero[ip][wire] + offset[ip][wire]) << ((wire+1) % 16 ? ", " : "\n") << fixed;
+     // cout <<  (t_zero[ip][wire] + offset[ip][wire]) << ((wire+1) % 16 ? ", " : "\n") ;
 	 }
        else if (wire==nwires[ip]-1) 
 	 {
-	   out_txtFILE << setprecision(6) << t_zero_final[ip][wire] << fixed << endl;
+	   out_txtFILE << setprecision(6) << (t_zero[ip][wire] + offset[ip][wire]) << fixed << endl;
+     // cout << (t_zero[ip][wire] + offset[ip][wire]) << endl;
      
 	   }
        
