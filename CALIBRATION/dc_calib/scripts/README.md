@@ -6,7 +6,8 @@ This directory contains the code for calibrating the pair of HMS/SHMS drift cham
 
 Directory structure
 ----------------------
-* hallc_replay/CALIBRATION/dc_calib/scripts/main_calib.C   : steering C++ code that executes the methods in DC_Calib.C
+* hallc_replay/CALIBRATION/dc_calib/scripts/main_calib.C   : old steering C++ code that executes the methods in DC_Calib.C
+* hallc_replay/CALIBRATION/dc_calib/scripts/main_calib_distonly.C   : new steering C++ code that executes the methods in DC_Calib.C, should use this one
 * hallc_replay/CALIBRATION/dc_calib/scripts/DC_Calib.C  : Calibration Code where all the class  methods are defined
 * hallc_replay/CALIBRATION/dc_calib/scripts/DC_Calib.h  : Header file containing the variable definitions used in the methods
 
@@ -17,7 +18,8 @@ Running code
 NOTE: p: SHMS,  h: HMS,  <spec>: HMS, or SHMS
 
 * First set the parameter 'p(h)_using_tzero_per_wire = 0' in the 
-  parameter file located in: hallc_replay/PARAM/<spec>/DC/p(h)dc_cuts.param
+  parameter file located in: hallc_replay/PARAM/<spec>/DC/p(h)dc_cuts.param,
+  skip this step if you only calibrate drift distance with the old tzero
 
 * Replay the data to produce the uncalibrated root file to be used as input in the calibration
   NOTE: Make sure to include the necessary leafs if you want to make any pid cuts.
@@ -33,28 +35,7 @@ NOTE: p: SHMS,  h: HMS,  <spec>: HMS, or SHMS
   * From the hallc_replay execute: ./hcana SCRIPTS/<spec>/PRODUCTION/<replay_script.C>
 
 * From the directory where this README file is:
-  -Open and modify 'DC_Calib obj()' line. This line has the following format:
-
-  -------------------------------------------------------------------------------------------------
-  	DC_calib obj("<spec_flag>", "/path/to/ROOTfile/", run_NUM, event_NUM, "<pid_flag>");
-
-	**The <spec_flag> and <pid_flag> have the possible arguments:
-
-	    <spec_flag>: HMS, SHMS
-
-	    <pid_flag>: pid_elec, pid_hadron, dc_1hit, pid_kFLASE
-
-	    When the <pid_flag> is selected, the calibration script applies the following cuts:
-
-	    	 1) pid_elec:  P.ngcer.npeSum > 1.0 && T.shms.pEL_CLEAN_tdcTime > 0.0   (for HMS:  H.cer.npeSum > 1.0 && T.hms.hEL_CLEAN_tdcTime > 0.0 )
-		 2) pid_hadron: P.ngcer.npeSum < 1.0  (for HMS:  H.cer.npeSum < 1.0 )
-		 3) dc_1hit: Ndata.P(H).dc.plane.time == 1 && Ndata.P(H).dc.plane.wirenum == 1,  where plane-> 1u1, 1u2, ...
-		    NOTE: The Ndata cut, requires a single hit in each chamber per plane per event
-		 4) pid_kFALSE: No cuts are applied.
-  -------------------------------------------------------------------------------------------------
-	    		
-
-* Once the arguments are specified, execute: root -l main_calib.C
+  execute hcana -b 'main_calib_distonly.C("(S)HMS",run,entries,"wire or card","tzero or dist"(calib. tzero and dist., or calib. dist. only),"raw or integral"(fit the raw drift time or the integrated drift time),"linear or heaviside"(fit tzero with linear or step function(only for "integral")))'
 
 When the calibration is completed, a directory will be created under the name: <spec_flag>_DC_Log_runNUM/
 
@@ -78,8 +59,8 @@ When the calibration is completed, a directory will be created under the name: <
       -> /hallc_replay/PARAM/<spec>/DC/hdc_tzero_per_wire.param
 
 * Set the parameter 'p(h)_using_tzero_per_wire = 1' in the 
-  parameter file located in: hallc_replay/PARAM/<spec>/DC/p(h)dc_cuts.param
-
+  parameter file located in: hallc_replay/PARAM/<spec>/DC/p(h)dc_cuts.param,
+  skip this step if you only calibrate drift distance with the old tzero
 
 * From the hallc_replay execute: ./hcana SCRIPTS/SHMS/PRODUCTION/<replay_script.C> once again.
 
